@@ -11,4 +11,5 @@ class AppColors {
   static const Color scaffoldBackground = Color(0xffffffff);
   static const Color primaryColor = Color(0xFF075E54);
   static const Color accentColor = Color(0xFF008069);
+  static const Color linkColor = Color(0xFFA390EC);
 }

@@ -9,6 +9,7 @@ dependencies:
   get: 4.6.1
   textless:
   country_list_pick: ^1.0.1+5
+  flutter_countdown_timer: ^4.1.0
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -26,6 +27,7 @@ flutter:
     - assets/images/3.0x/
     - assets/images/2.0x/
     - assets/privacy/
+    - assets/profile_info/
   uses-material-design: true
   generate: true
 

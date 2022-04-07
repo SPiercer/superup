@@ -1,20 +1,8 @@
 import 'package:get/get.dart';
+import 'package:superup/app/routes/app_pages.dart';
 
 class ProfileInfoController extends GetxController {
-  //TODO: Implement ProfileInfoController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void nextPress() {
+    Get.offAllNamed(Routes.HOME);
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }

@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
+      defaultTransition: Transition.cupertino,
       title: AppConstants.appName,
       initialRoute: AppPages.INITIAL,
       debugShowCheckedModeBanner: false,

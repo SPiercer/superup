@@ -1,4 +1,6 @@
-class AppConstants{
+class AppConstants {
   AppConstants._();
-  static const appName = "super up";
+
+  static const appName = "SuperUp";
+  static const otpInterval = 60 * 2; //in seconds
 }
