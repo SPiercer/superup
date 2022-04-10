@@ -9,7 +9,7 @@ import 'package:textless/textless.dart';
 import '../controllers/verify_number_controller.dart';
 
 class VerifyNumberView extends GetView<VerifyNumberController> {
-
+  const VerifyNumberView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class VerifyNumberView extends GetView<VerifyNumberController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                   TextField(
+                  TextField(
                     cursorHeight: 25,
                     controller: controller.txtController,
                     textAlign: TextAlign.center,
@@ -70,20 +70,20 @@ class VerifyNumberView extends GetView<VerifyNumberController> {
                 ],
               ),
             ),
-        Padding(
-          padding: const EdgeInsets.all(15),
-          child: ListTile(
-            // enabled: controller.isResendSmsEnabled.value,
-            enabled: false,
-            trailing: CountdownTimer(
-              endTime: controller.endTime,
-              onEnd: controller.onOtpTimeEnd,
-              endWidget: const SizedBox(),
-            ),
-            leading: const Icon(Icons.message),
-            title: "Resend SMS".text,
-          ),
-        )
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: ListTile(
+                // enabled: controller.isResendSmsEnabled.value,
+                enabled: false,
+                trailing: CountdownTimer(
+                  endTime: controller.endTime,
+                  onEnd: controller.onOtpTimeEnd,
+                  endWidget: const SizedBox(),
+                ),
+                leading: const Icon(Icons.message),
+                title: "Resend SMS".text,
+              ),
+            )
           ],
         ),
       ),

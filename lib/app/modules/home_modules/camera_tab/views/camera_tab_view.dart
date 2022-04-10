@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/calls_tab_controller.dart';
+import '../controllers/camera_tab_controller.dart';
 
-class CallsTabView extends GetView<CallsTabController> {
-  const CallsTabView({Key? key}) : super(key: key);
+class CameraTabView extends GetView<CameraTabController> {
+  const CameraTabView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class CallsTabView extends GetView<CallsTabController> {
 
       body: Center(
         child: Text(
-          'CallsTabView is working',
+          'CameraTabView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),

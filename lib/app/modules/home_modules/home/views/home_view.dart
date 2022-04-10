@@ -2,44 +2,44 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:superup/app/core/constants/app_constants.dart';
+import 'package:superup/app/modules/home_modules/home/widgets/home_count_bar.dart';
 
 import '../controllers/home_controller.dart';
+import '../widgets/home_app_bar.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
-      appBar: AppBar(
-        title: const Text(AppConstants.appName),
-        centerTitle: false,
-        elevation: 2,
-        actions: const [
-          Icon(Icons.search),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.0),
-          ),
-          Icon(Icons.more_vert)
-        ],
-        bottom: TabBar(
-          isScrollable: false,
-          indicatorPadding: EdgeInsets.zero,
-          indicatorColor: Colors.white,
-          controller: controller.controller,
-          tabs: controller.tabs,
-          padding: EdgeInsets.zero,
-          indicatorWeight: 4,
+    return WillPopScope(
+      onWillPop: () async {
+        if (controller.selectedRooms.isNotEmpty) {
+          controller.clearAllSelection();
+          return false;
+        }
+        return true;
+      },
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(100),
+          child: Obx(() {
+            final lisCount = controller.selectedRooms.length;
+            if (lisCount == 0) {
+              return const HomeAppbar();
+            } else {
+              return HomeCountAppbar();
+            }
+          }),
         ),
-      ),
-      body: const Center(
-        child: Text(
-          'HomeView is working',
-          style: const TextStyle(fontSize: 20),
+        body: SafeArea(
+          child: PageView(
+            onPageChanged: (i) {
+              controller.changeTab(i);
+            },
+            controller: controller.pageController,
+            children: controller.tabsWidgets,
+          ),
         ),
       ),
     );

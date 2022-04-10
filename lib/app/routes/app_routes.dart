@@ -12,6 +12,9 @@ abstract class Routes {
   static const ROOMS_TAB = _Paths.ROOMS_TAB;
   static const STATUS_TAB = _Paths.STATUS_TAB;
   static const CALLS_TAB = _Paths.CALLS_TAB;
+
+  static const CAMERA_TAB = _Paths.CAMERA_TAB;
+  static const MESSAGE = _Paths.MESSAGE;
 }
 
 abstract class _Paths {
@@ -25,4 +28,7 @@ abstract class _Paths {
   static const ROOMS_TAB = '/rooms-tab';
   static const STATUS_TAB = '/status-tab';
   static const CALLS_TAB = '/calls-tab';
+
+  static const CAMERA_TAB = '/camera-tab';
+  static const MESSAGE = '/message';
 }

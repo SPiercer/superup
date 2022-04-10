@@ -7,6 +7,8 @@ import 'package:textless/textless.dart';
 import '../controllers/profile_info_controller.dart';
 
 class ProfileInfoView extends GetView<ProfileInfoController> {
+  const ProfileInfoView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

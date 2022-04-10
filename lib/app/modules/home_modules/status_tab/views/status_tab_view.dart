@@ -5,13 +5,11 @@ import 'package:get/get.dart';
 import '../controllers/status_tab_controller.dart';
 
 class StatusTabView extends GetView<StatusTabController> {
+  const StatusTabView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('StatusTabView'),
-        centerTitle: true,
-      ),
       body: Center(
         child: Text(
           'StatusTabView is working',

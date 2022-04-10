@@ -8,15 +8,18 @@ import '../modules/auth/profile_info/bindings/profile_info_binding.dart';
 import '../modules/auth/profile_info/views/profile_info_view.dart';
 import '../modules/auth/verify_number/bindings/verify_number_binding.dart';
 import '../modules/auth/verify_number/views/verify_number_view.dart';
-
 import '../modules/home_modules/calls_tab/bindings/calls_tab_binding.dart';
 import '../modules/home_modules/calls_tab/views/calls_tab_view.dart';
+import '../modules/home_modules/camera_tab/bindings/camera_tab_binding.dart';
+import '../modules/home_modules/camera_tab/views/camera_tab_view.dart';
 import '../modules/home_modules/home/bindings/home_binding.dart';
 import '../modules/home_modules/home/views/home_view.dart';
 import '../modules/home_modules/rooms_tab/bindings/rooms_tab_binding.dart';
 import '../modules/home_modules/rooms_tab/views/rooms_tab_view.dart';
 import '../modules/home_modules/status_tab/bindings/status_tab_binding.dart';
 import '../modules/home_modules/status_tab/views/status_tab_view.dart';
+import '../modules/message/bindings/message_binding.dart';
+import '../modules/message/views/message_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -72,6 +75,16 @@ class AppPages {
       name: _Paths.CALLS_TAB,
       page: () => CallsTabView(),
       binding: CallsTabBinding(),
+    ),
+    GetPage(
+      name: _Paths.CAMERA_TAB,
+      page: () => CameraTabView(),
+      binding: CameraTabBinding(),
+    ),
+    GetPage(
+      name: _Paths.MESSAGE,
+      page: () => MessageView(),
+      binding: MessageBinding(),
     ),
   ];
 }

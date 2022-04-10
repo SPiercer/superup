@@ -12,4 +12,18 @@ class AppColors {
   static const Color primaryColor = Color(0xFF075E54);
   static const Color accentColor = Color(0xFF008069);
   static const Color linkColor = Color(0xFFA390EC);
+
+  /// message status colors
+  static const Color seenMessageIcon = Colors.green;
+  static const Color deliverMessageIcon = Colors.black;
+  static const Color sendMessageIcon = Colors.black;
+  /// unread colors
+  static const Color unreadMessageColor = Colors.amber;
+
+  /// read colors
+  static const Color readMessageColor = Colors.grey;
+
+  static const Color typingColor = Colors.lightGreen;
+
+
 }
