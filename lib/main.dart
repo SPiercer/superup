@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +8,11 @@ import 'package:superup/app/core/constants/theme.dart';
 
 import 'app/routes/app_pages.dart';
 
-void main() {
+late List<CameraDescription> cameras;
+
+void main()async {
   WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(const MyApp());
 }
 

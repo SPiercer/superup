@@ -17,6 +17,7 @@ class AppColors {
   static const Color seenMessageIcon = Colors.green;
   static const Color deliverMessageIcon = Colors.black;
   static const Color sendMessageIcon = Colors.black;
+
   /// unread colors
   static const Color unreadMessageColor = Colors.amber;
 
@@ -24,6 +25,5 @@ class AppColors {
   static const Color readMessageColor = Colors.grey;
 
   static const Color typingColor = Colors.lightGreen;
-
-
+  static const Color iconGrayColor = Color(0xff1EBEA6);
 }

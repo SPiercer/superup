@@ -1,20 +1,29 @@
+import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 
 class CameraTabController extends GetxController {
-  //TODO: Implement CameraTabController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  late CameraController controller;
+  late List<CameraDescription> cameras;
+  final isCameraReady = false.obs;
 
   @override
   void onReady() {
     super.onReady();
+ //   setUpCamera();
   }
 
   @override
-  void onClose() {}
-  void increment() => count.value++;
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void setUpCamera() async {
+    controller = CameraController(
+      cameras[0],
+      ResolutionPreset.medium,
+    );
+    await controller.initialize();
+    isCameraReady.value = true;
+  }
 }

@@ -48,7 +48,7 @@ class Room {
       id: 'xxx_single_chat_id_1',
       thumbImage:
           'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png',
-      title: 'test user',
+      title: '1 user',
       isArchived: false,
       typingStatus: VChatRoomStatusModel(
         name: "peer",
@@ -80,7 +80,7 @@ class Room {
       id: 'xxx_single_chat_id_2',
       thumbImage:
           'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png',
-      title: 'test user',
+      title: 'groupChat',
       isArchived: false,
       typingStatus: VChatRoomStatusModel(
         name: "peer",
@@ -99,7 +99,7 @@ class Room {
       leaverId: '',
       unReadCount: 1,
       isDeleted: false,
-      roomType: RoomType.single,
+      roomType: RoomType.groupChat,
       isMuted: false,
       peerId: 'xxx_peer_id_1',
     ),
@@ -107,7 +107,7 @@ class Room {
       id: 'xxx_single_chat_id_3',
       thumbImage:
           'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png',
-      title: 'test user',
+      title: 'broadcast',
       isArchived: false,
       typingStatus: VChatRoomStatusModel(
         name: "peer",
@@ -126,7 +126,7 @@ class Room {
       leaverId: '',
       unReadCount: 1,
       isDeleted: false,
-      roomType: RoomType.single,
+      roomType: RoomType.broadcast,
       isMuted: false,
       peerId: 'xxx_peer_id_1',
     ),
@@ -134,7 +134,7 @@ class Room {
       id: 'xxx_single_chat_id_4',
       thumbImage:
           'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png',
-      title: 'test user',
+      title: '4 user',
       isArchived: false,
       typingStatus: VChatRoomStatusModel(
         name: "peer",
@@ -161,7 +161,7 @@ class Room {
       id: 'xxx_single_chat_id_5',
       thumbImage:
           'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png',
-      title: 'test user',
+      title: '5 user',
       isArchived: false,
       typingStatus: VChatRoomStatusModel(
         name: "peer",
@@ -215,6 +215,39 @@ class Room {
     //           peerId: 'xxx_peer_id_1',
     //         ))
   ];
+
+  static final roomToAdd =  Room(
+    id: 'xxx_single_chat_id_add',
+    thumbImage:
+    'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png',
+    title: 'user from adding',
+    isArchived: false,
+    typingStatus: VChatRoomStatusModel(
+      name: "peerx",
+      roomId: "xx",
+      status: RoomTypingType.stop,
+      userId: "xxx",
+    ),
+    lastMessage: Message.buildMessage(
+      content:
+      "from adeded !",
+      roomId: "xxx_single_chat_id_1",
+      type: MessageType.text,
+      myUser: User(
+        id: "xxx",
+        fullName: "peer name",
+        email: "dsfsdfdsf",
+        userImages: User.myUser.userImages,
+      ),
+    ),
+    creatorId: '',
+    leaverId: '',
+    unReadCount: 1,
+    isDeleted: false,
+    roomType: RoomType.single,
+    isMuted: false,
+    peerId: 'xxx_peer_id_1',
+  );
 
   //String get thumbImageS3 => ApiConstants.s3BucketBaseUrl + thumbImage;
 

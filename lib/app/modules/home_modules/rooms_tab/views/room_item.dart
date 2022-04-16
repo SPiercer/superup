@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lightbox/lightbox.dart';
 import 'package:superup/app/core/constants/colors.dart';
 import 'package:superup/app/core/enums/message_status.dart';
 import 'package:superup/app/core/enums/room_type.dart';
 import 'package:superup/app/core/enums/room_typing_type.dart';
 import 'package:superup/app/models/room/room.dart';
 import 'package:superup/app/modules/home_modules/rooms_tab/controllers/rooms_tab_controller.dart';
+import 'package:superup/app/modules/home_modules/rooms_tab/views/view_image_page.dart';
 import 'package:textless/textless.dart';
 import '../../../../core/constants/app_icons.dart';
 import '../../../../core/widgets/colored_circle_container.dart';
@@ -42,11 +44,26 @@ class RoomItem extends GetWidget<RoomsTabController> {
             onTap: () {
               controller.onRoomTap(_room);
             },
-            leading: CircleAvatar(
-              foregroundColor: Theme.of(context).primaryColor,
-              backgroundColor: Colors.transparent,
-              radius: 35,
-              backgroundImage: NetworkImage(_room.thumbImage),
+            leading: Hero(
+              tag: "imageHero${_room.hashCode}",
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      opaque: false,
+                      pageBuilder: (BuildContext context, _, __) {
+                        return ViewImagePage(_room);
+                      },
+                    ),
+                  );
+                },
+                child: CircleAvatar(
+                  foregroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Colors.transparent,
+                  radius: 35,
+                  backgroundImage: NetworkImage(_room.thumbImage),
+                ),
+              ),
             ),
             isThreeLine: false,
             contentPadding: EdgeInsets.zero,
@@ -138,9 +155,17 @@ class RoomItem extends GetWidget<RoomsTabController> {
       child: Row(
         children: [
           getMessageStatusIfSender(),
-          Flexible(
-            child: _room.lastMessage.content.text.maxLine(1).overflowEllipsis,
-          ),
+          _room.isRoomUnread
+              ? Flexible(
+                  child: _room.lastMessage.content.text.medium.color(Colors.black)
+                      .maxLine(1)
+                      .overflowEllipsis,
+                )
+              : Flexible(
+                  child: _room.lastMessage.content.text
+                      .maxLine(1)
+                      .overflowEllipsis,
+                ),
         ],
       ),
     );

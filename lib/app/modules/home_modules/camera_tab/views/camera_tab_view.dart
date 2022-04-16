@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,14 +10,18 @@ class CameraTabView extends GetView<CameraTabController> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold();
     return Scaffold(
-
-      body: Center(
-        child: Text(
-          'CameraTabView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      body: Obx(() {
+        final isReady = controller.isCameraReady.value;
+        if (!isReady) {
+          return const SizedBox();
+        }
+        return AspectRatio(
+          aspectRatio: controller.controller.value.aspectRatio,
+          child: CameraPreview(controller.controller),
+        );
+      }),
     );
   }
 }

@@ -1,20 +1,20 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:story_view/controller/story_controller.dart';
+import 'package:story_view/widgets/story_view.dart';
 
 class StatusTabController extends GetxController {
-  //TODO: Implement StatusTabController
+  final controller = StoryController();
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+
+  void onFlatEditIconPress() {}
+
+  void onFlatCameraIconPress() {}
 }

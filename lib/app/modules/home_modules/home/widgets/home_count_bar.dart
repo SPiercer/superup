@@ -5,8 +5,10 @@ import 'package:get/get.dart';
 import 'package:superup/app/core/constants/app_icons.dart';
 import 'package:superup/app/modules/home_modules/home/controllers/home_controller.dart';
 
-class HomeCountAppbar extends GetView<HomeController> {
+import 'home_tab_bar.dart';
 
+class HomeCountAppbar extends GetView<HomeController> {
+  const HomeCountAppbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,19 +55,7 @@ class HomeCountAppbar extends GetView<HomeController> {
           padding: EdgeInsets.symmetric(horizontal: 5.0),
         ),
       ],
-      bottom: TabBar(
-        isScrollable: false,
-        indicatorPadding: EdgeInsets.zero,
-        labelPadding: EdgeInsets.zero,
-        indicatorColor: Colors.white,
-        controller: controller.controller,
-        tabs: controller.tabs,
-        padding: EdgeInsets.zero,
-        indicatorWeight: 4,
-        onTap: (i) {
-          controller.changeTab(i);
-        },
-      ),
+      bottom: homeTabBar(controller, context),
     );
   }
 }

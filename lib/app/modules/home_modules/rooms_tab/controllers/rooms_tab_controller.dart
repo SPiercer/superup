@@ -1,22 +1,45 @@
 import 'dart:async';
-
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:superup/app/core/alerts_widgets/permistion_alerts/permission_asker.dart';
+import 'package:superup/app/core/enums/permission_type.dart';
+import 'package:superup/app/core/widgets/app_state.dart';
 import 'package:superup/app/modules/home_modules/home/controllers/home_controller.dart';
-
+import '../../../../core/alerts_widgets/permistion_alerts/contacts_alert.dart';
 import '../../../../models/room/room.dart';
 import '../../../../routes/app_pages.dart';
 
 class RoomsTabController extends GetxController {
-  final rooms = Room.dummyRooms;
+  final state = CustomState().obs;
+  final rooms = <Room>[];
   final _homeController = Get.find<HomeController>();
   final _roomUpdaterStream = StreamController<Room>.broadcast(sync: false);
+  final scrollView = ScrollController();
 
   Stream<Room> get roomUpdaterStream => _roomUpdaterStream.stream;
 
   @override
   void onInit() {
     super.onInit();
-    updateRoom();
+    getRoomFromApis();
+    //  addFakeRoom();
+  }
+
+  void addFakeRoom() async {
+    await Future.delayed(const Duration(seconds: 4));
+
+    rooms.insert(0, Room.roomToAdd);
+
+    final fRoom = rooms.first;
+    fRoom.lastMessage.content =
+        "------------------------------------------------";
+    fRoom.unReadCount = 0;
+    await Future.delayed(const Duration(seconds: 2));
+    final rRoom = rooms.last;
+    rRoom.lastMessage.content = "2222222222222222222222222222222222222222";
+    rRoom.unReadCount = 0;
+    _roomUpdaterStream.add(rRoom);
+    state.refresh();
   }
 
   void onRoomTap(final Room _room) {
@@ -45,19 +68,19 @@ class RoomsTabController extends GetxController {
     _roomUpdaterStream.add(_room);
   }
 
-  void updateRoom() async {
-    await Future.delayed(const Duration(seconds: 10));
-    final fRoom = Room.dummyRooms.first;
-    fRoom.lastMessage.content =
-        "------------------------------------------------";
-    fRoom.unReadCount = 0;
-    _roomUpdaterStream.add(fRoom);
+  void getRoomFromApis() async {
+    state.value = CustomLoadingState();
+    await Future.delayed(const Duration(seconds: 1));
+    rooms.addAll(Room.dummyRooms);
+    state.value = CustomLoadedState();
+    // addFakeRoom();
+  }
 
-    await Future.delayed(const Duration(seconds: 10));
-    final rRoom = Room.dummyRooms.last;
-    rRoom.lastMessage.content =
-        "------------------------------------------------";
-    rRoom.unReadCount = 0;
-    _roomUpdaterStream.add(rRoom);
+  void onFlatMessageIconPress() async {
+    final res =
+        await PermissionAsker.askPermission(permission: PermissionType.contacts);
+    if (res == 1) {
+      Get.toNamed(Routes.START_CHAT);
+    }
   }
 }

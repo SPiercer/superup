@@ -17,4 +17,7 @@ class CallsTabController extends GetxController {
   @override
   void onClose() {}
   void increment() => count.value++;
+
+  void onFlatCallIconPress() {
+  }
 }

@@ -7,9 +7,21 @@ environment:
 
 dependencies:
   get: 4.6.1
-  textless:
+  textless: ^6.6.6
   country_list_pick: ^1.0.1+5
+  story_view: ^0.13.2
+  camera: ^0.9.4+19
   flutter_countdown_timer: ^4.1.0
+  #Whats app packages
+  status_view: ^0.0.2
+  ionicons: ^0.1.2
+  camera_with_files: ^0.0.4
+  app_utils: ^0.0.4
+  # mentions
+  easy_rich_text: ^1.0.4
+  lightbox: ^0.1.0
+  sliver_header_delegate: ^0.0.5
+  customizable_space_bar: ^0.2.0
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -28,6 +40,7 @@ flutter:
     - assets/images/2.0x/
     - assets/privacy/
     - assets/profile_info/
+    - assets/message/
   uses-material-design: true
   generate: true
 
