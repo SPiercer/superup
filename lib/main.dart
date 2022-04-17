@@ -8,11 +8,15 @@ import 'package:superup/app/core/constants/theme.dart';
 
 import 'app/routes/app_pages.dart';
 
-late List<CameraDescription> cameras;
+List<CameraDescription>? cameras;
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
+  try {
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print(e.toString());
+  }
   runApp(const MyApp());
 }
 

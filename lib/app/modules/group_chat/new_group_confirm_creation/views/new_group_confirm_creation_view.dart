@@ -6,6 +6,8 @@ import '../controllers/new_group_confirm_creation_controller.dart';
 
 class NewGroupConfirmCreationView
     extends GetView<NewGroupConfirmCreationController> {
+  const NewGroupConfirmCreationView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

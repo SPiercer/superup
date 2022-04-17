@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../controllers/chat_common_groups_controller.dart';
 
 class ChatCommonGroupsView extends GetView<ChatCommonGroupsController> {
+  const ChatCommonGroupsView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

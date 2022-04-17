@@ -37,6 +37,10 @@ abstract class Routes {
   static const SETTINGS_BASE = _Paths.SETTINGS_BASE;
   static const LINK_WEB = _Paths.LINK_WEB;
   static const USER_STATUS = _Paths.USER_STATUS;
+  static const GLOBAL_SEARCH = _Paths.GLOBAL_SEARCH;
+  static const CREATE_TEXT_STATUS = _Paths.CREATE_TEXT_STATUS;
+  static const MY_STATUS_DETAILS = _Paths.MY_STATUS_DETAILS;
+  static const GET_CAMERA_IMAGE = _Paths.GET_CAMERA_IMAGE;
 }
 
 abstract class _Paths {
@@ -79,4 +83,8 @@ abstract class _Paths {
   static const SETTINGS_BASE = '/settings-base';
   static const LINK_WEB = '/link-web';
   static const USER_STATUS = '/user-status';
+  static const GLOBAL_SEARCH = '/global-search';
+  static const CREATE_TEXT_STATUS = '/create-text-status';
+  static const MY_STATUS_DETAILS = '/my-status-details';
+  static const GET_CAMERA_IMAGE = '/get-camera-image';
 }

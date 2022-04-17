@@ -16,6 +16,8 @@ import '../modules/broadcast/new_broadcast_select_users/bindings/new_broadcast_s
 import '../modules/broadcast/new_broadcast_select_users/views/new_broadcast_select_users_view.dart';
 import '../modules/broadcast/show_broadcast_users/bindings/show_broadcast_users_binding.dart';
 import '../modules/broadcast/show_broadcast_users/views/show_broadcast_users_view.dart';
+import '../modules/get_camera_image/bindings/get_camera_image_binding.dart';
+import '../modules/get_camera_image/views/get_camera_image_view.dart';
 import '../modules/group_chat/add_users_to_group/bindings/add_users_to_group_binding.dart';
 import '../modules/group_chat/add_users_to_group/views/add_users_to_group_view.dart';
 import '../modules/group_chat/edit_group/bindings/edit_group_binding.dart';
@@ -28,20 +30,26 @@ import '../modules/group_chat/new_group_select_users/bindings/new_group_select_u
 import '../modules/group_chat/new_group_select_users/views/new_group_select_users_view.dart';
 import '../modules/group_chat/show_group_users/bindings/show_group_users_binding.dart';
 import '../modules/group_chat/show_group_users/views/show_group_users_view.dart';
-import '../modules/home_modules/calls_tab/views/calls_tab_view.dart';
-import '../modules/home_modules/camera_tab/views/camera_tab_view.dart';
-import '../modules/home_modules/home/bindings/home_binding.dart';
-import '../modules/home_modules/home/views/home_view.dart';
-import '../modules/home_modules/rooms_tab/views/rooms_tab_view.dart';
-import '../modules/home_modules/status_tab/views/status_tab_view.dart';
-import '../modules/link_web/bindings/link_web_binding.dart';
-import '../modules/link_web/views/link_web_view.dart';
+import '../modules/home_modules/global_search/bindings/global_search_binding.dart';
+import '../modules/home_modules/global_search/views/global_search_view.dart';
+import '../modules/home_modules/link_web/bindings/link_web_binding.dart';
+import '../modules/home_modules/link_web/views/link_web_view.dart';
+import '../modules/home_modules/settings/settings_base/bindings/settings_base_binding.dart';
+import '../modules/home_modules/settings/settings_base/views/settings_base_view.dart';
+import '../modules/home_modules/start_chat/bindings/start_chat_binding.dart';
+import '../modules/home_modules/start_chat/views/start_chat_view.dart';
+import '../modules/home_modules/started_messages/bindings/started_messages_binding.dart';
+import '../modules/home_modules/started_messages/views/started_messages_view.dart';
+import '../modules/home_tabs/calls_tab/views/calls_tab_view.dart';
+import '../modules/home_tabs/camera_tab/views/camera_tab_view.dart';
+import '../modules/home_tabs/home/bindings/home_binding.dart';
+import '../modules/home_tabs/home/views/home_view.dart';
+import '../modules/home_tabs/rooms_tab/views/rooms_tab_view.dart';
+import '../modules/home_tabs/status_tab/views/status_tab_view.dart';
 import '../modules/message_modules/message/bindings/message_binding.dart';
 import '../modules/message_modules/message/views/message_view.dart';
 import '../modules/message_modules/message_search/bindings/message_search_binding.dart';
 import '../modules/message_modules/message_search/views/message_search_view.dart';
-import '../modules/message_modules/started_messages/bindings/started_messages_binding.dart';
-import '../modules/message_modules/started_messages/views/started_messages_view.dart';
 import '../modules/rooms_settings/broadcast_room_settings/bindings/broadcast_room_settings_binding.dart';
 import '../modules/rooms_settings/broadcast_room_settings/views/broadcast_room_settings_view.dart';
 import '../modules/rooms_settings/chat_common_groups/bindings/chat_common_groups_binding.dart';
@@ -52,14 +60,14 @@ import '../modules/rooms_settings/group_room_settings/bindings/group_room_settin
 import '../modules/rooms_settings/group_room_settings/views/group_room_settings_view.dart';
 import '../modules/rooms_settings/single_room_settings/bindings/single_room_settings_binding.dart';
 import '../modules/rooms_settings/single_room_settings/views/single_room_settings_view.dart';
-import '../modules/settings/settings_base/bindings/settings_base_binding.dart';
-import '../modules/settings/settings_base/views/settings_base_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
-import '../modules/start_chat/bindings/start_chat_binding.dart';
-import '../modules/start_chat/views/start_chat_view.dart';
-import '../modules/user_status/bindings/user_status_binding.dart';
-import '../modules/user_status/views/user_status_view.dart';
+import '../modules/status_modules/create_text_status/bindings/create_text_status_binding.dart';
+import '../modules/status_modules/create_text_status/views/create_text_status_view.dart';
+import '../modules/status_modules/my_status_details/bindings/my_status_details_binding.dart';
+import '../modules/status_modules/my_status_details/views/my_status_details_view.dart';
+import '../modules/status_modules/user_status/bindings/user_status_binding.dart';
+import '../modules/status_modules/user_status/views/user_status_view.dart';
 
 part 'app_routes.dart';
 
@@ -117,7 +125,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MESSAGE,
-      page: () => MessageView(),
+      page: () => const MessageView(),
       binding: MessageBinding(),
     ),
     GetPage(
@@ -137,27 +145,27 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHAT_MEDIA,
-      page: () => ChatMediaView(),
+      page: () => const ChatMediaView(),
       binding: ChatMediaBinding(),
     ),
     GetPage(
       name: _Paths.CHAT_COMMON_GROUPS,
-      page: () => ChatCommonGroupsView(),
+      page: () => const ChatCommonGroupsView(),
       binding: ChatCommonGroupsBinding(),
     ),
     GetPage(
       name: _Paths.MESSAGE_SEARCH,
-      page: () => MessageSearchView(),
+      page: () => const MessageSearchView(),
       binding: MessageSearchBinding(),
     ),
     GetPage(
       name: _Paths.EDIT_GROUP,
-      page: () => EditGroupView(),
+      page: () => const EditGroupView(),
       binding: EditGroupBinding(),
     ),
     GetPage(
       name: _Paths.GROUP_INVITE_LINK,
-      page: () => GroupInviteLinkView(),
+      page: () => const GroupInviteLinkView(),
       binding: GroupInviteLinkBinding(),
     ),
     GetPage(
@@ -167,63 +175,83 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.NEW_GROUP_SELECT_USERS,
-      page: () => NewGroupSelectUsersView(),
+      page: () => const NewGroupSelectUsersView(),
       binding: NewGroupSelectUsersBinding(),
     ),
     GetPage(
       name: _Paths.NEW_GROUP_CONFIRM_CREATION,
-      page: () => NewGroupConfirmCreationView(),
+      page: () => const NewGroupConfirmCreationView(),
       binding: NewGroupConfirmCreationBinding(),
     ),
     GetPage(
       name: _Paths.NEW_BROADCAST_CONFIRM_CREATION,
-      page: () => NewBroadcastConfirmCreationView(),
+      page: () => const NewBroadcastConfirmCreationView(),
       binding: NewBroadcastConfirmCreationBinding(),
     ),
     GetPage(
       name: _Paths.NEW_BROADCAST_SELECT_USERS,
-      page: () => NewBroadcastSelectUsersView(),
+      page: () => const NewBroadcastSelectUsersView(),
       binding: NewBroadcastSelectUsersBinding(),
     ),
     GetPage(
       name: _Paths.SHOW_GROUP_USERS,
-      page: () => ShowGroupUsersView(),
+      page: () => const ShowGroupUsersView(),
       binding: ShowGroupUsersBinding(),
     ),
     GetPage(
       name: _Paths.ADD_USERS_TO_GROUP,
-      page: () => AddUsersToGroupView(),
+      page: () => const AddUsersToGroupView(),
       binding: AddUsersToGroupBinding(),
     ),
     GetPage(
       name: _Paths.ADD_USERS_TO_BROADCAST,
-      page: () => AddUsersToBroadcastView(),
+      page: () => const AddUsersToBroadcastView(),
       binding: AddUsersToBroadcastBinding(),
     ),
     GetPage(
       name: _Paths.SHOW_BROADCAST_USERS,
-      page: () => ShowBroadcastUsersView(),
+      page: () => const ShowBroadcastUsersView(),
       binding: ShowBroadcastUsersBinding(),
     ),
     GetPage(
       name: _Paths.STARTED_MESSAGES,
-      page: () => StartedMessagesView(),
+      page: () => const StartedMessagesView(),
       binding: StartedMessagesBinding(),
     ),
     GetPage(
       name: _Paths.SETTINGS_BASE,
-      page: () => SettingsBaseView(),
+      page: () => const SettingsBaseView(),
       binding: SettingsBaseBinding(),
     ),
     GetPage(
       name: _Paths.LINK_WEB,
-      page: () => LinkWebView(),
+      page: () => const LinkWebView(),
       binding: LinkWebBinding(),
     ),
     GetPage(
       name: _Paths.USER_STATUS,
-      page: () => UserStatusView(),
+      page: () => const UserStatusView(),
       binding: UserStatusBinding(),
+    ),
+    GetPage(
+      name: _Paths.GLOBAL_SEARCH,
+      page: () => const GlobalSearchView(),
+      binding: GlobalSearchBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_TEXT_STATUS,
+      page: () => const CreateTextStatusView(),
+      binding: CreateTextStatusBinding(),
+    ),
+    GetPage(
+      name: _Paths.MY_STATUS_DETAILS,
+      page: () => const MyStatusDetailsView(),
+      binding: MyStatusDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.GET_CAMERA_IMAGE,
+      page: () => GetCameraImageView(),
+      binding: GetCameraImageBinding(),
     ),
   ];
 }

@@ -6,6 +6,8 @@ import '../controllers/new_broadcast_confirm_creation_controller.dart';
 
 class NewBroadcastConfirmCreationView
     extends GetView<NewBroadcastConfirmCreationController> {
+  const NewBroadcastConfirmCreationView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

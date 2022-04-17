@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../controllers/new_group_select_users_controller.dart';
 
 class NewGroupSelectUsersView extends GetView<NewGroupSelectUsersController> {
+  const NewGroupSelectUsersView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

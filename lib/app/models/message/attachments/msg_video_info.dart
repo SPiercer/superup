@@ -48,8 +48,7 @@ class MsgVideoInfo {
 
   @override
   String toString() {
-    return 'MsgVideoInfo{' +
-        ' imageThumbUrl: $imageThumbUrl,' +
+    return 'MsgVideoInfo{' ' imageThumbUrl: $imageThumbUrl,' +
         ' width: $width,' +
         ' height: $height,' +
         ' videoUrl: $videoUrl,' +

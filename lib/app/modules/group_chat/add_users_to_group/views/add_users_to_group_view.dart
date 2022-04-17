@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../controllers/add_users_to_group_controller.dart';
 
 class AddUsersToGroupView extends GetView<AddUsersToGroupController> {
+  const AddUsersToGroupView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

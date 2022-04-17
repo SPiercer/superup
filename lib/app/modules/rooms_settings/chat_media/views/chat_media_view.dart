@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../controllers/chat_media_controller.dart';
 
 class ChatMediaView extends GetView<ChatMediaController> {
+  const ChatMediaView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

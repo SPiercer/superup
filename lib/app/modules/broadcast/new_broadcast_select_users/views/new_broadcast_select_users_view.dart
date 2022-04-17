@@ -6,6 +6,8 @@ import '../controllers/new_broadcast_select_users_controller.dart';
 
 class NewBroadcastSelectUsersView
     extends GetView<NewBroadcastSelectUsersController> {
+  const NewBroadcastSelectUsersView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../controllers/group_invite_link_controller.dart';
 
 class GroupInviteLinkView extends GetView<GroupInviteLinkController> {
+  const GroupInviteLinkView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
