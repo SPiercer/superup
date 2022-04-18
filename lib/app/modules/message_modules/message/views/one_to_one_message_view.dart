@@ -34,109 +34,108 @@ class _OneToOneMessageViewState
         title: const Text('OneToOneMessageView'),
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          /// background image
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  "assets/message/default_wallpaper.png",
-                ),
-                fit: BoxFit.cover,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/message/default_wallpaper.png",
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            /// list view
+            Expanded(
+              child: Stack(
+                children: [
+                  Obx(() {
+                    return ListView.separated(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      reverse: true,
+                      itemBuilder: (context, index) => MessageItem(
+                        msg: controller.messages[index],
+                        controller: controller,
+                      ),
+                      separatorBuilder: (_, __) => const SizedBox(
+                        height: 10,
+                      ),
+                      itemCount: controller.messages.length,
+                    );
+                  }),
+                  const PositionedDirectional(bottom: 10,child: ArrowDown(),end: 10),
+                ],
               ),
             ),
-          ),
 
-          Column(
-            children: [
-              /// list view
-              Expanded(
-                child: Obx(() {
-                  return ListView.separated(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    reverse: true,
-                    itemBuilder: (context, index) => MessageItem(
-                      msg: controller.messages[index],
-                      controller: controller,
-                    ),
-                    separatorBuilder: (_, __) => const SizedBox(
-                      height: 10,
-                    ),
-                    itemCount: controller.messages.length,
-                  );
-                }),
-              ),
+            /// submit inputs
+            Obx(
+                  () {
+                final isReplyEnable =
+                    controller.downArrow.value.isReplyEnable;
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
 
-              /// submit inputs
-              Obx(
-                () {
-                  final isReplyEnable =
-                      controller.downArrow.value.isReplyEnable;
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      ArrowDown(),
 
-                      ///MessageTextFiled
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(8.0),
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
-                                  ),
+                    ///MessageTextFiled
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
                                 ),
-                                child: Obx(() {
-                                  controller.textMessage.value;
-                                  return MeasuredSize(
-                                    onChange: (size) {
-                                      controller
-                                          .onTextFieldHeightChange(size.height);
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Visibility(
-                                          visible: isReplyEnable,
-                                          child: ReplyItem(
-                                            controller: controller,
-                                          ),
-                                        ),
-                                        MessageTextFiled(
-                                          controller: controller,
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                }),
                               ),
+                              child: Obx(() {
+                                controller.textMessage.value;
+                                return MeasuredSize(
+                                  onChange: (size) {
+                                    controller
+                                        .onTextFieldHeightChange(size.height);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Visibility(
+                                        visible: isReplyEnable,
+                                        child: ReplyItem(
+                                          controller: controller,
+                                        ),
+                                      ),
+                                      MessageTextFiled(
+                                        controller: controller,
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }),
                             ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            MessageSendBtn(
-                              onInsert: controller.insertMessage,
-                            )
-                          ],
-                        ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          MessageSendBtn(
+                            onInsert: controller.insertMessage,
+                          )
+                        ],
                       ),
-                    ],
-                  );
-                },
-              ),
-              EmojiKeyboard(
-                controller: controller,
-              ),
-            ],
-          ),
-        ],
+                    ),
+                  ],
+                );
+              },
+            ),
+            EmojiKeyboard(
+              controller: controller,
+            ),
+          ],
+        ),
       ),
     );
   }
