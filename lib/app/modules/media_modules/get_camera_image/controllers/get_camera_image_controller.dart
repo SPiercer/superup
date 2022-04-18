@@ -4,7 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../main.dart';
+import '../../../../../main.dart';
+
 
 class GetCameraImageController extends GetxController {
   CameraController? cameraController;

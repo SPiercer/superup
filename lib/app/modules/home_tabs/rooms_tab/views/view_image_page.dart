@@ -64,7 +64,9 @@ class ViewImagePage extends StatelessWidget {
                       color: Colors.black.withOpacity(0.4),
                       height: 0.05,
                     ),
-                   room.roomType ==RoomType.broadcast?_buildButtonsForBroadcast(): _buildButtons()
+                    room.roomType == RoomType.broadcast
+                        ? _buildButtonsForBroadcast()
+                        : _buildButtons()
                   ],
                 ),
               ),
@@ -88,7 +90,13 @@ class ViewImagePage extends StatelessWidget {
                 color: AppColors.textFieldBorderColor,
               ),
               onPressed: () {
-                Get.toNamed(Routes.MESSAGE);
+                if (room.roomType == RoomType.broadcast) {
+                  Get.toNamed(Routes.BROADCAST_MESSAGE_SCREEN, arguments: room);
+                } else if (room.roomType == RoomType.groupChat) {
+                  Get.toNamed(Routes.GROUP_MESSAGE_SCREEN, arguments: room);
+                } else {
+                  Get.toNamed(Routes.ONE_TO_ONE_MESSAGE, arguments: room);
+                }
               },
             ),
           ),
@@ -130,6 +138,7 @@ class ViewImagePage extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildButtonsForBroadcast() {
     return Container(
       height: 50.0,
@@ -145,11 +154,16 @@ class ViewImagePage extends StatelessWidget {
                 color: AppColors.textFieldBorderColor,
               ),
               onPressed: () {
-                Get.toNamed(Routes.MESSAGE);
+                if (room.roomType == RoomType.broadcast) {
+                  Get.toNamed(Routes.BROADCAST_MESSAGE_SCREEN, arguments: room);
+                } else if (room.roomType == RoomType.groupChat) {
+                  Get.toNamed(Routes.GROUP_MESSAGE_SCREEN, arguments: room);
+                } else {
+                  Get.toNamed(Routes.ONE_TO_ONE_MESSAGE, arguments: room);
+                }
               },
             ),
           ),
-
           Flexible(
             child: IconButton(
               icon: const Icon(

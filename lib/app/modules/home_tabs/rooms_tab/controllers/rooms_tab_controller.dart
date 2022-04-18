@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/alerts_widgets/permistion_alerts/permission_asker.dart';
 import 'package:superup/app/core/enums/permission_type.dart';
+import '../../../../core/enums/room_type.dart';
 import '../../../../core/widgets/app_state.dart';
 import '../../../../models/room/room.dart';
 import '../../../../routes/app_pages.dart';
@@ -41,12 +42,18 @@ class RoomsTabController extends GetxController {
     state.refresh();
   }
 
-  void onRoomTap(final Room _room) {
+  void onRoomTap(final Room room) {
     if (_homeController.selectedRooms.isNotEmpty) {
-      onRoomLongTap(_room);
+      onRoomLongTap(room);
       return;
     }
-    Get.toNamed(Routes.MESSAGE, arguments: _room);
+    if (room.roomType == RoomType.broadcast) {
+      Get.toNamed(Routes.BROADCAST_MESSAGE_SCREEN, arguments: room);
+    } else if (room.roomType == RoomType.groupChat) {
+      Get.toNamed(Routes.GROUP_MESSAGE_SCREEN, arguments: room);
+    } else {
+      Get.toNamed(Routes.ONE_TO_ONE_MESSAGE, arguments: room);
+    }
   }
 
   void unSelectRoom(final Room _room) {
@@ -76,8 +83,8 @@ class RoomsTabController extends GetxController {
   }
 
   void onFlatMessageIconPress() async {
-    final res =
-        await PermissionAsker.askPermission(permission: PermissionType.contacts);
+    final res = await PermissionAsker.askPermission(
+        permission: PermissionType.contacts);
     if (res == 1) {
       Get.toNamed(Routes.START_CHAT);
     }

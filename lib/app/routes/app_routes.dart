@@ -14,7 +14,6 @@ abstract class Routes {
   static const STATUS_TAB = _Paths.STATUS_TAB;
   static const CALLS_TAB = _Paths.CALLS_TAB;
   static const CAMERA_TAB = _Paths.CAMERA_TAB;
-  static const MESSAGE = _Paths.MESSAGE;
   static const SINGLE_ROOM_SETTINGS = _Paths.SINGLE_ROOM_SETTINGS;
   static const GROUP_ROOM_SETTINGS = _Paths.GROUP_ROOM_SETTINGS;
   static const BROADCAST_ROOM_SETTINGS = _Paths.BROADCAST_ROOM_SETTINGS;
@@ -41,6 +40,16 @@ abstract class Routes {
   static const CREATE_TEXT_STATUS = _Paths.CREATE_TEXT_STATUS;
   static const MY_STATUS_DETAILS = _Paths.MY_STATUS_DETAILS;
   static const GET_CAMERA_IMAGE = _Paths.GET_CAMERA_IMAGE;
+  static const FORWARD_MESSAGE = _Paths.FORWARD_MESSAGE;
+  static const SINGLE_MESSAGE_INFO = _Paths.SINGLE_MESSAGE_INFO;
+  static const GROUP_MESSAGE_INFO = _Paths.GROUP_MESSAGE_INFO;
+  static const PHOTO_VIEWER = _Paths.PHOTO_VIEWER;
+  static const VIDEO_VIEWER = _Paths.VIDEO_VIEWER;
+  static const VIDEO_EDITOR = _Paths.VIDEO_EDITOR;
+  static const PHOTOS_EDITOR = _Paths.PHOTOS_EDITOR;
+  static const ONE_TO_ONE_MESSAGE = _Paths.ONE_TO_ONE_MESSAGE;
+  static const GROUP_MESSAGE_SCREEN = _Paths.GROUP_MESSAGE_SCREEN;
+  static const BROADCAST_MESSAGE_SCREEN = _Paths.BROADCAST_MESSAGE_SCREEN;
 }
 
 abstract class _Paths {
@@ -57,7 +66,7 @@ abstract class _Paths {
   static const CALLS_TAB = '/calls-tab';
 
   static const CAMERA_TAB = '/camera-tab';
-  static const MESSAGE = '/message';
+
 
   static const SINGLE_ROOM_SETTINGS = '/single-room-settings';
   static const GROUP_ROOM_SETTINGS = '/group-room-settings';
@@ -87,4 +96,14 @@ abstract class _Paths {
   static const CREATE_TEXT_STATUS = '/create-text-status';
   static const MY_STATUS_DETAILS = '/my-status-details';
   static const GET_CAMERA_IMAGE = '/get-camera-image';
+  static const FORWARD_MESSAGE = '/forward-message';
+  static const SINGLE_MESSAGE_INFO = '/single-message-info';
+  static const GROUP_MESSAGE_INFO = '/group-message-info';
+  static const PHOTO_VIEWER = '/photo-viewer';
+  static const VIDEO_VIEWER = '/video-viewer';
+  static const VIDEO_EDITOR = '/video-editor';
+  static const PHOTOS_EDITOR = '/photos-editor';
+  static const ONE_TO_ONE_MESSAGE = '/one-to-one-message';
+  static const GROUP_MESSAGE_SCREEN = '/group-message-screen';
+  static const BROADCAST_MESSAGE_SCREEN = '/broadcast-message-screen';
 }

@@ -20,11 +20,11 @@ class CameraTabController extends GetxController {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     if (cameraController != null) {
       cameraController!.dispose();
     }
-    super.dispose();
+    super.onClose();
   }
 
   void setUpCamera() async {

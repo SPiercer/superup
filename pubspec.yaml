@@ -12,16 +12,20 @@ dependencies:
   story_view: ^0.13.2
   camera: ^0.9.4+19
   flutter_countdown_timer: ^4.1.0
+  measured_size: ^1.0.0
   #Whats app packages
   status_view: ^0.0.2
   ionicons: ^0.1.2
   camera_with_files: ^0.0.4
   app_utils: ^0.0.4
+  swipe_to: ^1.0.2
   # mentions
   easy_rich_text: ^1.0.4
   lightbox: ^0.1.0
   sliver_header_delegate: ^0.0.5
   customizable_space_bar: ^0.2.0
+  chat_bubbles: ^1.2.0
+  emoji_picker_flutter: ^1.1.2
 
   path_provider:
   flutter:

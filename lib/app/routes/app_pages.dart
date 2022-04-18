@@ -16,8 +16,7 @@ import '../modules/broadcast/new_broadcast_select_users/bindings/new_broadcast_s
 import '../modules/broadcast/new_broadcast_select_users/views/new_broadcast_select_users_view.dart';
 import '../modules/broadcast/show_broadcast_users/bindings/show_broadcast_users_binding.dart';
 import '../modules/broadcast/show_broadcast_users/views/show_broadcast_users_view.dart';
-import '../modules/get_camera_image/bindings/get_camera_image_binding.dart';
-import '../modules/get_camera_image/views/get_camera_image_view.dart';
+
 import '../modules/group_chat/add_users_to_group/bindings/add_users_to_group_binding.dart';
 import '../modules/group_chat/add_users_to_group/views/add_users_to_group_view.dart';
 import '../modules/group_chat/edit_group/bindings/edit_group_binding.dart';
@@ -30,6 +29,7 @@ import '../modules/group_chat/new_group_select_users/bindings/new_group_select_u
 import '../modules/group_chat/new_group_select_users/views/new_group_select_users_view.dart';
 import '../modules/group_chat/show_group_users/bindings/show_group_users_binding.dart';
 import '../modules/group_chat/show_group_users/views/show_group_users_view.dart';
+
 import '../modules/home_modules/global_search/bindings/global_search_binding.dart';
 import '../modules/home_modules/global_search/views/global_search_view.dart';
 import '../modules/home_modules/link_web/bindings/link_web_binding.dart';
@@ -46,10 +46,30 @@ import '../modules/home_tabs/home/bindings/home_binding.dart';
 import '../modules/home_tabs/home/views/home_view.dart';
 import '../modules/home_tabs/rooms_tab/views/rooms_tab_view.dart';
 import '../modules/home_tabs/status_tab/views/status_tab_view.dart';
+import '../modules/media_modules/get_camera_image/bindings/get_camera_image_binding.dart';
+import '../modules/media_modules/get_camera_image/views/get_camera_image_view.dart';
+import '../modules/media_modules/photo_viewer/bindings/photo_viewer_binding.dart';
+import '../modules/media_modules/photo_viewer/views/photo_viewer_view.dart';
+import '../modules/media_modules/photos_editor/bindings/photos_editor_binding.dart';
+import '../modules/media_modules/photos_editor/views/photos_editor_view.dart';
+import '../modules/media_modules/video_editor/bindings/video_editor_binding.dart';
+import '../modules/media_modules/video_editor/views/video_editor_view.dart';
+import '../modules/media_modules/video_viewer/bindings/video_viewer_binding.dart';
+import '../modules/media_modules/video_viewer/views/video_viewer_view.dart';
+import '../modules/message_modules/forward_message/bindings/forward_message_binding.dart';
+import '../modules/message_modules/forward_message/views/forward_message_view.dart';
+import '../modules/message_modules/group_message_info/bindings/group_message_info_binding.dart';
+import '../modules/message_modules/group_message_info/views/group_message_info_view.dart';
 import '../modules/message_modules/message/bindings/message_binding.dart';
-import '../modules/message_modules/message/views/message_view.dart';
+
+import '../modules/message_modules/message/views/broadcast_message_screen_view.dart';
+import '../modules/message_modules/message/views/group_message_screen_view.dart';
+import '../modules/message_modules/message/views/one_to_one_message_view.dart';
 import '../modules/message_modules/message_search/bindings/message_search_binding.dart';
 import '../modules/message_modules/message_search/views/message_search_view.dart';
+
+import '../modules/message_modules/single_message_info/bindings/single_message_info_binding.dart';
+import '../modules/message_modules/single_message_info/views/single_message_info_view.dart';
 import '../modules/rooms_settings/broadcast_room_settings/bindings/broadcast_room_settings_binding.dart';
 import '../modules/rooms_settings/broadcast_room_settings/views/broadcast_room_settings_view.dart';
 import '../modules/rooms_settings/chat_common_groups/bindings/chat_common_groups_binding.dart';
@@ -60,6 +80,7 @@ import '../modules/rooms_settings/group_room_settings/bindings/group_room_settin
 import '../modules/rooms_settings/group_room_settings/views/group_room_settings_view.dart';
 import '../modules/rooms_settings/single_room_settings/bindings/single_room_settings_binding.dart';
 import '../modules/rooms_settings/single_room_settings/views/single_room_settings_view.dart';
+
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/status_modules/create_text_status/bindings/create_text_status_binding.dart';
@@ -68,6 +89,7 @@ import '../modules/status_modules/my_status_details/bindings/my_status_details_b
 import '../modules/status_modules/my_status_details/views/my_status_details_view.dart';
 import '../modules/status_modules/user_status/bindings/user_status_binding.dart';
 import '../modules/status_modules/user_status/views/user_status_view.dart';
+
 
 part 'app_routes.dart';
 
@@ -124,11 +146,6 @@ class AppPages {
       page: () => const CameraTabView(),
     ),
     GetPage(
-      name: _Paths.MESSAGE,
-      page: () => const MessageView(),
-      binding: MessageBinding(),
-    ),
-    GetPage(
       name: _Paths.SINGLE_ROOM_SETTINGS,
       page: () => const SingleRoomSettingsView(),
       binding: SingleRoomSettingsBinding(),
@@ -170,7 +187,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.START_CHAT,
-      page: () => StartChatView(),
+      page: () => const StartChatView(),
       binding: StartChatBinding(),
     ),
     GetPage(
@@ -250,8 +267,58 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.GET_CAMERA_IMAGE,
-      page: () => GetCameraImageView(),
+      page: () => const GetCameraImageView(),
       binding: GetCameraImageBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORWARD_MESSAGE,
+      page: () => ForwardMessageView(),
+      binding: ForwardMessageBinding(),
+    ),
+    GetPage(
+      name: _Paths.SINGLE_MESSAGE_INFO,
+      page: () => SingleMessageInfoView(),
+      binding: SingleMessageInfoBinding(),
+    ),
+    GetPage(
+      name: _Paths.GROUP_MESSAGE_INFO,
+      page: () => GroupMessageInfoView(),
+      binding: GroupMessageInfoBinding(),
+    ),
+    GetPage(
+      name: _Paths.PHOTO_VIEWER,
+      page: () => PhotoViewerView(),
+      binding: PhotoViewerBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIDEO_VIEWER,
+      page: () => VideoViewerView(),
+      binding: VideoViewerBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIDEO_EDITOR,
+      page: () => VideoEditorView(),
+      binding: VideoEditorBinding(),
+    ),
+    GetPage(
+      name: _Paths.PHOTOS_EDITOR,
+      page: () => PhotosEditorView(),
+      binding: PhotosEditorBinding(),
+    ),
+    GetPage(
+      name: _Paths.ONE_TO_ONE_MESSAGE,
+      page: () => const OneToOneMessageView(),
+      binding: MessageBinding(),
+    ),
+    GetPage(
+      name: _Paths.GROUP_MESSAGE_SCREEN,
+      page: () => const GroupMessageScreenView(),
+      binding: MessageBinding(),
+    ),
+    GetPage(
+      name: _Paths.BROADCAST_MESSAGE_SCREEN,
+      page: () => const BroadcastMessageScreenView(),
+      binding: MessageBinding(),
     ),
   ];
 }

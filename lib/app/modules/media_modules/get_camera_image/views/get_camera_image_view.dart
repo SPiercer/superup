@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:textless/textless.dart';
 
-import '../../../models/user/user.dart';
+import '../../../../models/user/user.dart';
 import '../controllers/get_camera_image_controller.dart';
 
 class GetCameraImageView extends GetView<GetCameraImageController> {
