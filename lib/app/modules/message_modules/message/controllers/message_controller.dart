@@ -24,7 +24,8 @@ class MessageController extends GetxController {
 
   void showEmoji() async {
     focusNode.unfocus();
-    focusNode.canRequestFocus= true;
+    focusNode.canRequestFocus = true;
+    await Future.delayed(const Duration(milliseconds: 300));
     emojiShowing.value = !emojiShowing.value;
   }
 
