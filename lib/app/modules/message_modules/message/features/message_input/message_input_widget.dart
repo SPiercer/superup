@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/enums/room_typing_type.dart';
 import 'package:superup/app/models/message/message.dart';
+import 'package:superup/app/modules/message_modules/message/features/message_input/widgets/message_record_btn.dart';
+import '../recorder/record_widget.dart';
 import 'widgets/emoji_keyborad.dart';
 import 'message_input_controller.dart';
 import 'widgets/message_send_btn.dart';
@@ -39,32 +41,21 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
           widget.replyMessage = null;
         });
       },
-      typingType: widget.typingType,
+      onTypingTypeChange: widget.typingType,
     );
-  }
-
-  @override
-  void dispose() {
-    controller.close();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        if (controller.isEmojiShowing) {
-          setState(() {
-            controller.isEmojiShowing = false;
-          });
-          return false;
-        }
-        return true;
-      },
+      onWillPop: controller.onWillPop,
       child: Obx(
         () {
+          final isSendBottomEnable = controller.isSendBottomEnable;
+          final isRecording = controller.isRecording;
           controller.updateScreen.value;
           return Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -81,6 +72,7 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
                           ),
                         ),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Visibility(
                               visible: widget.replyMessage != null,
@@ -93,14 +85,20 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
                                 replyMessage: widget.replyMessage,
                               ),
                             ),
-                            MessageTextFiled(
-                              focusNode: controller.focusNode,
-                              textEditingController:
-                                  controller.textEditingController,
-                              onShowEmoji: () {
-                                controller.showEmoji();
-                              },
-                            )
+                            if (isRecording)
+                              RecordWidget(
+                                controller: controller.recordController,
+                                onClose: controller.onCloseRecordIconPress,
+                              )
+                            else
+                              MessageTextFiled(
+                                focusNode: controller.focusNode,
+                                textEditingController:
+                                    controller.textEditingController,
+                                onShowEmoji: () {
+                                  controller.showEmoji();
+                                },
+                              )
                           ],
                         ),
                       ),
@@ -108,9 +106,14 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
                     const SizedBox(
                       width: 5,
                     ),
-                    MessageSendBtn(
-                      onInsert: controller.insertTextMessage,
-                    )
+                    if (isSendBottomEnable)
+                      MessageSendBtn(
+                        onInsert: controller.insertTextMessage,
+                      )
+                    else
+                      MessageRecordBtn(
+                        onRecordClick: controller.onRecordClick,
+                      )
                   ],
                 ),
               ),
@@ -126,5 +129,11 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    controller.close();
+    super.dispose();
   }
 }

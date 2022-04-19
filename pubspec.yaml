@@ -26,7 +26,8 @@ dependencies:
   customizable_space_bar: ^0.2.0
   chat_bubbles: ^1.2.0
   emoji_picker_flutter: ^1.1.2
-
+  record: ^3.0.4
+  permission_handler: ^9.2.0
   path_provider:
   flutter:
     sdk: flutter

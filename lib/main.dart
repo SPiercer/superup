@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/constants/app_constants.dart';
 import 'package:superup/app/core/constants/theme.dart';
+import 'package:superup/app/core/lazy_injection.dart';
 
+import 'app/core/manager/permission_manager.dart';
 import 'app/routes/app_pages.dart';
 
 List<CameraDescription>? cameras;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  LazyInjection();
   try {
     cameras = await availableCameras();
   } on CameraException catch (e) {
@@ -31,6 +34,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.cupertino,
       title: AppConstants.appName,
       initialRoute: AppPages.INITIAL,
+      initialBinding: LazyInjection(),
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       enableLog: !kReleaseMode,

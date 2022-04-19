@@ -32,7 +32,6 @@ class MessageController extends GetxController {
       myUser: User.myUser,
     )
   ].obs;
-  final textMessage = "".obs;
   final downArrow = ReplyMessageState().obs;
 
   void onTitlePress() {
@@ -41,38 +40,6 @@ class MessageController extends GetxController {
 
   final emojiShowing = false.obs;
 
-  void showEmoji() async {
-    // focusNode.unfocus();
-    // focusNode.canRequestFocus = true;
-    // await Future.delayed(const Duration(milliseconds: 300));
-    // emojiShowing.value = !emojiShowing.value;
-  }
-
-  void onEmojiSelected(Emoji emoji) {
-    // textEditingController
-    //   ..text += emoji.emoji
-    //   ..selection = TextSelection.fromPosition(
-    //       TextPosition(offset: textEditingController.text.length));
-  }
-
-  void onBackspacePressed() {
-    // textEditingController
-    //   ..text = textEditingController.text.characters.skipLast(1).toString()
-    //   ..selection = TextSelection.fromPosition(
-    //       TextPosition(offset: textEditingController.text.length));
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    // textEditingController.addListener(_textEditListener);
-    // focusNode.addListener(() {
-    //   print("focusNode.hasFocus ${focusNode.hasFocus}");
-    //   if (focusNode.hasFocus) {
-    //     emojiShowing.value = false;
-    //   }
-    // });
-  }
 
   void insertMessage(Message msg) {
     messages.insert(0, msg);
