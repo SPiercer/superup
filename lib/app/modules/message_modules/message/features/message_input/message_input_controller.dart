@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/enums/message_type.dart';
 import 'package:superup/app/modules/message_modules/message/features/recorder/record_controller.dart';
+import 'package:superup/app/routes/app_pages.dart';
 import '../../../../../core/enums/room_typing_type.dart';
 import '../../../../../models/message/message.dart';
 import '../../../../../models/user/user.dart';
@@ -12,6 +13,7 @@ class MessageInputController {
   final Function(RoomTypingType typingType) onTypingTypeChange;
 
   bool isEmojiShowing = false;
+
   final recordController = RecordController();
 
   String text = "";
@@ -19,6 +21,7 @@ class MessageInputController {
   bool isRecording = false;
   bool isSendBottomEnable = false;
   final updateScreen = false.obs;
+  Message? replyMessage;
 
   RoomTypingType typingType = RoomTypingType.stop;
 
@@ -28,6 +31,7 @@ class MessageInputController {
   MessageInputController({
     required this.onSubmit,
     required this.onTypingTypeChange,
+    required this.replyMessage,
   }) {
     textEditingController.addListener(_textEditListener);
     focusNode.addListener(() {
@@ -58,8 +62,8 @@ class MessageInputController {
 
   void insertTextMessage() {
     if (isRecording) {
-      isRecording = false;
       recordController.stop();
+      // _updateSendBottom(isRecording: false);
     }
     onSubmit(Message.buildMessage(
       content: textEditingController.text,
@@ -68,6 +72,8 @@ class MessageInputController {
       myUser: User.myUser,
     ));
     textEditingController.clear();
+    replyMessage = null;
+    _updateSendBottom(isRecording: false, isTyping: false);
   }
 
   void onEmojiSelected(Emoji emoji) {
@@ -95,9 +101,10 @@ class MessageInputController {
     return true;
   }
 
-  void close() {
+  Future close() async {
     textEditingController.removeListener(_textEditListener);
     textEditingController.dispose();
+    await recordController.close();
   }
 
   void _textEditListener() {
@@ -135,6 +142,7 @@ class MessageInputController {
     if (isStarted) {
       _updateSendBottom(isRecording: true, isTyping: true);
       _changeTypingType(RoomTypingType.recording);
+      recordController.startCounterUp();
     }
   }
 
@@ -142,5 +150,18 @@ class MessageInputController {
     recordController.stop();
     _updateSendBottom();
     _changeTypingType(RoomTypingType.stop);
+    recordController.stopCounter();
+  }
+
+  void onAttachFilePress() {}
+
+  void onCameraPress()async {
+
+    Get.toNamed(Routes.PHOTOS_EDITOR);
+  }
+
+  void onDismissReply() {
+    replyMessage = null;
+    updateScreen.refresh();
   }
 }

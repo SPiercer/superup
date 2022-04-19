@@ -1,20 +1,15 @@
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
+import 'package:flutter_painter/flutter_painter.dart';
 import 'package:get/get.dart';
 
 class PhotosEditorController extends GetxController {
-  //TODO: Implement PhotosEditorController
+  PainterController controller = PainterController();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Future<Uint8List?> renderImage(Size size) async {
+    final ui.Image renderedImage = await controller.renderImage(size);
+    final Uint8List? byteData = await renderedImage.pngBytes;
+    return byteData;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }

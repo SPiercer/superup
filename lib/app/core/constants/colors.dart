@@ -25,5 +25,5 @@ class AppColors {
   static const Color readMessageColor = Colors.grey;
 
   static const Color typingColor = Colors.lightGreen;
-  static const Color iconGrayColor = Color(0xff1EBEA6);
+  static const Color iconGrayColor = Color(0xff189583);
 }

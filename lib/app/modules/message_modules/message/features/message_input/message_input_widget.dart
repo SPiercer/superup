@@ -11,12 +11,12 @@ import 'widgets/message_text_filed.dart';
 import 'widgets/reply_item.dart';
 
 class MessageInputWidget extends StatefulWidget {
-  Message? replyMessage;
+  final Message? replyMessage;
   final String? leaverId;
   final Function(Message message) onSubmit;
   final Function(RoomTypingType typingType) typingType;
 
-  MessageInputWidget({
+  const MessageInputWidget({
     Key? key,
     this.replyMessage,
     this.leaverId,
@@ -35,18 +35,15 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
   void initState() {
     super.initState();
     controller = MessageInputController(
-      onSubmit: (v) {
-        widget.onSubmit(v);
-        setState(() {
-          widget.replyMessage = null;
-        });
-      },
+      replyMessage: widget.replyMessage,
+      onSubmit: widget.onSubmit,
       onTypingTypeChange: widget.typingType,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    controller.replyMessage = widget.replyMessage;
     return WillPopScope(
       onWillPop: controller.onWillPop,
       child: Obx(
@@ -75,14 +72,10 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Visibility(
-                              visible: widget.replyMessage != null,
+                              visible: controller.replyMessage != null,
                               child: ReplyItem(
-                                onDismissReply: () {
-                                  setState(() {
-                                    widget.replyMessage = null;
-                                  });
-                                },
-                                replyMessage: widget.replyMessage,
+                                onDismissReply: controller.onDismissReply,
+                                replyMessage: controller.replyMessage,
                               ),
                             ),
                             if (isRecording)
@@ -93,11 +86,13 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
                             else
                               MessageTextFiled(
                                 focusNode: controller.focusNode,
+                                isTyping: controller.typingType ==
+                                    RoomTypingType.typing,
                                 textEditingController:
                                     controller.textEditingController,
-                                onShowEmoji: () {
-                                  controller.showEmoji();
-                                },
+                                onShowEmoji: controller.showEmoji,
+                                onAttachFilePress: controller.onAttachFilePress,
+                                onCameraPress: controller.onCameraPress,
                               )
                           ],
                         ),
@@ -132,8 +127,8 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
   }
 
   @override
-  void dispose() {
-    controller.close();
+  void dispose() async {
     super.dispose();
+    await controller.close();
   }
 }

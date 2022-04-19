@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:superup/app/core/constants/colors.dart';
 import 'package:superup/app/models/message/message.dart';
-import 'package:superup/app/modules/message_modules/message/controllers/message_controller.dart';
 import 'package:textless/textless.dart';
 
 class ReplyItem extends StatelessWidget {
@@ -18,7 +18,8 @@ class ReplyItem extends StatelessWidget {
     }
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(3),
+      padding: const EdgeInsets.all(7),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: const BorderRadius.all(
@@ -27,19 +28,24 @@ class ReplyItem extends StatelessWidget {
       ),
       height: 70,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              replyMessage!.content.text,
+              replyMessage!.senderName.cap,
               InkWell(
                 onTap: onDismissReply,
                 child: const Icon(
                   Icons.clear,
+                  size: 22,
+                  color: AppColors.iconGrayColor,
                 ),
               ),
             ],
           ),
+          const SizedBox(height: 8,),
+          Flexible(child: replyMessage!.content.text.maxLine(2))
         ],
       ),
     );

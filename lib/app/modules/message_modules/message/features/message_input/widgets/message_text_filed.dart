@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:superup/app/core/constants/colors.dart';
 
 class MessageTextFiled extends StatelessWidget {
   final TextEditingController textEditingController;
   final FocusNode focusNode;
+  final bool isTyping;
   final VoidCallback onShowEmoji;
+  final VoidCallback onCameraPress;
+  final VoidCallback onAttachFilePress;
 
   const MessageTextFiled({
     Key? key,
     required this.textEditingController,
     required this.focusNode,
     required this.onShowEmoji,
+    required this.onCameraPress,
+    required this.onAttachFilePress,
+    required this.isTyping,
   }) : super(key: key);
 
   @override
@@ -22,6 +29,7 @@ class MessageTextFiled extends StatelessWidget {
           child: const Icon(
             Icons.emoji_emotions_outlined,
             size: 28,
+            color: AppColors.iconGrayColor,
           ),
         ),
         const SizedBox(
@@ -46,7 +54,32 @@ class MessageTextFiled extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        const Icon(Icons.attach_file, size: 28),
+        Visibility(
+          visible: !isTyping,
+          child: Row(
+            children: [
+              InkWell(
+                onTap: onCameraPress,
+                child: const Icon(
+                  Icons.camera_alt_sharp,
+                  size: 25,
+                  color: AppColors.iconGrayColor,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+        ),
+        InkWell(
+          onTap: onAttachFilePress,
+          child: const Icon(
+            Icons.attach_file,
+            size: 25,
+            color: AppColors.iconGrayColor,
+          ),
+        ),
       ],
     );
   }

@@ -1,5 +1,4 @@
 import 'package:permission_handler/permission_handler.dart';
-import 'package:record/record.dart';
 
 class PermissionManager {
   Future<bool> isAllowRecord() async {
