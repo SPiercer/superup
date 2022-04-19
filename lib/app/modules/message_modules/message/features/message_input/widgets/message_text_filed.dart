@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:superup/app/models/message/message.dart';
-import 'package:superup/app/modules/message_modules/message/controllers/message_controller.dart';
 
 class MessageTextFiled extends StatelessWidget {
-  final MessageController controller;
-  const MessageTextFiled({Key? key,required this.controller}) : super(key: key);
+  final TextEditingController textEditingController;
+  final FocusNode focusNode;
+  final VoidCallback onShowEmoji;
+
+  const MessageTextFiled({
+    Key? key,
+    required this.textEditingController,
+    required this.focusNode,
+    required this.onShowEmoji,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +18,7 @@ class MessageTextFiled extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         InkWell(
-          onTap: controller.showEmoji,
+          onTap: onShowEmoji,
           child: const Icon(
             Icons.emoji_emotions_outlined,
             size: 28,
@@ -25,8 +31,8 @@ class MessageTextFiled extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(bottom: 5, top: 5),
             child: TextField(
-              focusNode: controller.focusNode,
-              controller: controller.textEditingController,
+              focusNode: focusNode,
+              controller: textEditingController,
               maxLines: 5,
               minLines: 1,
               textInputAction: TextInputAction.newline,

@@ -4,16 +4,20 @@ import 'package:get/get.dart';
 import 'package:superup/app/modules/message_modules/message/controllers/message_controller.dart';
 
 import '../../../../core/widgets/get_full.dart';
-
+import '../features/message_input/message_input_widget.dart';
+import '../widgets/arrow_down.dart';
+import '../widgets/message_item.dart';
 
 class BroadcastMessageScreenView extends StatefulWidget {
   const BroadcastMessageScreenView({Key? key}) : super(key: key);
 
   @override
-  State<BroadcastMessageScreenView> createState() => _BroadcastMessageScreenViewState();
+  State<BroadcastMessageScreenView> createState() =>
+      _BroadcastMessageScreenViewState();
 }
 
-class _BroadcastMessageScreenViewState extends GetFull<BroadcastMessageScreenView,MessageController> {
+class _BroadcastMessageScreenViewState
+    extends GetFull<BroadcastMessageScreenView, MessageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +25,62 @@ class _BroadcastMessageScreenViewState extends GetFull<BroadcastMessageScreenVie
         title: Text('BroadcastMessageScreenView'),
         centerTitle: true,
       ),
-        body: Stack(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/message/default_wallpaper.png",
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
           children: [
-            Image.asset("assets/message/default_wallpaper.png",fit: BoxFit.cover,)
+            /// list view
+            Expanded(
+              child: Stack(
+                children: [
+                  Obx(() {
+                    return ListView.separated(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      reverse: true,
+                      itemBuilder: (context, index) => MessageItem(
+                        msg: controller.messages[index],
+                        controller: controller,
+                      ),
+                      separatorBuilder: (_, __) => const SizedBox(
+                        height: 10,
+                      ),
+                      itemCount: controller.messages.length,
+                    );
+                  }),
+                  const PositionedDirectional(
+                    bottom: 10,
+                    child: ArrowDown(),
+                    end: 10,
+                  ),
+                ],
+              ),
+            ),
+
+            /// submit inputs
+            Obx(
+              () {
+                final reply = controller.downArrow.value.replyMessage;
+                final leaverId = controller.room.value.leaverId;
+                return MessageInputWidget(
+                  onSubmit: (msg) {
+                    controller.insertMessage(msg);
+                  },
+                  typingType: (typing) {},
+                  leaverId: leaverId,
+                  replyMessage: reply,
+                );
+              },
+            ),
           ],
-        )
+        ),
+      ),
     );
   }
-
 }

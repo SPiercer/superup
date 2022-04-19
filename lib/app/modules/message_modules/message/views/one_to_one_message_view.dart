@@ -11,12 +11,13 @@ import 'package:superup/app/core/widgets/get_full.dart';
 import 'package:textless/textless.dart';
 
 import '../controllers/message_controller.dart';
+import '../features/message_input/message_input_widget.dart';
 import '../widgets/arrow_down.dart';
-import '../widgets/emoji_keyborad.dart';
+import '../features/message_input/widgets/emoji_keyborad.dart';
 import '../widgets/message_item.dart';
-import '../widgets/message_send_btn.dart';
-import '../widgets/message_text_filed.dart';
-import '../widgets/reply_item.dart';
+import '../features/message_input/widgets/message_send_btn.dart';
+import '../features/message_input/widgets/message_text_filed.dart';
+import '../features/message_input/widgets/reply_item.dart';
 
 class OneToOneMessageView extends StatefulWidget {
   const OneToOneMessageView({Key? key}) : super(key: key);
@@ -63,76 +64,29 @@ class _OneToOneMessageViewState
                       itemCount: controller.messages.length,
                     );
                   }),
-                  const PositionedDirectional(bottom: 10,child: ArrowDown(),end: 10),
+                  const PositionedDirectional(
+                    bottom: 10,
+                    child: ArrowDown(),
+                    end: 10,
+                  ),
                 ],
               ),
             ),
 
             /// submit inputs
             Obx(
-                  () {
-                final isReplyEnable =
-                    controller.downArrow.value.isReplyEnable;
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-
-
-                    ///MessageTextFiled
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(8.0),
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                              ),
-                              child: Obx(() {
-                                controller.textMessage.value;
-                                return MeasuredSize(
-                                  onChange: (size) {
-                                    controller
-                                        .onTextFieldHeightChange(size.height);
-                                  },
-                                  child: Column(
-                                    children: [
-                                      Visibility(
-                                        visible: isReplyEnable,
-                                        child: ReplyItem(
-                                          controller: controller,
-                                        ),
-                                      ),
-                                      MessageTextFiled(
-                                        controller: controller,
-                                      )
-                                    ],
-                                  ),
-                                );
-                              }),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          MessageSendBtn(
-                            onInsert: controller.insertMessage,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+              () {
+                final reply = controller.downArrow.value.replyMessage;
+                final leaverId = controller.room.value.leaverId;
+                return MessageInputWidget(
+                  onSubmit: (msg) {
+                    controller.insertMessage(msg);
+                  },
+                  typingType: (typing) {},
+                  leaverId: leaverId,
+                  replyMessage: reply,
                 );
               },
-            ),
-            EmojiKeyboard(
-              controller: controller,
             ),
           ],
         ),

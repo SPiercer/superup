@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
+import 'package:superup/app/models/message/message.dart';
 
-class DownArrowModel {
-  String? replyMessage;
+class ReplyMessageState {
+  Message? replyMessage;
   bool isReplyEnable = false;
-  double downArrowSpace = 0.8;
 }
