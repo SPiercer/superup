@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:superup/app/modules/message_modules/message/controllers/message_controller.dart';
 
 import '../../../../core/widgets/get_full.dart';
+import '../../../../models/user/user.dart';
 import '../features/message_input/message_input_widget.dart';
 import '../widgets/arrow_down.dart';
 import '../widgets/message_item.dart';
@@ -69,11 +70,13 @@ class _BroadcastMessageScreenViewState
                 final reply = controller.downArrow.value.replyMessage;
                 final leaverId = controller.room.value.leaverId;
                 return MessageInputWidget(
+                  myUser: User.myUser,
                   onSubmit: (msg) {
-                    controller.insertMessage(msg);
+                    controller.onSubmitInsertMessage(msg);
                   },
                   typingType: (typing) {},
                   leaverId: leaverId,
+                  roomId: controller.room.value.id,
                   replyMessage: reply,
                 );
               },

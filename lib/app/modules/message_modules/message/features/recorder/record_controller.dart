@@ -26,14 +26,12 @@ class RecordController {
     });
   }
 
-
-
   Future close() async {
     await _stopWatchTimer.dispose();
   }
 
   void startCounterUp() {
-    if(_stopWatchTimer.isRunning){
+    if (_stopWatchTimer.isRunning) {
       stopCounter();
     }
     _stopWatchTimer.onExecute.add(StopWatchExecute.start);
@@ -42,9 +40,6 @@ class RecordController {
   Future stopCounter() async {
     _stopWatchTimer.onExecute.add(StopWatchExecute.reset);
   }
-
-
-
 
   Future<bool> _start() async {
     final perms = Get.find<PermissionManager>();
@@ -72,8 +67,12 @@ class RecordController {
     }
   }
 
-  Future<String?> stop() async {
-    return await recorder.stop();
+  Future<VoiceInfoData> stop() async {
+    final path = await recorder.stop();
+    if (path != null) {
+      return VoiceInfoData(duration: currentTime.value, path: path, size: "mb");
+    }
+    throw "record path is null here ! while stop the record";
   }
 
   void pause() {}
@@ -82,4 +81,16 @@ class RecordController {
     /// permission handler ask for storage and record
     return await _start();
   }
+}
+
+class VoiceInfoData {
+  final String path;
+  final String duration;
+  final String size;
+
+  const VoiceInfoData({
+    required this.path,
+    required this.duration,
+    required this.size,
+  });
 }

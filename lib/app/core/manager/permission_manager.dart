@@ -9,4 +9,12 @@ class PermissionManager {
     final res = await Permission.microphone.request();
     return res.isGranted;
   }
+
+  Future<bool> isCameraAllwed()async {
+    return await Permission.camera.isGranted;
+  }
+  Future<bool> askForCamera()async {
+    final st = await Permission.camera.request();
+    return st == PermissionStatus.granted;
+  }
 }

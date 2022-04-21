@@ -10,6 +10,7 @@ import 'package:superup/app/core/constants/colors.dart';
 import 'package:superup/app/core/widgets/get_full.dart';
 import 'package:textless/textless.dart';
 
+import '../../../../models/user/user.dart';
 import '../controllers/message_controller.dart';
 import '../features/message_input/message_input_widget.dart';
 import '../widgets/arrow_down.dart';
@@ -79,8 +80,10 @@ class _OneToOneMessageViewState
                 final reply = controller.downArrow.value.replyMessage;
                 final leaverId = controller.room.value.leaverId;
                 return MessageInputWidget(
+                  myUser: User.myUser,
+                  roomId: controller.room.value.id,
                   onSubmit: (msg) {
-                    controller.insertMessage(msg);
+                    controller.onSubmitInsertMessage(msg);
                   },
                   typingType: (typing) {},
                   leaverId: leaverId,

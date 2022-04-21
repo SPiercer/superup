@@ -40,8 +40,8 @@ class MessageController extends GetxController {
 
   final emojiShowing = false.obs;
 
-
-  void insertMessage(Message msg) {
+  void onSubmitInsertMessage(Message msg) {
+    msg.content = msg.toString();
     messages.insert(0, msg);
   }
 

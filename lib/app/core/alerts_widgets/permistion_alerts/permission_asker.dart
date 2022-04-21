@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/alerts_widgets/permistion_alerts/mic_alert.dart';
 import '../../enums/permission_type.dart';
+import 'camera_alert.dart';
 import 'contacts_alert.dart';
 
 class PermissionAsker {
@@ -12,13 +13,19 @@ class PermissionAsker {
         if (permission == PermissionType.contacts) {
           return const AlertDialog(
             contentPadding: EdgeInsets.zero,
-            content:  ContactsDialog(),
+            content: ContactsDialog(),
           );
         }
         if (permission == PermissionType.mic) {
           return const AlertDialog(
             contentPadding: EdgeInsets.zero,
-            content:  MicDialog(),
+            content: MicDialog(),
+          );
+        }
+        if (permission == PermissionType.camera) {
+          return const AlertDialog(
+            contentPadding: EdgeInsets.zero,
+            content: CameraDialog(),
           );
         }
         return SizedBox();

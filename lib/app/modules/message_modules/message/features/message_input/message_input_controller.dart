@@ -1,25 +1,36 @@
 import 'package:emoji_picker_flutter/src/emoji.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:superup/app/core/enums/message_type.dart';
+import 'package:superup/app/models/message/attachments/message_attachment.dart';
+import 'package:superup/app/models/message/attachments/msg_reply_info.dart';
+import 'package:superup/app/models/message/attachments/msg_voice_info.dart';
 import 'package:superup/app/modules/message_modules/message/features/recorder/record_controller.dart';
 import 'package:superup/app/routes/app_pages.dart';
 import '../../../../../core/enums/room_typing_type.dart';
 import '../../../../../models/message/message.dart';
 import '../../../../../models/user/user.dart';
+import '../media_picker/media_picker_controller.dart';
+import '../media_picker/media_picker_widget.dart';
 
 class MessageInputController {
   final Function(Message message) onSubmit;
   final Function(RoomTypingType typingType) onTypingTypeChange;
 
   bool isEmojiShowing = false;
+  String roomId;
 
   final recordController = RecordController();
+  late MediaPickerController mediaPickerController;
 
   String text = "";
 
   bool isRecording = false;
   bool isSendBottomEnable = false;
+  User myUser;
+
   final updateScreen = false.obs;
   Message? replyMessage;
 
@@ -30,8 +41,10 @@ class MessageInputController {
 
   MessageInputController({
     required this.onSubmit,
+    required this.myUser,
     required this.onTypingTypeChange,
     required this.replyMessage,
+    required this.roomId,
   }) {
     textEditingController.addListener(_textEditListener);
     focusNode.addListener(() {
@@ -40,6 +53,10 @@ class MessageInputController {
         updateScreen.refresh();
       }
     });
+
+    mediaPickerController =
+        MediaPickerController(myUser: myUser, roomId: roomId);
+    mediaPickerController.addListener(_onMediaMessageRecived);
   }
 
   Future showEmoji() async {
@@ -60,20 +77,33 @@ class MessageInputController {
       );
   }
 
-  void insertTextMessage() {
+  void insertTextMessage() async {
+    late Message msgToSend;
     if (isRecording) {
-      recordController.stop();
-      // _updateSendBottom(isRecording: false);
+      final info = await recordController.stop();
+      msgToSend = Message.buildMessage(
+        content: textEditingController.text,
+        roomId: roomId,
+        type: MessageType.voice,
+        attachments: MessageAttachment(
+          msgVoiceInfo: MsgVoiceInfo(
+            playUrl: info.path,
+            voiceDuration: info.duration,
+            voiceSize: info.size,
+          ),
+        ),
+        myUser: User.myUser,
+      );
+    } else {
+      msgToSend = Message.buildMessage(
+        content: textEditingController.text,
+        roomId: roomId,
+        type: MessageType.text,
+        myUser: User.myUser,
+      );
     }
-    onSubmit(Message.buildMessage(
-      content: textEditingController.text,
-      roomId: "roomId",
-      type: MessageType.text,
-      myUser: User.myUser,
-    ));
-    textEditingController.clear();
-    replyMessage = null;
-    _updateSendBottom(isRecording: false, isTyping: false);
+
+    onSubmit(_setReplyIfNotNull(msgToSend));
   }
 
   void onEmojiSelected(Emoji emoji) {
@@ -103,6 +133,7 @@ class MessageInputController {
 
   Future close() async {
     textEditingController.removeListener(_textEditListener);
+    mediaPickerController.removeListener(_onMediaMessageRecived);
     textEditingController.dispose();
     await recordController.close();
   }
@@ -153,15 +184,54 @@ class MessageInputController {
     recordController.stopCounter();
   }
 
-  void onAttachFilePress() {}
+  void onAttachFilePress(BuildContext context) async {
+    final res = await showModalBottomSheet(
+      context: context,
+      elevation: 0,
+      enableDrag: true,
+      isDismissible: true,
+      builder: (context) {
+        return MediaPickerWidget(
+          mediaPickerController: mediaPickerController,
+        );
+      },
+    );
 
-  void onCameraPress()async {
+    /// we need to build media message
+  }
 
-    Get.toNamed(Routes.PHOTOS_EDITOR);
+  void onCameraPress() async {
+    mediaPickerController.pickImage(ImageSource.camera);
+    //Get.toNamed(Routes.PHOTOS_EDITOR);
   }
 
   void onDismissReply() {
     replyMessage = null;
     updateScreen.refresh();
+  }
+
+  void _onMediaMessageRecived() {
+    if (mediaPickerController.value == null) {
+      throw "mediaPickerController cant reply with null message !";
+    }
+    final mediaMsg = _setReplyIfNotNull(mediaPickerController.value!);
+    onSubmit(_setReplyIfNotNull(mediaMsg));
+  }
+
+  Message _setReplyIfNotNull(Message message) {
+    if (replyMessage != null) {
+      message.messageContains = MessageContains.reply;
+      message.messageAttachment = MessageAttachment(
+        msgReplyInfo: MsgReplyInfo(
+          parentMessageId: replyMessage!.id,
+          parentSenderId: myUser.id,
+          messageData: replyMessage!,
+        ),
+      );
+      replyMessage = null;
+    }
+    textEditingController.clear();
+    _updateSendBottom(isRecording: false, isTyping: false);
+    return message;
   }
 }

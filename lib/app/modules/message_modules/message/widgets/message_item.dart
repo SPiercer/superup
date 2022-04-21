@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:flutter/material.dart';
+import 'package:superup/app/core/enums/message_type.dart';
 import 'package:superup/app/models/message/message.dart';
 import 'package:superup/app/modules/message_modules/message/controllers/message_controller.dart';
 import 'package:swipe_to/swipe_to.dart';
@@ -14,6 +17,9 @@ class MessageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(msg.messageType == MessageType.image){
+      return Image.file(File(msg.messageAttachment!.msgImageInfo!.imageUrl));
+    }
     return SwipeTo(
       key: UniqueKey(),
       onRightSwipe: () {

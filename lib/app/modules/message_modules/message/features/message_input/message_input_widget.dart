@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:superup/app/core/enums/room_typing_type.dart';
 import 'package:superup/app/models/message/message.dart';
 import 'package:superup/app/modules/message_modules/message/features/message_input/widgets/message_record_btn.dart';
+import '../../../../../models/user/user.dart';
 import '../recorder/record_widget.dart';
 import 'widgets/emoji_keyborad.dart';
 import 'message_input_controller.dart';
@@ -13,6 +14,8 @@ import 'widgets/reply_item.dart';
 class MessageInputWidget extends StatefulWidget {
   final Message? replyMessage;
   final String? leaverId;
+  final String roomId;
+  final User myUser;
   final Function(Message message) onSubmit;
   final Function(RoomTypingType typingType) typingType;
 
@@ -21,6 +24,8 @@ class MessageInputWidget extends StatefulWidget {
     this.replyMessage,
     this.leaverId,
     required this.onSubmit,
+    required this.roomId,
+    required this.myUser,
     required this.typingType,
   }) : super(key: key);
 
@@ -36,6 +41,8 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
     super.initState();
     controller = MessageInputController(
       replyMessage: widget.replyMessage,
+      roomId: widget.roomId,
+      myUser: widget.myUser,
       onSubmit: widget.onSubmit,
       onTypingTypeChange: widget.typingType,
     );
@@ -44,6 +51,9 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
   @override
   Widget build(BuildContext context) {
     controller.replyMessage = widget.replyMessage;
+    if (controller.replyMessage != null) {
+      controller.focusNode.requestFocus();
+    }
     return WillPopScope(
       onWillPop: controller.onWillPop,
       child: Obx(
@@ -91,7 +101,8 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
                                 textEditingController:
                                     controller.textEditingController,
                                 onShowEmoji: controller.showEmoji,
-                                onAttachFilePress: controller.onAttachFilePress,
+                                onAttachFilePress: () =>
+                                    controller.onAttachFilePress(context),
                                 onCameraPress: controller.onCameraPress,
                               )
                           ],

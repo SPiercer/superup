@@ -18,14 +18,14 @@ class MessageAttachment {
   final MsgLocationInfo? msgLocationInfo;
   final MsgFileInfo? msgFileInfo;
   final MsgCallInfo? msgCallInfo;
-  final MsgReplyInfo? msgReplyInfo;
+  MsgReplyInfo? msgReplyInfo;
   final List<MsgMentionInfo>? msgMentionInfo;
   final GroupMsgInfo? groupMsgInfo;
   final MsgBotInfo? msgBotInfo;
 
 //<editor-fold desc="Data Methods">
 
-  const MessageAttachment({
+    MessageAttachment({
     this.msgLinkInfo,
     this.msgImageInfo,
     this.msgVideoInfo,

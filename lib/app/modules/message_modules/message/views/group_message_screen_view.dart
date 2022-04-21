@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:superup/app/core/widgets/get_full.dart';
 import 'package:superup/app/modules/message_modules/message/widgets/message_item.dart';
 
+import '../../../../models/user/user.dart';
 import '../controllers/message_controller.dart';
 import '../features/message_input/message_input_widget.dart';
 import '../widgets/arrow_down.dart';
@@ -70,11 +71,13 @@ class _GroupMessageScreenViewState
                 final leaverId = controller.room.value.leaverId;
                 return MessageInputWidget(
                   onSubmit: (msg) {
-                    controller.insertMessage(msg);
+                    controller.onSubmitInsertMessage(msg);
                   },
+                  myUser: User.myUser,
                   typingType: (typing) {},
                   leaverId: leaverId,
                   replyMessage: reply,
+                  roomId: controller.room.value.id,
                 );
               },
             ),
