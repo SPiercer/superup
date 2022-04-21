@@ -29,11 +29,7 @@ class MsgLinkInfo {
 
   @override
   String toString() {
-    return 'MsgLinkInfo{' +
-        ' url: $url,' +
-        ' imageUrl: $imageUrl,' +
-        ' title: $title,' +
-        ' description: $description,' +
+    return 'MsgLinkInfo{' ' url: $url,' ' imageUrl: $imageUrl,' ' title: $title,' ' description: $description,' +
         '}';
   }
 
@@ -53,10 +49,10 @@ class MsgLinkInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'url': this.url,
-      'imageUrl': this.imageUrl,
-      'title': this.title,
-      'description': this.description,
+      'url': url,
+      'imageUrl': imageUrl,
+      'title': title,
+      'description': description,
     };
   }
 

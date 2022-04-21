@@ -7,7 +7,6 @@ import 'package:superup/app/core/constants/app_constants.dart';
 import 'package:superup/app/core/constants/theme.dart';
 import 'package:superup/app/core/lazy_injection.dart';
 
-import 'app/core/manager/permission_manager.dart';
 import 'app/routes/app_pages.dart';
 
 List<CameraDescription>? cameras;

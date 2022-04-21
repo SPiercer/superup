@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:mime_type/mime_type.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,11 +9,12 @@ import 'package:superup/app/core/enums/message_type.dart';
 import 'package:superup/app/core/enums/permission_type.dart';
 import 'package:superup/app/core/manager/permission_manager.dart';
 import 'package:superup/app/models/message/attachments/message_attachment.dart';
+import 'package:superup/app/models/message/attachments/msg_file_info.dart';
 import 'package:superup/app/models/message/attachments/msg_image_info.dart';
 import 'package:superup/app/models/message/attachments/msg_video_info.dart';
 import 'package:superup/app/models/user/user.dart';
 import 'package:superup/app/routes/app_pages.dart';
-
+import 'package:path/path.dart';
 import '../../../../../core/alerts_widgets/permistion_alerts/permission_asker.dart';
 import '../../../../../core/constants/app_constants.dart';
 import '../../../../../core/manager/media_manager.dart';
@@ -68,28 +70,39 @@ class MediaPickerController extends ValueNotifier<Message?> {
       }
       // final compressedImage = await manager.compressImage(file);
       final compressedImage = file;
-      final size = manager.getFileSize(compressedImage);
-      final imageInfo = await manager.getImageSize(compressedImage);
+
+      final newPath = await Get.toNamed(
+        Routes.PHOTOS_EDITOR,
+        arguments: File(compressedImage.path),
+      );
+      if (newPath == null) {
+        return;
+      }
+
+      final editedImage = File(newPath);
+
+      final size = manager.getFileSize(editedImage);
+      final imageInfo = await manager.getImageSize(editedImage);
 
       final imgMsg = Message.buildMessage(
-        content: "this content is photo",
+        content: "this content is photo 📷",
         roomId: roomId,
         type: MessageType.image,
         attachments: MessageAttachment(
           msgImageInfo: MsgImageInfo(
             width: imageInfo.image.width,
             height: imageInfo.image.height,
-            smallImageUrl: compressedImage.path,
-            imageUrl: compressedImage.path,
+            smallImageUrl: editedImage.path,
+            imageUrl: editedImage.path,
             imageSize: size,
           ),
         ),
         myUser: myUser,
       );
-      final newPath = await Get.toNamed(Routes.PHOTOS_EDITOR,
-          arguments: File(compressedImage.path));
-      imgMsg.messageAttachment!.msgImageInfo!.imageUrl = newPath;
+
+      /// notify the listener to send the message
       value = imgMsg;
+
     }
   }
 
@@ -108,7 +121,7 @@ class MediaPickerController extends ValueNotifier<Message?> {
       final thumbVideoThumb = await manager.getImageSize(videoThumb);
       final videoFileSize = manager.getFileSize(videoFile);
       final videoMsg = Message.buildMessage(
-        content: "this content is video",
+        content: "This content video 📽",
         roomId: roomId,
         type: MessageType.video,
         attachments: MessageAttachment(
@@ -130,5 +143,30 @@ class MediaPickerController extends ValueNotifier<Message?> {
 
   Future pickFile() async {
     Get.back();
+    final FilePickerResult? pickedFile = await FilePicker.platform.pickFiles();
+    if (pickedFile != null) {
+      final file = File(pickedFile.files.first.path!);
+      if (file.lengthSync() > AppConstants.maxMediaSize) {
+        File(file.path).deleteSync();
+        InfoAlert().show(text: "File is too large");
+        return;
+      }
+      final fileMsg = Message.buildMessage(
+        content: "This content file 📁",
+        roomId: roomId,
+        type: MessageType.file,
+        attachments: MessageAttachment(
+          msgFileInfo: MsgFileInfo(
+            fileSize: manager.getFileSize(file),
+            fileTitle: basename(file.path),
+            fileUrl: file.path,
+            mimeType: mime(file.path).toString(),
+          ),
+        ),
+        myUser: myUser,
+      );
+
+      value = fileMsg;
+    }
   }
 }

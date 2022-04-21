@@ -12,10 +12,10 @@ class NewGroupConfirmCreationView
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NewGroupConfirmCreationView'),
+        title: const Text('NewGroupConfirmCreationView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'NewGroupConfirmCreationView is working',
           style: TextStyle(fontSize: 20),

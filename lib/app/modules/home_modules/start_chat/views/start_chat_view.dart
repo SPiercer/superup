@@ -11,10 +11,10 @@ class StartChatView extends GetView<StartChatController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('StartChatView'),
+        title: const Text('StartChatView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'StartChatView is working',
           style: TextStyle(fontSize: 20),

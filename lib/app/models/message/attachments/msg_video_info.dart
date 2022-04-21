@@ -48,11 +48,7 @@ class MsgVideoInfo {
 
   @override
   String toString() {
-    return 'MsgVideoInfo{' ' imageThumbUrl: $imageThumbUrl,' +
-        ' width: $width,' +
-        ' height: $height,' +
-        ' videoUrl: $videoUrl,' +
-        ' videoSize: $videoSize,' +
+    return 'MsgVideoInfo{' ' imageThumbUrl: $imageThumbUrl,' ' width: $width,' ' height: $height,' ' videoUrl: $videoUrl,' ' videoSize: $videoSize,' +
         ' videoDuration: $videoDuration,' +
         '}';
   }
@@ -77,12 +73,12 @@ class MsgVideoInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'imageThumbUrl': this.imageThumbUrl,
-      'width': this.width,
-      'height': this.height,
-      'videoUrl': this.videoUrl,
-      'videoSize': this.videoSize,
-      'videoDuration': this.videoDuration,
+      'imageThumbUrl': imageThumbUrl,
+      'width': width,
+      'height': height,
+      'videoUrl': videoUrl,
+      'videoSize': videoSize,
+      'videoDuration': videoDuration,
     };
   }
 

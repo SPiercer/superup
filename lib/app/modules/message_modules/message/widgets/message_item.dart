@@ -6,7 +6,6 @@ import 'package:superup/app/core/enums/message_type.dart';
 import 'package:superup/app/models/message/message.dart';
 import 'package:superup/app/modules/message_modules/message/controllers/message_controller.dart';
 import 'package:swipe_to/swipe_to.dart';
-import 'package:textless/textless.dart';
 
 class MessageItem extends StatelessWidget {
   final Message msg;

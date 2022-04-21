@@ -30,7 +30,7 @@ class CallsTabView extends GetView<CallsTabController> {
               ),
               ListTile(
                 leading: CircleAvatar(
-                  foregroundColor: Theme.of(context).accentColor,
+                  foregroundColor: Theme.of(context).colorScheme.secondary,
                   backgroundColor: Colors.grey,
                   backgroundImage: NetworkImage(dummc[i].imgurl),
                 ),

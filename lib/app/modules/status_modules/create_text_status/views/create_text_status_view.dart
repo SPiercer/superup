@@ -11,10 +11,10 @@ class CreateTextStatusView extends GetView<CreateTextStatusController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CreateTextStatusView'),
+        title: const Text('CreateTextStatusView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'CreateTextStatusView is working',
           style: TextStyle(fontSize: 20),

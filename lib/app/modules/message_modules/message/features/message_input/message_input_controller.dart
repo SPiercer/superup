@@ -1,5 +1,4 @@
-import 'package:emoji_picker_flutter/src/emoji.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,7 +7,6 @@ import 'package:superup/app/models/message/attachments/message_attachment.dart';
 import 'package:superup/app/models/message/attachments/msg_reply_info.dart';
 import 'package:superup/app/models/message/attachments/msg_voice_info.dart';
 import 'package:superup/app/modules/message_modules/message/features/recorder/record_controller.dart';
-import 'package:superup/app/routes/app_pages.dart';
 import '../../../../../core/enums/room_typing_type.dart';
 import '../../../../../models/message/message.dart';
 import '../../../../../models/user/user.dart';
@@ -106,7 +104,7 @@ class MessageInputController {
     onSubmit(_setReplyIfNotNull(msgToSend));
   }
 
-  void onEmojiSelected(Emoji emoji) {
+  void onEmojiSelected(  emoji) {
     textEditingController
       ..text += emoji.emoji
       ..selection = TextSelection.fromPosition(
@@ -221,13 +219,22 @@ class MessageInputController {
   Message _setReplyIfNotNull(Message message) {
     if (replyMessage != null) {
       message.messageContains = MessageContains.reply;
-      message.messageAttachment = MessageAttachment(
-        msgReplyInfo: MsgReplyInfo(
+      if (message.messageAttachment != null) {
+        message.messageAttachment!.msgReplyInfo = MsgReplyInfo(
           parentMessageId: replyMessage!.id,
           parentSenderId: myUser.id,
           messageData: replyMessage!,
-        ),
-      );
+        );
+      } else {
+        message.messageAttachment = MessageAttachment(
+          msgReplyInfo: MsgReplyInfo(
+            parentMessageId: replyMessage!.id,
+            parentSenderId: myUser.id,
+            messageData: replyMessage!,
+          ),
+        );
+      }
+
       replyMessage = null;
     }
     textEditingController.clear();

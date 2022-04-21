@@ -74,7 +74,6 @@ abstract class _Paths {
   static const CHAT_MEDIA = '/chat-media';
   static const CHAT_COMMON_GROUPS = '/chat-common-groups';
   static const MESSAGE_SEARCH = '/message-search';
-  static const SELECT_MEMBERS = '/select-members';
   static const EDIT_GROUP = '/edit-group';
   static const GROUP_INVITE_LINK = '/group-invite-link';
   static const START_CHAT = '/start-chat';

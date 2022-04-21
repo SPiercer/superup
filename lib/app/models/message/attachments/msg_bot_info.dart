@@ -22,7 +22,7 @@ class MsgBotInfo {
 
   @override
   String toString() {
-    return 'MsgBotInfo{' + ' type: $type,' + ' options: $botMsgReplays,' + '}';
+    return 'MsgBotInfo{' ' type: $type,' ' options: $botMsgReplays,' '}';
   }
 
   MsgBotInfo copyWith({
@@ -31,14 +31,14 @@ class MsgBotInfo {
   }) {
     return MsgBotInfo(
       type: type ?? this.type,
-      botMsgReplays: options ?? this.botMsgReplays,
+      botMsgReplays: options ?? botMsgReplays,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'type': this.type,
-      'botMsgReplays': this.botMsgReplays,
+      'type': type,
+      'botMsgReplays': botMsgReplays,
     };
   }
 

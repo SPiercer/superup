@@ -23,7 +23,7 @@ class _BroadcastMessageScreenViewState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BroadcastMessageScreenView'),
+        title: const Text('BroadcastMessageScreenView'),
         centerTitle: true,
       ),
       body: Container(

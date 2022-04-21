@@ -11,10 +11,10 @@ class EditGroupView extends GetView<EditGroupController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('EditGroupView'),
+        title: const Text('EditGroupView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'EditGroupView is working',
           style: TextStyle(fontSize: 20),

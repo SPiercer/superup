@@ -34,11 +34,7 @@ class MsgFileInfo {
 
   @override
   String toString() {
-    return 'MsgFileInfo{' +
-        ' fileUrl: $fileUrl,' +
-        ' fileSize: $fileSize,' +
-        ' fileTitle: $fileTitle,' +
-        ' mimeType: $mimeType,' +
+    return 'MsgFileInfo{' ' fileUrl: $fileUrl,' ' fileSize: $fileSize,' ' fileTitle: $fileTitle,' ' mimeType: $mimeType,' +
         '}';
   }
 
@@ -58,10 +54,10 @@ class MsgFileInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'fileUrl': this.fileUrl,
-      'fileSize': this.fileSize,
-      'fileTitle': this.fileTitle,
-      'mimeType': this.mimeType,
+      'fileUrl': fileUrl,
+      'fileSize': fileSize,
+      'fileTitle': fileTitle,
+      'mimeType': mimeType,
     };
   }
 

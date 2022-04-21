@@ -9,7 +9,7 @@ import 'widgets/emoji_keyborad.dart';
 import 'message_input_controller.dart';
 import 'widgets/message_send_btn.dart';
 import 'widgets/message_text_filed.dart';
-import 'widgets/reply_item.dart';
+import 'widgets/reply_widget.dart';
 
 class MessageInputWidget extends StatefulWidget {
   final Message? replyMessage;
@@ -83,7 +83,7 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
                           children: [
                             Visibility(
                               visible: controller.replyMessage != null,
-                              child: ReplyItem(
+                              child: ReplyWidget(
                                 onDismissReply: controller.onDismissReply,
                                 replyMessage: controller.replyMessage,
                               ),

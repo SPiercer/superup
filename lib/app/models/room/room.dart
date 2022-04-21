@@ -1,10 +1,9 @@
-import 'dart:convert';
 
 import 'package:intl/intl.dart';
 import 'package:superup/app/core/enums/message_type.dart';
 import 'package:superup/app/models/room/v_chat_room_status_model.dart';
 import 'package:superup/app/models/user/user.dart';
-import 'package:superup/app/models/user/user_image.dart';
+
 
 import '../../core/enums/room_type.dart';
 import '../../core/enums/room_typing_type.dart';
@@ -271,11 +270,7 @@ class Room {
 
   @override
   String toString() {
-    return 'Room{' +
-        ' id: $id,' +
-        ' roomType: $roomType,' +
-        ' title: $title,' +
-        ' thumbImage: $thumbImage,' +
+    return 'Room{' ' id: $id,' ' roomType: $roomType,' ' title: $title,' ' thumbImage: $thumbImage,' +
         ' isDeleted: $isDeleted,' +
         ' isArchived: $isArchived,' +
         ' isMute: $isMuted,' +
@@ -307,18 +302,18 @@ class Room {
 
   Map<String, dynamic> toMap() {
     return {
-      '_id': this.id,
-      'roomType': this.roomType,
-      'title': this.title,
-      'thumbImage': this.thumbImage,
-      'isDeleted': this.isDeleted,
-      'isArchived': this.isArchived,
-      'isMuted': this.isMuted,
-      'peerId': this.peerId,
-      'leaverId': this.leaverId,
-      'unReadCount': this.unReadCount,
-      'lastMessage': this.lastMessage,
-      'creatorId': this.creatorId,
+      '_id': id,
+      'roomType': roomType,
+      'title': title,
+      'thumbImage': thumbImage,
+      'isDeleted': isDeleted,
+      'isArchived': isArchived,
+      'isMuted': isMuted,
+      'peerId': peerId,
+      'leaverId': leaverId,
+      'unReadCount': unReadCount,
+      'lastMessage': lastMessage,
+      'creatorId': creatorId,
     };
   }
 

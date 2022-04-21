@@ -11,10 +11,10 @@ class MyStatusDetailsView extends GetView<MyStatusDetailsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MyStatusDetailsView'),
+        title: const Text('MyStatusDetailsView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'MyStatusDetailsView is working',
           style: TextStyle(fontSize: 20),

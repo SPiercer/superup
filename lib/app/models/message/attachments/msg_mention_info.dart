@@ -22,10 +22,7 @@ class MsgMentionInfo {
 
   @override
   String toString() {
-    return 'MsgMentionInfo{' +
-        ' userId: $userId,' +
-        ' userName: $userName,' +
-        '}';
+    return 'MsgMentionInfo{' ' userId: $userId,' ' userName: $userName,' '}';
   }
 
   MsgMentionInfo copyWith({
@@ -40,8 +37,8 @@ class MsgMentionInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'userId': this.userId,
-      'userName': this.userName,
+      'userId': userId,
+      'userName': userName,
     };
   }
 

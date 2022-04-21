@@ -28,11 +28,7 @@ class UserImage {
 
   @override
   String toString() {
-    return 'UserImage{' +
-        ' fullImage: $fullImage,' +
-        ' chatImage: $chatImage,' +
-        ' smallImage: $smallImage,' +
-        '}';
+    return 'UserImage{' ' fullImage: $fullImage,' ' chatImage: $chatImage,' ' smallImage: $smallImage,' '}';
   }
 
   UserImage copyWith({
@@ -55,9 +51,9 @@ class UserImage {
 
   Map<String, dynamic> toMap() {
     return {
-      'fullImage': this.fullImage,
-      'chatImage': this.chatImage,
-      'smallImage': this.smallImage,
+      'fullImage': fullImage,
+      'chatImage': chatImage,
+      'smallImage': smallImage,
     };
   }
 

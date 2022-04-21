@@ -11,10 +11,10 @@ class ChatMediaView extends GetView<ChatMediaController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ChatMediaView'),
+        title: const Text('ChatMediaView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'ChatMediaView is working',
           style: TextStyle(fontSize: 20),

@@ -9,10 +9,10 @@ class PhotoViewerView extends GetView<PhotoViewerController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PhotoViewerView'),
+        title: const Text('PhotoViewerView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'PhotoViewerView is working',
           style: TextStyle(fontSize: 20),

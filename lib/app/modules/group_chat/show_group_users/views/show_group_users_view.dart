@@ -11,10 +11,10 @@ class ShowGroupUsersView extends GetView<ShowGroupUsersController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ShowGroupUsersView'),
+        title: const Text('ShowGroupUsersView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'ShowGroupUsersView is working',
           style: TextStyle(fontSize: 20),

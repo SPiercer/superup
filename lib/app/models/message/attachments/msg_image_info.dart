@@ -39,11 +39,7 @@ class MsgImageInfo {
 
   @override
   String toString() {
-    return 'MsgImageInfo{' +
-        ' imageUrl: $imageUrl,' +
-        ' smallImageUrl: $smallImageUrl,' +
-        ' width: $width,' +
-        ' height: $height,' +
+    return 'MsgImageInfo{' ' imageUrl: $imageUrl,' ' smallImageUrl: $smallImageUrl,' ' width: $width,' ' height: $height,' +
         ' imageSize: $imageSize,' +
         '}';
   }
@@ -66,11 +62,11 @@ class MsgImageInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'imageUrl': this.imageUrl,
-      'smallImageUrl': this.smallImageUrl,
-      'width': this.width,
-      'height': this.height,
-      'imageSize': this.imageSize,
+      'imageUrl': imageUrl,
+      'smallImageUrl': smallImageUrl,
+      'width': width,
+      'height': height,
+      'imageSize': imageSize,
     };
   }
 

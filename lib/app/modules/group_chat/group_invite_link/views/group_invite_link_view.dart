@@ -11,10 +11,10 @@ class GroupInviteLinkView extends GetView<GroupInviteLinkController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('GroupInviteLinkView'),
+        title: const Text('GroupInviteLinkView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'GroupInviteLinkView is working',
           style: TextStyle(fontSize: 20),

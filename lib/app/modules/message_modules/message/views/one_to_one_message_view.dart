@@ -1,24 +1,14 @@
-import 'dart:io';
 
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:measured_size/measured_size.dart';
-import 'package:superup/app/core/constants/colors.dart';
 import 'package:superup/app/core/widgets/get_full.dart';
-import 'package:textless/textless.dart';
 
 import '../../../../models/user/user.dart';
 import '../controllers/message_controller.dart';
 import '../features/message_input/message_input_widget.dart';
 import '../widgets/arrow_down.dart';
-import '../features/message_input/widgets/emoji_keyborad.dart';
 import '../widgets/message_item.dart';
-import '../features/message_input/widgets/message_send_btn.dart';
-import '../features/message_input/widgets/message_text_filed.dart';
-import '../features/message_input/widgets/reply_item.dart';
 
 class OneToOneMessageView extends StatefulWidget {
   const OneToOneMessageView({Key? key}) : super(key: key);

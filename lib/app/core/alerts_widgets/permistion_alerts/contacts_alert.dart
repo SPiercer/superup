@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/constants/colors.dart';
 
-import '../../enums/permission_type.dart';
 
 class ContactsDialog extends StatelessWidget {
   const ContactsDialog({Key? key}) : super(key: key);

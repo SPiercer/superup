@@ -5,14 +5,16 @@ import 'package:get/get.dart';
 import '../controllers/video_editor_controller.dart';
 
 class VideoEditorView extends GetView<VideoEditorController> {
+  const VideoEditorView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('VideoEditorView'),
+        title: const Text('VideoEditorView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'VideoEditorView is working',
           style: TextStyle(fontSize: 20),

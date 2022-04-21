@@ -63,7 +63,7 @@ class CameraTabController extends GetxController {
 
     try {
       await cameraController!.takePicture();
-    } on CameraException catch (e) {
+    } on CameraException {
       rethrow;
     }
     return filePath;

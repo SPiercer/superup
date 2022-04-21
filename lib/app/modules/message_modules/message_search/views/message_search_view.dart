@@ -11,10 +11,10 @@ class MessageSearchView extends GetView<MessageSearchController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MessageSearchView'),
+        title: const Text('MessageSearchView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'MessageSearchView is working',
           style: TextStyle(fontSize: 20),

@@ -1,7 +1,5 @@
-import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:superup/app/core/alerts_widgets/info/info_alert.dart';
 import 'package:superup/app/routes/app_pages.dart';
 
 import '../../../../core/alerts_widgets/confirm_phone/confirm_phone_alert.dart';

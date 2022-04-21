@@ -7,12 +7,12 @@ class ModalTile extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  const ModalTile({
+    const ModalTile({Key? key,
     required this.title,
     required this.subtitle,
     required this.icon,
     required this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

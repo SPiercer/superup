@@ -72,11 +72,7 @@ class MessageAttachment {
 
   @override
   String toString() {
-    return 'MessageAttachment{' +
-        ' msgLinkInfo: $msgLinkInfo,' +
-        ' msgImageInfo: $msgImageInfo,' +
-        ' msgVideoInfo: $msgVideoInfo,' +
-        ' msgVoiceInfo: $msgVoiceInfo,' +
+    return 'MessageAttachment{' ' msgLinkInfo: $msgLinkInfo,' ' msgImageInfo: $msgImageInfo,' ' msgVideoInfo: $msgVideoInfo,' ' msgVoiceInfo: $msgVoiceInfo,' +
         ' msgLocationInfo: $msgLocationInfo,' +
         ' msgFileInfo: $msgFileInfo,' +
         ' msgCallInfo: $msgCallInfo,' +

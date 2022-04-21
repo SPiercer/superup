@@ -11,10 +11,10 @@ class NewGroupSelectUsersView extends GetView<NewGroupSelectUsersController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NewGroupSelectUsersView'),
+        title: const Text('NewGroupSelectUsersView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'NewGroupSelectUsersView is working',
           style: TextStyle(fontSize: 20),

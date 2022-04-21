@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/constants/colors.dart';
 import 'package:textless/textless.dart';

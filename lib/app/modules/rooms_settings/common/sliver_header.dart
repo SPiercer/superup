@@ -2,7 +2,6 @@ import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sliver_header_delegate/sliver_header_delegate.dart';
-import 'package:textless/textless.dart';
 
 import '../../../core/constants/colors.dart';
 

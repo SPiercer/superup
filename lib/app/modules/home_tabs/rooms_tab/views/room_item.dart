@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lightbox/lightbox.dart';
 import 'package:superup/app/core/constants/colors.dart';
 import 'package:superup/app/core/enums/message_status.dart';
 import 'package:superup/app/core/enums/room_type.dart';

@@ -12,10 +12,10 @@ class NewBroadcastSelectUsersView
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NewBroadcastSelectUsersView'),
+        title: const Text('NewBroadcastSelectUsersView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'NewBroadcastSelectUsersView is working',
           style: TextStyle(fontSize: 20),

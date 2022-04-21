@@ -1,6 +1,3 @@
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/enums/message_type.dart';
 import 'package:superup/app/models/user/user.dart';

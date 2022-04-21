@@ -22,10 +22,7 @@ class MsgCallInfo {
 
   @override
   String toString() {
-    return 'MsgCallInfo{' +
-        ' callDuration: $callDuration,' +
-        ' callType: $callType,' +
-        '}';
+    return 'MsgCallInfo{' ' callDuration: $callDuration,' ' callType: $callType,' '}';
   }
 
   MsgCallInfo copyWith({
@@ -40,8 +37,8 @@ class MsgCallInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'callDuration': this.callDuration,
-      'callType': this.callType,
+      'callDuration': callDuration,
+      'callType': callType,
     };
   }
 

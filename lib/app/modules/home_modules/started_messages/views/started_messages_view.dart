@@ -11,10 +11,10 @@ class StartedMessagesView extends GetView<StartedMessagesController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('StartedMessagesView'),
+        title: const Text('StartedMessagesView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'StartedMessagesView is working',
           style: TextStyle(fontSize: 20),

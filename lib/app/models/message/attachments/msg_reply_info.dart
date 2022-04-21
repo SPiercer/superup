@@ -28,11 +28,7 @@ class MsgReplyInfo {
 
   @override
   String toString() {
-    return 'MsgReplyInfo{' +
-        ' parentMessageId: $parentMessageId,' +
-        ' parentSenderId: $parentSenderId,' +
-        ' messageData: $messageData,' +
-        '}';
+    return 'MsgReplyInfo{' ' parentMessageId: $parentMessageId,' ' parentSenderId: $parentSenderId,' ' messageData: $messageData,' '}';
   }
 
   Map<String, dynamic> toMap() {

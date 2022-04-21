@@ -11,10 +11,10 @@ class ChatCommonGroupsView extends GetView<ChatCommonGroupsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ChatCommonGroupsView'),
+        title: const Text('ChatCommonGroupsView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'ChatCommonGroupsView is working',
           style: TextStyle(fontSize: 20),

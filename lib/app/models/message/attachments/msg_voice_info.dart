@@ -28,11 +28,7 @@ class MsgVoiceInfo {
 
   @override
   String toString() {
-    return 'MsgVoiceInfo{' +
-        ' playUrl: $playUrl,' +
-        ' voiceSize: $voiceSize,' +
-        ' voiceDuration: $voiceDuration,' +
-        '}';
+    return 'MsgVoiceInfo{' ' playUrl: $playUrl,' ' voiceSize: $voiceSize,' ' voiceDuration: $voiceDuration,' '}';
   }
 
   // String get playUrlS3 => ApiConstants.s3BucketBaseUrl + playUrl;
@@ -51,9 +47,9 @@ class MsgVoiceInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'playUrl': this.playUrl,
-      'voiceSize': this.voiceSize,
-      'voiceDuration': this.voiceDuration,
+      'playUrl': playUrl,
+      'voiceSize': voiceSize,
+      'voiceDuration': voiceDuration,
     };
   }
 

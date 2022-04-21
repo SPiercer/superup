@@ -11,10 +11,10 @@ class AddUsersToGroupView extends GetView<AddUsersToGroupController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AddUsersToGroupView'),
+        title: const Text('AddUsersToGroupView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'AddUsersToGroupView is working',
           style: TextStyle(fontSize: 20),

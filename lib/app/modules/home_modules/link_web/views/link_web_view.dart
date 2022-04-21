@@ -11,10 +11,10 @@ class LinkWebView extends GetView<LinkWebController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('LinkWebView'),
+        title: const Text('LinkWebView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'LinkWebView is working',
           style: TextStyle(fontSize: 20),

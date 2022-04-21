@@ -272,17 +272,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FORWARD_MESSAGE,
-      page: () => ForwardMessageView(),
+      page: () => const ForwardMessageView(),
       binding: ForwardMessageBinding(),
     ),
     GetPage(
       name: _Paths.SINGLE_MESSAGE_INFO,
-      page: () => SingleMessageInfoView(),
+      page: () => const SingleMessageInfoView(),
       binding: SingleMessageInfoBinding(),
     ),
     GetPage(
       name: _Paths.GROUP_MESSAGE_INFO,
-      page: () => GroupMessageInfoView(),
+      page: () => const GroupMessageInfoView(),
       binding: GroupMessageInfoBinding(),
     ),
     GetPage(
@@ -292,12 +292,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.VIDEO_VIEWER,
-      page: () => VideoViewerView(),
+      page: () => const VideoViewerView(),
       binding: VideoViewerBinding(),
     ),
     GetPage(
       name: _Paths.VIDEO_EDITOR,
-      page: () => VideoEditorView(),
+      page: () => const VideoEditorView(),
       binding: VideoEditorBinding(),
     ),
     GetPage(

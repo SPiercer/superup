@@ -22,7 +22,7 @@ class GroupMsgInfo {
 
   @override
   String toString() {
-    return 'GroupMsgInfo{' + ' adminName: $adminName,' + ' type: $type,' + '}';
+    return 'GroupMsgInfo{' ' adminName: $adminName,' ' type: $type,' '}';
   }
 
   GroupMsgInfo copyWith({
@@ -37,8 +37,8 @@ class GroupMsgInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'adminName': this.adminName,
-      'type': this.type,
+      'adminName': adminName,
+      'type': type,
     };
   }
 

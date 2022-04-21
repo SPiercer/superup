@@ -42,11 +42,7 @@ class StatusModelItem{
 
   @override
   String toString() {
-    return 'StatusModelItem{' +
-        ' url: $url,' +
-        ' statusType: $statusType,' +
-        ' statusText: $statusText,' +
-        ' statusColor: $statusColor,' +
+    return 'StatusModelItem{' ' url: $url,' ' statusType: $statusType,' ' statusText: $statusText,' ' statusColor: $statusColor,' +
         '}';
   }
 
@@ -66,10 +62,10 @@ class StatusModelItem{
 
   Map<String, dynamic> toMap() {
     return {
-      'url': this.url,
-      'statusType': this.statusType,
-      'statusText': this.statusText,
-      'statusColor': this.statusColor,
+      'url': url,
+      'statusType': statusType,
+      'statusText': statusText,
+      'statusColor': statusColor,
     };
   }
 

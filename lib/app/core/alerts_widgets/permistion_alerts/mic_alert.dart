@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/constants/colors.dart';
 
-import '../../enums/permission_type.dart';
 
 class MicDialog extends StatelessWidget {
   const MicDialog({Key? key}) : super(key: key);

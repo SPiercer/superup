@@ -3,11 +3,11 @@ import 'package:superup/app/core/constants/colors.dart';
 import 'package:superup/app/models/message/message.dart';
 import 'package:textless/textless.dart';
 
-class ReplyItem extends StatelessWidget {
+class ReplyWidget extends StatelessWidget {
   final Message? replyMessage;
   final VoidCallback onDismissReply;
 
-  const ReplyItem(
+  const ReplyWidget(
       {Key? key, required this.replyMessage, required this.onDismissReply})
       : super(key: key);
 
@@ -44,7 +44,7 @@ class ReplyItem extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8,),
+          const SizedBox(height: 5,),
           Flexible(child: replyMessage!.content.text.maxLine(2))
         ],
       ),

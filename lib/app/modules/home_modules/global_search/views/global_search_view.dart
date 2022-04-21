@@ -11,10 +11,10 @@ class GlobalSearchView extends GetView<GlobalSearchController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('GlobalSearchView'),
+        title: const Text('GlobalSearchView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'GlobalSearchView is working',
           style: TextStyle(fontSize: 20),

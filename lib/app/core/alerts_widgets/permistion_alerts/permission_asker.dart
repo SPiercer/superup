@@ -28,7 +28,7 @@ class PermissionAsker {
             content: CameraDialog(),
           );
         }
-        return SizedBox();
+        return const SizedBox();
       },
     );
   }

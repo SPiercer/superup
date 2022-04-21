@@ -51,7 +51,7 @@ class MediaPickerWidget extends StatelessWidget {
                 title: "File",
                 subtitle: "Share files",
                 icon: Icons.tab,
-                onTap: () {},
+                onTap: mediaPickerController.pickFile
               ),
               // ModalTile(
               //   title: "Contact",

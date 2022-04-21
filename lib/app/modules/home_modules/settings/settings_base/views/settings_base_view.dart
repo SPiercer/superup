@@ -11,10 +11,10 @@ class SettingsBaseView extends GetView<SettingsBaseController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SettingsBaseView'),
+        title: const Text('SettingsBaseView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'SettingsBaseView is working',
           style: TextStyle(fontSize: 20),

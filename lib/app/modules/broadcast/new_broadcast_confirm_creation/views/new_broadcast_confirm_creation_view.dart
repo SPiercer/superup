@@ -12,10 +12,10 @@ class NewBroadcastConfirmCreationView
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NewBroadcastConfirmCreationView'),
+        title: const Text('NewBroadcastConfirmCreationView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'NewBroadcastConfirmCreationView is working',
           style: TextStyle(fontSize: 20),

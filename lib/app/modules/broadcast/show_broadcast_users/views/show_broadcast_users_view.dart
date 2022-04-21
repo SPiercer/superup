@@ -11,10 +11,10 @@ class ShowBroadcastUsersView extends GetView<ShowBroadcastUsersController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ShowBroadcastUsersView'),
+        title: const Text('ShowBroadcastUsersView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'ShowBroadcastUsersView is working',
           style: TextStyle(fontSize: 20),

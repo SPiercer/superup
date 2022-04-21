@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:superup/app/models/status/status_model_item.dart';
 import 'package:superup/app/models/user/user.dart';
 
@@ -99,11 +98,7 @@ class Status {
 
   @override
   String toString() {
-    return 'Status{' +
-        ' id: $id,' +
-        ' user: $user,' +
-        ' createdAt: $createdAt,' +
-        ' seenIndex: $seenIndex,' +
+    return 'Status{' ' id: $id,' ' user: $user,' ' createdAt: $createdAt,' ' seenIndex: $seenIndex,' +
         ' statusList: $statusList,' +
         '}';
   }
@@ -126,11 +121,11 @@ class Status {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': this.id,
-      'user': this.user,
-      'createdAt': this.createdAt,
-      'seenIndex': this.seenIndex,
-      'statusList': this.statusList,
+      'id': id,
+      'user': user,
+      'createdAt': createdAt,
+      'seenIndex': seenIndex,
+      'statusList': statusList,
     };
   }
 

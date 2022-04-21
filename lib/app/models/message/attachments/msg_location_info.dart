@@ -22,7 +22,7 @@ class MsgLocationInfo {
 
   @override
   String toString() {
-    return 'MsgLocationInfo{' + ' lat: $lat,' + ' long: $long,' + '}';
+    return 'MsgLocationInfo{' ' lat: $lat,' ' long: $long,' '}';
   }
 
   MsgLocationInfo copyWith({
@@ -37,8 +37,8 @@ class MsgLocationInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'lat': this.lat,
-      'long': this.long,
+      'lat': lat,
+      'long': long,
     };
   }
 
