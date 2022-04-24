@@ -1,4 +1,6 @@
 
+import '../../../core/constants/api_constants.dart';
+
 class MsgImageInfo {
   String imageUrl;
   final String smallImageUrl;
@@ -16,7 +18,7 @@ class MsgImageInfo {
     required this.imageSize,
   });
 
-  //String get imageUrlS3 => "${ApiConstants.s3BucketBaseUrl}$imageUrl";
+  String get imageUrlS3 => "${ApiConstants.s3BucketBaseUrl}$imageUrl";
 
   @override
   bool operator ==(Object other) =>

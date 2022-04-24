@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -65,25 +64,26 @@ class _OneToOneMessageViewState
             ),
 
             /// submit inputs
-            Obx(
-              () {
-                final reply = controller.downArrow.value.replyMessage;
-                final leaverId = controller.room.value.leaverId;
-                return MessageInputWidget(
-                  myUser: User.myUser,
-                  roomId: controller.room.value.id,
-                  onSubmit: (msg) {
-                    controller.onSubmitInsertMessage(msg);
-                  },
-                  typingType: (typing) {},
-                  leaverId: leaverId,
-                  replyMessage: reply,
-                );
-              },
-            ),
+            SafeArea(
+              child: MessageInputWidget(
+                myUser: User.myUser,
+                rxReplyState: controller.replyMessage,
+                onSubmit: (msg) {
+                  controller.onSubmitInsertMessage(msg);
+                },
+                typingType: (typing) {},
+                rxRoom: controller.room,
+              ),
+            )
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    Get.delete<MessageController>();
+    super.dispose();
   }
 }

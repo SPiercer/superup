@@ -16,22 +16,20 @@ class MessageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(msg.messageType == MessageType.image){
-      return Image.file(File(msg.messageAttachment!.msgImageInfo!.imageUrl));
-    }
     return SwipeTo(
       key: UniqueKey(),
       onRightSwipe: () {
         controller.onRightSwipe(msg);
       },
-      child: BubbleSpecialThree(
-        text: msg.content,
-        sent: msg.hashCode % 2 == 0,
-        color: msg.hashCode % 2 == 0 ? Colors.greenAccent : Colors.green,
-        tail: true,
-        isSender: msg.hashCode % 2 == 0,
-      ),
+      child: msg.messageType == MessageType.image
+          ? Image.file(File(msg.messageAttachment!.msgImageInfo!.imageUrl))
+          : BubbleSpecialThree(
+              text: msg.content,
+              sent: msg.hashCode % 2 == 0,
+              color: msg.hashCode % 2 == 0 ? Colors.greenAccent : Colors.green,
+              tail: true,
+              isSender: msg.hashCode % 2 == 0,
+            ),
     );
-
   }
 }

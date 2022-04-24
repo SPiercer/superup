@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/enums/room_typing_type.dart';
 import 'package:superup/app/models/message/message.dart';
+import 'package:superup/app/modules/message_modules/message/features/message_input/widgets/ban_widget.dart';
 import 'package:superup/app/modules/message_modules/message/features/message_input/widgets/message_record_btn.dart';
+import '../../../../../models/room/room.dart';
 import '../../../../../models/user/user.dart';
+import '../../controllers/down_arrow_model.dart';
 import '../recorder/record_widget.dart';
 import 'widgets/emoji_keyborad.dart';
 import 'message_input_controller.dart';
@@ -12,19 +15,17 @@ import 'widgets/message_text_filed.dart';
 import 'widgets/reply_widget.dart';
 
 class MessageInputWidget extends StatefulWidget {
-  final Message? replyMessage;
-  final String? leaverId;
-  final String roomId;
+  final Rx<Room> rxRoom;
   final User myUser;
+  final Rx<ReplyMessageState> rxReplyState;
   final Function(Message message) onSubmit;
   final Function(RoomTypingType typingType) typingType;
 
   const MessageInputWidget({
     Key? key,
-    this.replyMessage,
-    this.leaverId,
+    required this.rxRoom,
     required this.onSubmit,
-    required this.roomId,
+    required this.rxReplyState,
     required this.myUser,
     required this.typingType,
   }) : super(key: key);
@@ -40,9 +41,7 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
   void initState() {
     super.initState();
     controller = MessageInputController(
-      replyMessage: widget.replyMessage,
-      roomId: widget.roomId,
-      myUser: widget.myUser,
+      rxReplyMessage: widget.rxReplyState,
       onSubmit: widget.onSubmit,
       onTypingTypeChange: widget.typingType,
     );
@@ -50,10 +49,6 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    controller.replyMessage = widget.replyMessage;
-    if (controller.replyMessage != null) {
-      controller.focusNode.requestFocus();
-    }
     return WillPopScope(
       onWillPop: controller.onWillPop,
       child: Obx(
@@ -61,6 +56,13 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
           final isSendBottomEnable = controller.isSendBottomEnable;
           final isRecording = controller.isRecording;
           controller.updateScreen.value;
+          final replyMessage = widget.rxReplyState.value.replyMessage;
+          final leaverId = widget.rxRoom.value.leaverId;
+          if (leaverId != null) {
+            return BanWidget(
+              isMy: leaverId == widget.myUser.id,
+            );
+          }
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -72,9 +74,11 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.all(8.0),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(
+                        decoration: BoxDecoration(
+                          color: Get.isDarkMode
+                              ? const Color(0xf7232121)
+                              : Colors.white,
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(20),
                           ),
                         ),
@@ -82,10 +86,10 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Visibility(
-                              visible: controller.replyMessage != null,
+                              visible: replyMessage != null,
                               child: ReplyWidget(
                                 onDismissReply: controller.onDismissReply,
-                                replyMessage: controller.replyMessage,
+                                replyMessage: replyMessage,
                               ),
                             ),
                             if (isRecording)

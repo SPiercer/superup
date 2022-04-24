@@ -65,22 +65,21 @@ class _BroadcastMessageScreenViewState
             ),
 
             /// submit inputs
-            Obx(
-              () {
-                final reply = controller.downArrow.value.replyMessage;
-                final leaverId = controller.room.value.leaverId;
-                return MessageInputWidget(
-                  myUser: User.myUser,
-                  onSubmit: (msg) {
-                    controller.onSubmitInsertMessage(msg);
-                  },
-                  typingType: (typing) {},
-                  leaverId: leaverId,
-                  roomId: controller.room.value.id,
-                  replyMessage: reply,
-                );
-              },
-            ),
+            // Obx(
+            //   () {
+            //     final reply = controller.replyMessage.value.replyMessage;
+            //     final leaverId = controller.room.value.leaverId;
+            //     return MessageInputWidget(
+            //       myUser: User.myUser,
+            //       onSubmit: (msg) {
+            //         controller.onSubmitInsertMessage(msg);
+            //       },
+            //       typingType: (typing) {},
+            //       leaverId: leaverId,
+            //       replyMessage: reply,
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

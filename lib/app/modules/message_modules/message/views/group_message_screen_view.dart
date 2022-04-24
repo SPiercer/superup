@@ -64,22 +64,21 @@ class _GroupMessageScreenViewState
             ),
 
             /// submit inputs
-            Obx(
-                  () {
-                final reply = controller.downArrow.value.replyMessage;
-                final leaverId = controller.room.value.leaverId;
-                return MessageInputWidget(
-                  onSubmit: (msg) {
-                    controller.onSubmitInsertMessage(msg);
-                  },
-                  myUser: User.myUser,
-                  typingType: (typing) {},
-                  leaverId: leaverId,
-                  replyMessage: reply,
-                  roomId: controller.room.value.id,
-                );
-              },
-            ),
+            // Obx(
+            //       () {
+            //     final reply = controller.replyMessage.value.replyMessage;
+            //     final leaverId = controller.room.value.leaverId;
+            //     return MessageInputWidget(
+            //       onSubmit: (msg) {
+            //         controller.onSubmitInsertMessage(msg);
+            //       },
+            //       myUser: User.myUser,
+            //       typingType: (typing) {},
+            //       leaverId: leaverId,
+            //       replyMessage: reply,
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

@@ -21,7 +21,7 @@ class _RecordWidgetState extends State<RecordWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(5),
-      color: Colors.white,
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

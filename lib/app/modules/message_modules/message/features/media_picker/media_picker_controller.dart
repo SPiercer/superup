@@ -24,10 +24,8 @@ class MediaPickerController extends ValueNotifier<Message?> {
   final manager = Get.find<MediaManager>();
   final permissionManager = Get.find<PermissionManager>();
   final picker = ImagePicker();
-  final User myUser;
-  final String roomId;
 
-  MediaPickerController({required this.myUser, required this.roomId})
+  MediaPickerController()
       : super(null);
 
   Future<bool> askForCameraPerm() async {
@@ -68,13 +66,13 @@ class MediaPickerController extends ValueNotifier<Message?> {
         InfoAlert().show(text: "File is too large");
         return;
       }
-      // final compressedImage = await manager.compressImage(file);
-      final compressedImage = file;
+      final compressedImage = await manager.compressImage(file);
 
       final newPath = await Get.toNamed(
         Routes.PHOTOS_EDITOR,
         arguments: File(compressedImage.path),
       );
+
       if (newPath == null) {
         return;
       }
@@ -86,7 +84,6 @@ class MediaPickerController extends ValueNotifier<Message?> {
 
       final imgMsg = Message.buildMessage(
         content: "this content is photo 📷",
-        roomId: roomId,
         type: MessageType.image,
         attachments: MessageAttachment(
           msgImageInfo: MsgImageInfo(
@@ -97,7 +94,6 @@ class MediaPickerController extends ValueNotifier<Message?> {
             imageSize: size,
           ),
         ),
-        myUser: myUser,
       );
 
       /// notify the listener to send the message
@@ -122,7 +118,6 @@ class MediaPickerController extends ValueNotifier<Message?> {
       final videoFileSize = manager.getFileSize(videoFile);
       final videoMsg = Message.buildMessage(
         content: "This content video 📽",
-        roomId: roomId,
         type: MessageType.video,
         attachments: MessageAttachment(
           msgVideoInfo: MsgVideoInfo(
@@ -134,7 +129,6 @@ class MediaPickerController extends ValueNotifier<Message?> {
             imageThumbUrl: videoThumb.path,
           ),
         ),
-        myUser: myUser,
       );
 
       value = videoMsg;
@@ -153,7 +147,6 @@ class MediaPickerController extends ValueNotifier<Message?> {
       }
       final fileMsg = Message.buildMessage(
         content: "This content file 📁",
-        roomId: roomId,
         type: MessageType.file,
         attachments: MessageAttachment(
           msgFileInfo: MsgFileInfo(
@@ -163,7 +156,6 @@ class MediaPickerController extends ValueNotifier<Message?> {
             mimeType: mime(file.path).toString(),
           ),
         ),
-        myUser: myUser,
       );
 
       value = fileMsg;

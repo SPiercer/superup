@@ -61,6 +61,24 @@ class Message implements Comparable {
 
   DateTime get createdAtLocalDate => createdAtDate.toLocal();
 
+  /// if Msg contain image
+  bool get isImage => messageType == MessageType.image;
+
+  String get imageUrl => messageAttachment!.msgImageInfo!.imageUrl;
+
+  /// if Msg contain video
+  bool get isVideo => messageType == MessageType.video;
+
+  String? get videoImageUrl => messageAttachment!.msgVideoInfo!.imageThumbUrl;
+
+  String get videoUrl => messageAttachment!.msgVideoInfo!.videoUrl;
+
+  bool get isVoice => messageType == MessageType.voice;
+
+  bool get isFile => messageType == MessageType.file;
+
+  bool get isLocalSend => messageStatus == MessageStatus.localSend;
+
   DateTime get updatedAtDate => DateTime.parse(updatedAt);
 
   static Message _getDefaultMsgObj() {
@@ -90,19 +108,22 @@ class Message implements Comparable {
 
   static Message buildMessage({
     required String content,
-    required String roomId,
+    String? roomId,
     bool containReply = false,
     required MessageType type,
-    required User myUser,
+    String? myId,
     String? broadcastId,
     MessageAttachment? attachments,
   }) {
     final msg = _getDefaultMsgObj();
+    // if (roomId == null || myUser == null) {
+    //   throw "roomId must not null $roomId or myUser must not null $myUser";
+    // }
     msg.content = content;
     msg.messageType = type;
-    msg.roomId = roomId;
+    msg.roomId = roomId ?? "null";
     msg.messageContains = containReply ? MessageContains.reply : null;
-    msg.senderId = myUser.id;
+    msg.senderId = myId ?? "null";
     msg.broadcastId = broadcastId;
     msg.messageAttachment = attachments;
     return msg;

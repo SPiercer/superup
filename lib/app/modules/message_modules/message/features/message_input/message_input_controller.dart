@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,6 +9,7 @@ import 'package:superup/app/modules/message_modules/message/features/recorder/re
 import '../../../../../core/enums/room_typing_type.dart';
 import '../../../../../models/message/message.dart';
 import '../../../../../models/user/user.dart';
+import '../../controllers/down_arrow_model.dart';
 import '../media_picker/media_picker_controller.dart';
 import '../media_picker/media_picker_widget.dart';
 
@@ -18,20 +18,19 @@ class MessageInputController {
   final Function(RoomTypingType typingType) onTypingTypeChange;
 
   bool isEmojiShowing = false;
-  String roomId;
 
   final recordController = RecordController();
-  late MediaPickerController mediaPickerController;
+  final mediaPickerController = MediaPickerController();
 
   String text = "";
 
   bool isRecording = false;
   bool isSendBottomEnable = false;
-  User myUser;
 
   final updateScreen = false.obs;
-  Message? replyMessage;
+  Rx<ReplyMessageState> rxReplyMessage;
 
+  Message? get _replyMessage => rxReplyMessage.value.replyMessage;
   RoomTypingType typingType = RoomTypingType.stop;
 
   final textEditingController = TextEditingController();
@@ -39,10 +38,8 @@ class MessageInputController {
 
   MessageInputController({
     required this.onSubmit,
-    required this.myUser,
     required this.onTypingTypeChange,
-    required this.replyMessage,
-    required this.roomId,
+    required this.rxReplyMessage,
   }) {
     textEditingController.addListener(_textEditListener);
     focusNode.addListener(() {
@@ -51,10 +48,15 @@ class MessageInputController {
         updateScreen.refresh();
       }
     });
+    rxReplyMessage.listen((p0) {
+      if (p0.replyMessage != null) {
+        if (!isEmojiShowing) {
+          focusNode.requestFocus();
+        }
+      }
+    });
 
-    mediaPickerController =
-        MediaPickerController(myUser: myUser, roomId: roomId);
-    mediaPickerController.addListener(_onMediaMessageRecived);
+    mediaPickerController.addListener(_onMediaMessageReceived);
   }
 
   Future showEmoji() async {
@@ -80,8 +82,7 @@ class MessageInputController {
     if (isRecording) {
       final info = await recordController.stop();
       msgToSend = Message.buildMessage(
-        content: textEditingController.text,
-        roomId: roomId,
+        content: "This content is Voice 🎤",
         type: MessageType.voice,
         attachments: MessageAttachment(
           msgVoiceInfo: MsgVoiceInfo(
@@ -90,21 +91,18 @@ class MessageInputController {
             voiceSize: info.size,
           ),
         ),
-        myUser: User.myUser,
       );
     } else {
       msgToSend = Message.buildMessage(
         content: textEditingController.text,
-        roomId: roomId,
         type: MessageType.text,
-        myUser: User.myUser,
       );
     }
 
     onSubmit(_setReplyIfNotNull(msgToSend));
   }
 
-  void onEmojiSelected(  emoji) {
+  void onEmojiSelected(emoji) {
     textEditingController
       ..text += emoji.emoji
       ..selection = TextSelection.fromPosition(
@@ -131,8 +129,9 @@ class MessageInputController {
 
   Future close() async {
     textEditingController.removeListener(_textEditListener);
-    mediaPickerController.removeListener(_onMediaMessageRecived);
+    mediaPickerController.removeListener(_onMediaMessageReceived);
     textEditingController.dispose();
+    focusNode.dispose();
     await recordController.close();
   }
 
@@ -183,7 +182,7 @@ class MessageInputController {
   }
 
   void onAttachFilePress(BuildContext context) async {
-    final res = await showModalBottomSheet(
+     showModalBottomSheet(
       context: context,
       elevation: 0,
       enableDrag: true,
@@ -194,21 +193,18 @@ class MessageInputController {
         );
       },
     );
-
-    /// we need to build media message
   }
 
   void onCameraPress() async {
     mediaPickerController.pickImage(ImageSource.camera);
-    //Get.toNamed(Routes.PHOTOS_EDITOR);
   }
 
   void onDismissReply() {
-    replyMessage = null;
+    rxReplyMessage.value.replyMessage = null;
     updateScreen.refresh();
   }
 
-  void _onMediaMessageRecived() {
+  void _onMediaMessageReceived() {
     if (mediaPickerController.value == null) {
       throw "mediaPickerController cant reply with null message !";
     }
@@ -217,26 +213,23 @@ class MessageInputController {
   }
 
   Message _setReplyIfNotNull(Message message) {
-    if (replyMessage != null) {
+    if (_replyMessage != null) {
       message.messageContains = MessageContains.reply;
+      final reply = MsgReplyInfo(
+        parentMessageId: _replyMessage!.id,
+        parentSenderId: "null",
+        messageData: _replyMessage!,
+      );
+
       if (message.messageAttachment != null) {
-        message.messageAttachment!.msgReplyInfo = MsgReplyInfo(
-          parentMessageId: replyMessage!.id,
-          parentSenderId: myUser.id,
-          messageData: replyMessage!,
-        );
+        message.messageAttachment!.msgReplyInfo = reply;
       } else {
         message.messageAttachment = MessageAttachment(
-          msgReplyInfo: MsgReplyInfo(
-            parentMessageId: replyMessage!.id,
-            parentSenderId: myUser.id,
-            messageData: replyMessage!,
-          ),
+          msgReplyInfo: reply,
         );
       }
-
-      replyMessage = null;
     }
+    onDismissReply();
     textEditingController.clear();
     _updateSendBottom(isRecording: false, isTyping: false);
     return message;
