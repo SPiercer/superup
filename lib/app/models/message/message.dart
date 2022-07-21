@@ -73,6 +73,8 @@ class Message implements Comparable {
 
   String get videoUrl => messageAttachment!.msgVideoInfo!.videoUrl;
 
+  String get voiceUrl => messageAttachment!.msgVoiceInfo!.playUrl;
+
   bool get isVoice => messageType == MessageType.voice;
 
   bool get isFile => messageType == MessageType.file;

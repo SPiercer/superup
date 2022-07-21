@@ -40,24 +40,39 @@ class _OneToOneMessageViewState
             Expanded(
               child: Stack(
                 children: [
-                  Obx(() {
-                    return ListView.separated(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      reverse: true,
-                      itemBuilder: (context, index) => MessageItem(
-                        msg: controller.messages[index],
-                        controller: controller,
-                      ),
-                      separatorBuilder: (_, __) => const SizedBox(
-                        height: 10,
-                      ),
-                      itemCount: controller.messages.length,
-                    );
-                  }),
-                  const PositionedDirectional(
+                  Obx(
+                    () {
+                      return ListView.separated(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        reverse: true,
+                        controller: controller.scrollController,
+                        itemBuilder: (context, index) => MessageItem(
+                          msg: controller.messages[index],
+                          index: index,
+                          controller: controller,
+                        ),
+                        separatorBuilder: (_, __) => const SizedBox(
+                          height: 10,
+                        ),
+                        itemCount: controller.messages.length,
+                      );
+                    },
+                  ),
+                  PositionedDirectional(
                     bottom: 10,
-                    child: ArrowDown(),
-                    end: 10,
+                    child: Obx(() {
+                      final isShown = controller.isDownArrowShown.value;
+                      if (!isShown) {
+                        return const SizedBox();
+                      }
+
+                      return ArrowDown(
+                        onPress: () {
+                          controller.scrollDown();
+                        },
+                      );
+                    }),
+                    end: 20,
                   ),
                 ],
               ),

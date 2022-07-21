@@ -13,7 +13,6 @@ List<CameraDescription>? cameras;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  LazyInjection();
   try {
     cameras = await availableCameras();
   } on CameraException catch (e) {

@@ -1,9 +1,8 @@
-
-
 class MsgVoiceInfo {
   String playUrl;
   final String voiceSize;
   final String voiceDuration;
+  int playDuration = 0;
 
 //<editor-fold desc="Data Methods">
 
@@ -28,7 +27,11 @@ class MsgVoiceInfo {
 
   @override
   String toString() {
-    return 'MsgVoiceInfo{' ' playUrl: $playUrl,' ' voiceSize: $voiceSize,' ' voiceDuration: $voiceDuration,' '}';
+    return 'MsgVoiceInfo{'
+        ' playUrl: $playUrl,'
+        ' voiceSize: $voiceSize,'
+        ' voiceDuration: $voiceDuration,'
+        '}';
   }
 
   // String get playUrlS3 => ApiConstants.s3BucketBaseUrl + playUrl;

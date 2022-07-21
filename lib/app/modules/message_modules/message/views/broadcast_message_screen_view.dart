@@ -47,6 +47,7 @@ class _BroadcastMessageScreenViewState
                       reverse: true,
                       itemBuilder: (context, index) => MessageItem(
                         msg: controller.messages[index],
+                        index: index,
                         controller: controller,
                       ),
                       separatorBuilder: (_, __) => const SizedBox(
@@ -55,11 +56,7 @@ class _BroadcastMessageScreenViewState
                       itemCount: controller.messages.length,
                     );
                   }),
-                  const PositionedDirectional(
-                    bottom: 10,
-                    child: ArrowDown(),
-                    end: 10,
-                  ),
+
                 ],
               ),
             ),
