@@ -38,6 +38,7 @@ dependencies:
   image_gallery_saver: ^1.7.1
   mime_type: ^1.0.0
   cached_network_image: ^3.2.0
+  custom_pop_up_menu: ^1.2.4
   path_provider:
   flutter:
     sdk: flutter

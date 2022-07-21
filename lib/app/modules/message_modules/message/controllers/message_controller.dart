@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/enums/message_type.dart';
@@ -120,5 +121,9 @@ class MessageController extends GetxController {
       curve: Curves.easeOut,
       duration: const Duration(milliseconds: 300),
     );
+  }
+  final CustomPopupMenuController _controller = CustomPopupMenuController();
+  void onMsgTab() {
+
   }
 }

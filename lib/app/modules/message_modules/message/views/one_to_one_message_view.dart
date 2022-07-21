@@ -46,10 +46,15 @@ class _OneToOneMessageViewState
                         padding: const EdgeInsets.only(bottom: 10),
                         reverse: true,
                         controller: controller.scrollController,
-                        itemBuilder: (context, index) => MessageItem(
-                          msg: controller.messages[index],
-                          index: index,
-                          controller: controller,
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: (){
+                            controller.onMsgTab();
+                          },
+                          child: MessageItem(
+                            msg: controller.messages[index],
+                            index: index,
+                            controller: controller,
+                          ),
                         ),
                         separatorBuilder: (_, __) => const SizedBox(
                           height: 10,
