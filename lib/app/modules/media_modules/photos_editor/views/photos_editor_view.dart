@@ -1,4 +1,5 @@
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:superup/app/core/widgets/get_full.dart';
@@ -6,14 +7,14 @@ import 'package:superup/app/modules/media_modules/photos_editor/controllers/phot
 
 //void main() => runApp(CanvasPainting());
 GlobalKey globalKey = GlobalKey();
+
 class PhotosEditorView extends StatefulWidget {
   @override
   _PhotosEditorViewState createState() => _PhotosEditorViewState();
 }
 
-class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorController> {
-
-
+class _PhotosEditorViewState
+    extends GetFull<PhotosEditorView, PhotosEditorController> {
   final points = <TouchPoints?>[];
   double opacity = 1.0;
   StrokeCap strokeType = StrokeCap.round;
@@ -34,8 +35,8 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
             //Creates three buttons to pick stroke value.
             actions: <Widget>[
               //Resetting to default stroke value
-              FlatButton(
-                child: const Icon(
+              IconButton(
+                icon: const Icon(
                   Icons.clear,
                 ),
                 onPressed: () {
@@ -43,8 +44,8 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
                   Navigator.of(context).pop();
                 },
               ),
-              FlatButton(
-                child: const Icon(
+              IconButton(
+                icon: const Icon(
                   Icons.brush,
                   size: 24,
                 ),
@@ -53,8 +54,8 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
                   Navigator.of(context).pop();
                 },
               ),
-              FlatButton(
-                child: const Icon(
+              IconButton(
+                icon: const Icon(
                   Icons.brush,
                   size: 40,
                 ),
@@ -63,8 +64,8 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
                   Navigator.of(context).pop();
                 },
               ),
-              FlatButton(
-                child: const Icon(
+              IconButton(
+                icon: const Icon(
                   Icons.brush,
                   size: 60,
                 ),
@@ -94,8 +95,8 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
           child: AlertDialog(
             //Creates three buttons to pick opacity value.
             actions: <Widget>[
-              FlatButton(
-                child: const Icon(
+              IconButton(
+                icon: const Icon(
                   Icons.opacity,
                   size: 24,
                 ),
@@ -105,8 +106,8 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
                   Navigator.of(context).pop();
                 },
               ),
-              FlatButton(
-                child: const Icon(
+              IconButton(
+                icon: const Icon(
                   Icons.opacity,
                   size: 40,
                 ),
@@ -115,8 +116,8 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
                   Navigator.of(context).pop();
                 },
               ),
-              FlatButton(
-                child: const Icon(
+              IconButton(
+                icon: const Icon(
                   Icons.opacity,
                   size: 60,
                 ),
@@ -133,11 +134,8 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
     );
   }
 
-
-
   List<Widget> fabOption() {
     return <Widget>[
-
       FloatingActionButton(
         heroTag: "paint_stroke",
         child: const Icon(Icons.brush),
@@ -219,7 +217,6 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: GestureDetector(
         onPanUpdate: (details) {
           setState(() {
@@ -255,13 +252,15 @@ class _PhotosEditorViewState extends GetFull<PhotosEditorView,PhotosEditorContro
         child: RepaintBoundary(
           key: globalKey,
           child: Stack(
-
             children: <Widget>[
               Center(
-                child: Image.file(controller.backgroundImage,fit: BoxFit.cover,),
+                child: Image.file(
+                  controller.backgroundImage,
+                  fit: BoxFit.cover,
+                ),
               ),
               CustomPaint(
-                size: Size(Get.width,Get.height),
+                size: Size(Get.width, Get.height),
                 painter: MyPainter(
                   pointsList: points,
                 ),
