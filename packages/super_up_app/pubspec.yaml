@@ -1,0 +1,61 @@
+name: super_up
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.18.5 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  get: 4.6.5
+  story_view: ^0.14.0
+  sliver_header_delegate: ^0.0.5
+  customizable_space_bar: ^0.2.0
+  custom_pop_up_menu: ^1.2.4
+  ionicons: ^0.1.2
+  camera: ^0.10.0
+  v_chat_message_page: ^0.1.0+3
+  v_chat_sdk_core: ^0.1.0+3
+  v_chat_room_page: ^0.1.0+3
+  v_chat_utils: ^0.1.0
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.11.0
+flutter:
+  assets:
+    - assets/images/
+    - assets/
+    - assets/images/3.0x/
+    - assets/images/2.0x/
+    - assets/privacy/
+    - assets/profile_info/
+    - assets/message/
+  uses-material-design: true
+  generate: true
+
+flutter_icons:
+  android: ic_launcher
+  image_path: assets/logo.png
+  ios: true
+  remove_alpha_ios: true
+#  adaptive_icon_foreground: true
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/logo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/logo.png"
