@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.6"
+  badges:
+    dependency: "direct main"
+    description:
+      name: badges
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3"
   boolean_selector:
     dependency: transitive
     description:
@@ -274,6 +281,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.4"
+  email_validator:
+    dependency: "direct main"
+    description:
+      name: email_validator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.17"
   emoji_picker_flutter:
     dependency: transitive
     description:
@@ -358,6 +372,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.6"
+  flex_color_scheme:
+    dependency: "direct main"
+    description:
+      name: flex_color_scheme
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.1.2"
+  flex_seed_scheme:
+    dependency: transitive
+    description:
+      name: flex_seed_scheme
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -438,6 +466,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.7"
+  flutter_social_button:
+    dependency: "direct main"
+    description:
+      name: flutter_social_button
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.4"
   flutter_staggered_grid_view:
     dependency: transitive
     description:
@@ -455,6 +490,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: transitive
+    description:
+      name: font_awesome_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "9.2.0"
   geolocator:
     dependency: transitive
     description:
@@ -636,7 +678,7 @@ packages:
       name: ionicons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "0.2.1"
   js:
     dependency: transitive
     description:
@@ -987,13 +1029,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
-  progress_dialog_null_safe:
-    dependency: transitive
-    description:
-      name: progress_dialog_null_safe
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.7"
   provider:
     dependency: transitive
     description:
@@ -1195,6 +1230,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
+  status_view:
+    dependency: "direct main"
+    description:
+      name: status_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   stop_watch_timer:
     dependency: transitive
     description:
@@ -1230,6 +1272,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
+  super_up_core:
+    dependency: "direct main"
+    description:
+      path: "../super_up_core"
+      relative: true
+    source: path
+    version: "0.0.1"
   swipe_to:
     dependency: transitive
     description:
@@ -1272,6 +1321,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
+  touchable_opacity:
+    dependency: "direct main"
+    description:
+      name: touchable_opacity
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   typed_data:
     dependency: transitive
     description:
@@ -1390,7 +1446,7 @@ packages:
       name: v_chat_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.0+5"
   v_chat_voice_player:
     dependency: transitive
     description:
