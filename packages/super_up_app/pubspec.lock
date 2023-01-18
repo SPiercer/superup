@@ -1425,21 +1425,21 @@ packages:
       name: v_chat_message_page
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0+5"
+    version: "0.1.0+6"
   v_chat_room_page:
     dependency: "direct main"
     description:
       name: v_chat_room_page
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0+5"
+    version: "0.1.0+6"
   v_chat_sdk_core:
     dependency: "direct main"
     description:
       name: v_chat_sdk_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0+5"
+    version: "0.1.0+6"
   v_chat_utils:
     dependency: "direct main"
     description:

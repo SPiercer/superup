@@ -61,14 +61,9 @@ class AppMembersController extends GetxController {
   void onSearchPress() {}
 
   Future onItemPress(SSearchUser item) async {
-    final room = await VChatController.I.roomApi
-        .getPeerRoom(peerIdentifier: item.baseUser.id);
-    Navigator.of(Get.context!).push(
-      MaterialPageRoute(
-        builder: (context) => VMessagePage(
-          vRoom: room,
-        ),
-      ),
+    VChatController.I.roomApi.openChatWith(
+      Get.context!,
+      item.baseUser.id,
     );
   }
 }
