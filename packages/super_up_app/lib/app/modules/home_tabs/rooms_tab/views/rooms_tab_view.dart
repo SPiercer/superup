@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_room_page/v_chat_room_page.dart';
 
 import '../controllers/rooms_tab_controller.dart';
 
@@ -9,7 +10,7 @@ class RoomsTabView extends GetView<RoomsTabController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return VChatPage(
       floatingActionButton: FloatingActionButton(
         elevation: 1,
         backgroundColor: AppColors.buttonBackground,
@@ -19,7 +20,8 @@ class RoomsTabView extends GetView<RoomsTabController> {
           color: Colors.white,
         ),
       ),
-      body: Text("rooms"),
+      appBar: null,
+      controller: controller.vRoomController,
     );
   }
 }

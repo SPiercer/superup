@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:super_up/app/routes/app_pages.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart' hide AuthApiService;
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 class LoginController extends GetxController {
@@ -67,6 +68,11 @@ class LoginController extends GetxController {
       onSuccess: (response) async {
         final status = response.registerStatus;
         await VAppPref.setMap(SStorageKeys.myProfile.name, response.toMap());
+
+        await VChatController.I.authApi.login(
+          identifier: response.baseUser.id,
+          deviceLanguage: response.language,
+        );
         if (status == RegisterStatus.accepted) {
           await VAppPref.setBool(SStorageKeys.isLogin.name, true);
           Get.offAllNamed(Routes.HOME);
@@ -80,7 +86,6 @@ class LoginController extends GetxController {
       },
       ignoreTimeoutAndNoInternet: false,
       showToastError: false,
-
     );
   }
 

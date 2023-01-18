@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_message_page/v_chat_message_page.dart';
+import 'package:v_chat_room_page/v_chat_room_page.dart';
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 class AppMembersController extends GetxController {
   final txtController = TextEditingController();
+  final ProfileApiService profileApiService;
   VChatLoadingState loadingState = VChatLoadingState.ideal;
-  final _data = <dynamic>[];
+  final _data = <SSearchUser>[];
 
-  List<dynamic> get data => _data;
+  final _filterDto = UserFilterDto(
+    limit: 30,
+    page: 1,
+  );
+  final _roomsController = VRoomController();
+
+  AppMembersController(this.profileApiService);
+
+  List<SSearchUser> get data => _data;
 
   @override
   void onInit() {
@@ -17,7 +30,7 @@ class AppMembersController extends GetxController {
   }
 
   Future<void> getData() async {
-    await vSafeApiCall<List<dynamic>>(
+    await vSafeApiCall<List<SSearchUser>>(
       onLoading: () async {
         loadingState = VChatLoadingState.loading;
         update();
@@ -27,8 +40,7 @@ class AppMembersController extends GetxController {
         update();
       },
       request: () async {
-        await Future.delayed(const Duration(seconds: 4));
-        return [];
+        return await profileApiService.appUsers(_filterDto);
       },
       onSuccess: (response) {
         loadingState = VChatLoadingState.success;
@@ -44,5 +56,19 @@ class AppMembersController extends GetxController {
   void onClose() {
     txtController.dispose();
     super.onClose();
+  }
+
+  void onSearchPress() {}
+
+  Future onItemPress(SSearchUser item) async {
+    final room = await VChatController.I.roomApi
+        .getPeerRoom(peerIdentifier: item.baseUser.id);
+    Navigator.of(Get.context!).push(
+      MaterialPageRoute(
+        builder: (context) => VMessagePage(
+          vRoom: room,
+        ),
+      ),
+    );
   }
 }

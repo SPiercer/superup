@@ -8,11 +8,19 @@ import '../controllers/app_members_controller.dart';
 
 class AppMembersView extends GetView<AppMembersController> {
   const AppMembersView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AppMembersView'),
+        title: const Text('App Members'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: controller.onSearchPress,
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
       body: GetBuilder<AppMembersController>(
         assignId: true,
@@ -25,10 +33,18 @@ class AppMembersView extends GetView<AppMembersController> {
             emptyWidget: () => const SEmptyWidget(),
             successWidget: () {
               return ListView.builder(
+                padding: const EdgeInsets.all(3),
                 itemBuilder: (context, index) {
                   final item = logic.data[index];
                   return ListTile(
-                    title: "test".text,
+                    onTap: () => logic.onItemPress(item),
+                    contentPadding: EdgeInsets.zero,
+                    subtitle: item.bio.text,
+                    dense: true,
+                    leading: VCircleAvatar(
+                      fullUrl: item.baseUser.userImage,
+                    ),
+                    title: item.baseUser.fullName.text,
                   );
                 },
                 itemCount: logic.data.length,

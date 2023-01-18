@@ -6,7 +6,8 @@ class SEmptyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Empty widget"),
+      alignment: Alignment.center,
+      child: Text("Empty Data"),
     );
   }
 }

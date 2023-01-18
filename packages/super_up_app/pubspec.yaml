@@ -14,9 +14,9 @@ dependencies:
   custom_pop_up_menu: ^1.2.4
   ionicons: ^0.2.1
   camera: ^0.10.0
-  v_chat_message_page: ^0.1.0+3
-  v_chat_sdk_core: ^0.1.0+3
-  v_chat_room_page: ^0.1.0+3
+  v_chat_message_page: ^0.1.0+5
+  v_chat_sdk_core: ^0.1.0+5
+  v_chat_room_page: ^0.1.0+5
   v_chat_utils: ^0.1.0+5
   badges: ^2.0.3
   status_view: ^0.0.2

@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_message_page/v_chat_message_page.dart';
+import 'package:v_chat_room_page/v_chat_room_page.dart';
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 import 'app/core/app_service.dart';
@@ -15,7 +18,16 @@ List<CameraDescription>? cameras;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put<AppService>(AppService());
-  await VAppPref.init(hasKey: "tedsfkmlsdghgjkjmsgkmfsdmkg");
+  await VChatController.init(
+    vChatConfig: VChatConfig(
+      encryptHashKey: "V_CHAT_SDK_V2_VERY_STRONG_KEY",
+      baseUrl: SConstants.vChatBaseUrl,
+    ),
+    vNavigator: VNavigator(
+      roomNavigator: roomDefaultNavigator,
+      messageNavigator: messageDefaultNavigator,
+    ),
+  );
   try {
     cameras = await availableCameras();
   } on CameraException catch (e) {

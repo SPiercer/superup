@@ -6,7 +6,8 @@ class SErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("ErrorWidget widget"),
+      alignment: Alignment.center,
+      child: const Text("Some thing went wrong try again!"),
     );
   }
 }

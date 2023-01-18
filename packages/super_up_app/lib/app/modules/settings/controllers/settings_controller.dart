@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:super_up/app/routes/app_pages.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart'  hide AuthApiService;
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 class SettingsController extends GetxController {
@@ -31,6 +32,7 @@ class SettingsController extends GetxController {
         await authApiService.logout(
           isLogoutFromALl: false,
         );
+        await VChatController.I.authApi.logout();
         return VAppPref.clear();
       },
       onSuccess: (response) {

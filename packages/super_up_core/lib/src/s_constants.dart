@@ -10,15 +10,15 @@ abstract class SConstants {
   static const otpInterval = 60 * 2; //2 minutes
   static const maxMediaSize = 50 * 1000 * 1000; // 50 mb
 
-  static String get vChatBaseUrl {
+  static Uri get vChatBaseUrl {
     if (kDebugMode) {
       if (VPlatforms.isAndroid) {
         ///android emulator only for real device you need to get your ipv4 network address
-        return "http://10.0.2.2:3001";
+        return Uri.parse("http://10.0.2.2:3001");
       }
-      return "http://localhost:3001";
+      return Uri.parse("http://localhost:3001");
     }
-    return "vchat.api.$_productionBaseUrl";
+    return Uri.parse("https://vchat.$_productionBaseUrl");
   }
 
   static Uri get sApiBaseUrl {

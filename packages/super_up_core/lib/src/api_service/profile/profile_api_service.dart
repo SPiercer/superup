@@ -1,4 +1,5 @@
 import 'package:super_up_core/src/api_service/profile/profile_api.dart';
+import 'package:super_up_core/src/models/model.dart';
 import 'package:super_up_core/src/models/user/my_profile.dart';
 import 'package:super_up_core/src/s_constants.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
@@ -45,6 +46,16 @@ class ProfileApiService {
     final res = await _profileApi!.myProfile();
     throwIfNotSuccess(res);
     return SMyProfile.fromMap(extractDataFromResponse(res));
+  }
+
+  Future<List<SSearchUser>> appUsers(UserFilterDto dto) async {
+    final res = await _profileApi!.appUsers(dto.toMap());
+    throwIfNotSuccess(res);
+    return (extractDataFromResponse(res)['docs'] as List)
+        .map(
+          (e) => SSearchUser.fromMap(e),
+        )
+        .toList();
   }
 
   static ProfileApiService init({

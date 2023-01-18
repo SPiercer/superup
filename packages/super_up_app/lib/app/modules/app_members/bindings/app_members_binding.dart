@@ -6,7 +6,7 @@ class AppMembersBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<AppMembersController>(
-      AppMembersController(),
+      AppMembersController(Get.find()),
     );
   }
 }
