@@ -1,84 +1,66 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import 'package:super_up/app/routes/app_pages.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:super_up_web/src/pages/home/home_page.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart' hide AuthApiService;
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-class RegisterController extends GetxController {
-  final nameController = TextEditingController();
+class LoginController {
+  late final BuildContext context;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final confirmController = TextEditingController();
+
+  void onInit(BuildContext context) {
+    this.context = context;
+  }
+
   final AuthApiService authService;
   final ProfileApiService profileService;
 
-  RegisterController(
+  LoginController(
     this.authService,
     this.profileService,
   );
 
-  Future<void> register() async {
-    final name = nameController.text.trim();
+  Future login() async {
     final email = emailController.text.trim();
-    if (name.isEmpty) {
-      VAppAlert.showErrorSnackBar(
-        msg: "Name must have value",
-        context: Get.context!,
-      );
-      return;
-    }
+    final pass = passwordController.text;
     if (!EmailValidator.validate(email)) {
       VAppAlert.showErrorSnackBar(
         msg: "Email not valid",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
     final password = passwordController.text;
-    final confirm = confirmController.text;
 
     if (password.isEmpty) {
       VAppAlert.showErrorSnackBar(
         msg: "Password must have value",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
-
-    if (password != confirm) {
-      VAppAlert.showErrorSnackBar(
-        msg: "Password not match",
-        context: Get.context!,
-      );
-      return;
-    }
-
     await vSafeApiCall<SMyProfile>(
       onLoading: () async {
-        VAppAlert.showLoading(context: Get.context!);
+        VAppAlert.showLoading(context: context);
       },
       onError: (exception, trace) {
-        Get.back();
+        context.pop();
         VAppAlert.showOkAlertDialog(
-          context: Get.context!,
+          context: context!,
           title: "Error",
           content: exception.toString(),
         );
-        print(trace);
       },
       request: () async {
         final deviceHelper = DeviceInfoHelper();
-        await authService.register(RegisterDto(
+        await authService.login(LoginDto(
           email: email,
           method: RegisterMethod.email,
-          fullName: name,
-          //todo set key
           pushKey: null,
           deviceInfo: await deviceHelper.getDeviceMapInfo(),
           deviceId: await deviceHelper.getId(),
-          //todo fix
           language: "en",
           platform: VPlatforms.currentPlatform,
           password: password,
@@ -88,21 +70,19 @@ class RegisterController extends GetxController {
       onSuccess: (response) async {
         final status = response.registerStatus;
         await VAppPref.setMap(SStorageKeys.myProfile.name, response.toMap());
-        await VChatController.I.authApi.register(
+        await VChatController.I.authApi.login(
           identifier: response.baseUser.id,
-          fullName: response.baseUser.fullName,
           deviceLanguage: response.language,
         );
-
         if (status == RegisterStatus.accepted) {
           await VAppPref.setBool(SStorageKeys.isLogin.name, true);
-          Get.offAllNamed(Routes.HOME);
+          context.toPageAndRemoveAll(HomePage());
         } else {
-          Get.offAll(
-            () => SWaitingPage(
-              profile: response,
-            ),
-          );
+          // Get.offAll(
+          //       () => SWaitingPage(
+          //     profile: response,
+          //   ),
+          // );
         }
       },
       ignoreTimeoutAndNoInternet: false,
@@ -110,18 +90,8 @@ class RegisterController extends GetxController {
     );
   }
 
-  @override
-  void onClose() {
+  void close() {
     emailController.dispose();
-    nameController.dispose();
-    confirmController.dispose();
     passwordController.dispose();
-    super.onClose();
   }
-
-  void facebook() {}
-
-  void apple() {}
-
-  void google() {}
 }

@@ -70,4 +70,5 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.browser:browser:1.4.0'
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 }

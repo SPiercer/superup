@@ -35,18 +35,27 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
+  responsive_framework: ^0.2.0
+  v_chat_utils: ^0.3.0
+  v_chat_sdk_core: ^0.3.0
+  v_chat_room_page: ^0.3.0
+  v_chat_message_page: ^0.3.0
   super_up_core:
     path: ../super_up_core
+  email_validator: ^2.1.17
+  get_it: ^7.2.0
+  flex_color_scheme: ^6.1.2
 
 dev_dependencies:
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.11.0
+#  flutter_launcher_icons: ^0.11.0
 flutter:
   assets:
     - assets/
+    - assets/message/
   uses-material-design: true
   generate: true
 

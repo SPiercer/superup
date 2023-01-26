@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-import 'package:super_up/app/core/app_service.dart';
-import 'package:super_up_core/super_up_core.dart';
+ import 'package:super_up_core/super_up_core.dart';
 
 class LazyInjection extends Bindings {
   @override

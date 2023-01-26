@@ -1,5 +1,5 @@
 import 'package:badges/badges.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Badge;
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../controllers/home_controller.dart';
@@ -33,20 +33,22 @@ TabBar homeTabBar(HomeController controller, BuildContext context) {
         width: yourWidth,
         alignment: Alignment.center,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               "CHATS",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(
-              width: 4,
-            ),
             Badge(
-              elevation: 0,
+              showBadge: false,
+             badgeStyle: BadgeStyle(
+               elevation: 0,
+               badgeColor: context.isDark ? Colors.green : Colors.grey,
+             ),
               badgeContent: '3'.cap.color(
                     context.isDark ? Colors.black : Colors.white,
                   ),
-              badgeColor: context.isDark ? Colors.green : Colors.grey,
             ),
           ],
         ),
