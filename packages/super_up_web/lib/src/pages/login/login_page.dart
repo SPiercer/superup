@@ -21,12 +21,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _controller.context = context;
+    _controller.onInit(context);
   }
 
   @override
   Widget build(BuildContext context) {
-     print(Theme.of(context).brightness);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login"),
@@ -37,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const FlutterLogo(size: 150),
+              Image.asset("assets/logo.png",height: 150,width: 150,),
             const SizedBox(
               height: 20,
             ),

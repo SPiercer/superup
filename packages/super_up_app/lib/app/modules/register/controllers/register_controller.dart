@@ -74,8 +74,9 @@ class RegisterController extends GetxController {
           email: email,
           method: RegisterMethod.email,
           fullName: name,
-          //todo set key
-          pushKey: null,
+          pushKey: await VChatController
+              .I.vChatConfig.currentPushProviderService!
+              .getToken(),
           deviceInfo: await deviceHelper.getDeviceMapInfo(),
           deviceId: await deviceHelper.getId(),
           //todo fix

@@ -29,7 +29,13 @@ class _HomePageState extends State<HomePage> {
             width: isMobile ? 85 : 300,
             child: VChatPage(
               appBar: AppBar(
-                title: const Text("start chat"),
+                title: isMobile
+                    ? Image.asset(
+                        "assets/logo.png",
+                        height: 30,
+                        width: 30,
+                      )
+                    : const Text("start chat"),
               ),
               controller: controller.vRoomController,
               useIconForRoomItem: isMobile,
@@ -41,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           VerticalDivider(
             width: 1,
             thickness: 1,
-            color: context.isDark ? Colors.black12 : null,
+            color: context.isDark ? Colors.black12 : Colors.white,
           ),
           Flexible(
             child: Navigator(

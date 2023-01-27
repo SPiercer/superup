@@ -12,6 +12,8 @@ class LoginController {
 
   void onInit(BuildContext context) {
     this.context = context;
+    emailController.text = "user1@gmail.com";
+    passwordController.text = "12345678";
   }
 
   final AuthApiService authService;
@@ -24,7 +26,6 @@ class LoginController {
 
   Future login() async {
     final email = emailController.text.trim();
-    final pass = passwordController.text;
     if (!EmailValidator.validate(email)) {
       VAppAlert.showErrorSnackBar(
         msg: "Email not valid",

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -52,7 +54,21 @@ class MyApp extends StatelessWidget {
           return ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(
               context,
-              isLogin ? const HomePage() : child!,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color:context.isDark?Colors.black: Colors.white,
+                  boxShadow:   [
+                    BoxShadow(
+                      color:context.isDark?Colors.blueGrey: Colors.grey,
+                      offset: const Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 6.0,
+                    ),
+                  ],
+                ),
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                child: isLogin ? const HomePage() : child!,
+              ),
             ),
             maxWidth: 1000,
             minWidth: 450,
@@ -64,6 +80,9 @@ class MyApp extends StatelessWidget {
               const ResponsiveBreakpoint.resize(1200, name: DESKTOP),
               const ResponsiveBreakpoint.autoScale(2460, name: "4K"),
             ],
+            background: Container(
+              decoration: sMessageBackground(isDark: context.isDark),
+            ),
           );
         },
         home: const LoginPage(),

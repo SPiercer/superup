@@ -17,6 +17,14 @@ class LoginController extends GetxController {
     this.profileService,
   );
 
+  @override
+  onInit() {
+    emailController.text = "user1@gmail.com";
+    passwordController.text = "12345678";
+    super.onInit();
+
+  }
+
   Future<void> login() async {
     final email = emailController.text.trim();
 
@@ -54,8 +62,9 @@ class LoginController extends GetxController {
         await authService.login(LoginDto(
           email: email,
           method: RegisterMethod.email,
-          //todo fix
-          pushKey: null,
+          pushKey: await VChatController
+              .I.vChatConfig.currentPushProviderService!
+              .getToken(),
           deviceInfo: await deviceHelper.getDeviceMapInfo(),
           deviceId: await deviceHelper.getId(),
           //todo fix

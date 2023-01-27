@@ -1,11 +1,14 @@
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_firebase_fcm/v_chat_firebase_fcm.dart';
 import 'package:v_chat_message_page/v_chat_message_page.dart';
 import 'package:v_chat_one_signal/v_chat_one_signal.dart';
 import 'package:v_chat_room_page/v_chat_room_page.dart';
@@ -15,24 +18,36 @@ import 'package:v_chat_utils/v_chat_utils.dart';
 import 'app/core/app_service.dart';
 import 'app/core/lazy_injection.dart';
 import 'app/routes/app_pages.dart';
+import 'firebase_options.dart';
 
 List<CameraDescription>? cameras;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+ await dotenv.load(fileName: ".env");
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   Get.put<AppService>(AppService());
   await VChatController.init(
     vChatConfig: VChatConfig(
-        encryptHashKey: "V_CHAT_SDK_V2_VERY_STRONG_KEY",
-        baseUrl: SConstants.vChatBaseUrl,
-        oneSignalPushProvider: VPlatforms.isWeb
-            ? null
-            : VChatOneSignalProver(
-                appId: "609f7bcb-96ae-4a9c-a96f-f1005c26a2dc",
-                enableForegroundNotification: true,
-              )),
+      encryptHashKey: "V_CHAT_SDK_V2_VERY_STRONG_KEY",
+      baseUrl: SConstants.vChatBaseUrl,
+      oneSignalPushProvider: VPlatforms.isWeb
+          ? null
+          : VChatOneSignalProver(
+              appId: "609f7bcb-96ae-4a9c-a96f-f1005c26a2dc",
+              enableForegroundNotification: true,
+            ),
+      fcmPushProvider: VPlatforms.isWeb
+          ? null
+          : VChatFcmProver(
+              enableForegroundNotification: true,
+            ),
+    ),
     vMessagePageConfig: VMessagePageConfig(
       onMentionPress: (context, id) {},
+      googleMapsApiKey: null,
       onMentionRequireSearch: (context, roomType, query) async {
         return [];
       },
