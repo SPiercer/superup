@@ -36,7 +36,7 @@ class BroadcastRoomSettingsController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: true,
+
     );
   }
 

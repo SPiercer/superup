@@ -94,7 +94,7 @@ class LoginController extends GetxController {
         }
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: false,
+
     );
   }
 

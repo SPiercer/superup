@@ -11,6 +11,7 @@ class RoomsTabView extends GetView<RoomsTabController> {
   @override
   Widget build(BuildContext context) {
     return VChatPage(
+      context: context,
       floatingActionButton: FloatingActionButton(
         elevation: 1,
         backgroundColor: AppColors.buttonBackground,

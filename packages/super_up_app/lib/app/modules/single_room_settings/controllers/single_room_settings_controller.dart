@@ -36,7 +36,7 @@ class SingleRoomSettingsController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: true,
+
     );
   }
 

@@ -36,7 +36,7 @@ class GlobalSearchController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: true,
+
     );
   }
 

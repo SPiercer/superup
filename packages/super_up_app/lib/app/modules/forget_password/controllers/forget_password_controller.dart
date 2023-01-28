@@ -36,7 +36,7 @@ class ForgetPasswordController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: true,
+
     );
   }
 

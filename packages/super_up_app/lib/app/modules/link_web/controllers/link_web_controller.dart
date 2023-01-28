@@ -36,7 +36,7 @@ class LinkWebController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: true,
+
     );
   }
 

@@ -38,17 +38,21 @@ class SettingsController extends GetxController {
         );
       },
       request: () async {
-        await authApiService.logout(
-          isLogoutFromALl: false,
-        );
-        await VChatController.I.authApi.logout();
+        try {
+          await authApiService.logout(
+            isLogoutFromALl: false,
+          );
+          await VChatController.I.authApi.logout();
+        } catch (err) {
+          print(err);
+        }
         return VAppPref.clear();
       },
       onSuccess: (response) {
         Get.offAllNamed(Routes.SPLASH);
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: false,
+
     );
   }
 }

@@ -36,7 +36,7 @@ class MyStatusDetailsController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: true,
+
     );
   }
 

@@ -36,7 +36,7 @@ class ChooseMembersController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: true,
+
     );
   }
 

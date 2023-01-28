@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -21,33 +20,37 @@ import 'app/routes/app_pages.dart';
 import 'firebase_options.dart';
 
 List<CameraDescription>? cameras;
+final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Get.put<AppService>(AppService());
+  FirebaseMessaging.onBackgroundMessage(vFirebaseMessagingBackgroundHandler);
   await VChatController.init(
+    navigatorKey: _navigatorKey,
     vChatConfig: VChatConfig(
-      encryptHashKey: "V_CHAT_SDK_V2_VERY_STRONG_KEY",
+      encryptHashKey: kDebugMode
+          ? "V_CHAT_SDK_V2_VERY_STRONG_KEY"
+          : dotenv.env['encryptHashKey']!,
       baseUrl: SConstants.vChatBaseUrl,
-      oneSignalPushProvider: VPlatforms.isWeb
-          ? null
-          : VChatOneSignalProver(
-              appId: "609f7bcb-96ae-4a9c-a96f-f1005c26a2dc",
-              enableForegroundNotification: true,
-            ),
-      fcmPushProvider: VPlatforms.isWeb
-          ? null
-          : VChatFcmProver(
-              enableForegroundNotification: true,
-            ),
+      vPush: VPush(
+        enableVForegroundNotification: true,
+        vPushConfig: const VLocalNotificationPushConfig(),
+        fcmProvider: VPlatforms.isWeb ? null : VChatFcmProver(),
+        oneSignalProvider: VPlatforms.isWeb
+            ? null
+            : VChatOneSignalProver(
+                appId: dotenv.env['oneSignalKey']!,
+              ),
+      ),
     ),
     vMessagePageConfig: VMessagePageConfig(
       onMentionPress: (context, id) {},
-      googleMapsApiKey: null,
+      googleMapsApiKey: dotenv.env['googleMapsApiKey'],
       onMentionRequireSearch: (context, roomType, query) async {
         return [];
       },
@@ -70,11 +73,23 @@ void main() async {
         assignId: true,
         builder: (appService) {
           return GetMaterialApp(
+            navigatorKey: _navigatorKey,
             title: SConstants.appName,
             opaqueRoute: Get.isOpaqueRouteDefault,
             popGesture: Get.isPopGestureEnable,
             themeMode: appService.themeMode,
             initialRoute: AppPages.INITIAL,
+            localizationsDelegates: [
+              // S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              VTrans.delegate,
+            ],
+            supportedLocales: const <Locale>[
+              Locale.fromSubtags(languageCode: 'en'),
+              Locale.fromSubtags(languageCode: 'ar'),
+            ] ,
             builder: (context, child) {
               return ResponsiveWrapper.builder(
                 BouncingScrollWrapper.builder(

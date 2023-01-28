@@ -87,7 +87,7 @@ class LoginController {
         }
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: false,
+
     );
   }
 

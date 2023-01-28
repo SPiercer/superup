@@ -1,25 +1,32 @@
-import 'dart:ui';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:super_up_core/super_up_core.dart';
-import 'package:super_up_web/src/pages/home/home_page.dart';
-import 'package:super_up_web/src/pages/login/login_page.dart';
+import 'package:super_up_web/src/pages/splash.dart';
 import 'package:v_chat_message_page/v_chat_message_page.dart';
 import 'package:v_chat_room_page/v_chat_room_page.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
+final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   _inject();
-  await VAppPref.init();
+  await dotenv.load(fileName: ".env");
   await VChatController.init(
+    navigatorKey: _navigatorKey,
     vChatConfig: VChatConfig(
-      encryptHashKey: "V_CHAT_SDK_V2_VERY_STRONG_KEY",
+      vPush: VPush(
+          enableVForegroundNotification: true,
+          vPushConfig: const VLocalNotificationPushConfig()),
+      encryptHashKey: kDebugMode
+          ? "V_CHAT_SDK_V2_VERY_STRONG_KEY"
+          : dotenv.env['encryptHashKey']!,
       baseUrl: SConstants.vChatBaseUrl,
     ),
     vNavigator: VNavigator(
@@ -29,16 +36,24 @@ void main() async {
     vMessagePageConfig: VMessagePageConfig(
       onMentionPress: (context, id) {},
       onMentionRequireSearch: (context, roomType, query) async {
-        return [];
+        return [
+          VMentionModel(
+            identifier: "identifier",
+            name: "user 1",
+            image:
+                "https://super-up-dev.s3.eu-west-3.amazonaws.com/default_user_image.png",
+          ),
+          VMentionModel(
+            identifier: "identifier2",
+            name: "user 2",
+            image:
+                "https://super-up-dev.s3.eu-west-3.amazonaws.com/default_user_image.png",
+          ),
+        ];
       },
     ),
   );
   runApp(const MyApp());
-}
-
-void _inject() {
-  GetIt.I.registerSingleton<AuthApiService>(AuthApiService.init());
-  GetIt.I.registerSingleton<ProfileApiService>(ProfileApiService.init());
 }
 
 class MyApp extends StatelessWidget {
@@ -48,26 +63,38 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return OverlaySupport.global(
       child: MaterialApp(
+        title: SConstants.appName,
+        navigatorKey: _navigatorKey,
+        localizationsDelegates: [
+          // S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          VTrans.delegate,
+        ],
+        supportedLocales: const <Locale>[
+          Locale.fromSubtags(languageCode: 'en'),
+          Locale.fromSubtags(languageCode: 'ar'),
+        ],
         debugShowCheckedModeBanner: false,
         builder: (context, child) {
-          final isLogin = VAppPref.getBool(SStorageKeys.isLogin.name);
           return ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(
               context,
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
-                  color:context.isDark?Colors.black: Colors.white,
-                  boxShadow:   [
+                  color: context.isDark ? Colors.black : Colors.white,
+                  boxShadow: [
                     BoxShadow(
-                      color:context.isDark?Colors.blueGrey: Colors.grey,
+                      color: context.isDark ? Colors.blueGrey : Colors.grey,
                       offset: const Offset(0.0, 1.0), //(x,y)
                       blurRadius: 6.0,
                     ),
                   ],
                 ),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                child: isLogin ? const HomePage() : child!,
+                child: child!,
               ),
             ),
             maxWidth: 1000,
@@ -85,7 +112,7 @@ class MyApp extends StatelessWidget {
             ),
           );
         },
-        home: const LoginPage(),
+        home: const SplashPage(),
         theme: FlexThemeData.light(
           scheme: FlexScheme.gold,
           useMaterial3: true,
@@ -116,4 +143,9 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+void _inject() {
+  GetIt.I.registerSingleton<AuthApiService>(AuthApiService.init());
+  GetIt.I.registerSingleton<ProfileApiService>(ProfileApiService.init());
 }

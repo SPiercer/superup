@@ -107,7 +107,7 @@ class RegisterController extends GetxController {
         }
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: false,
+
     );
   }
 

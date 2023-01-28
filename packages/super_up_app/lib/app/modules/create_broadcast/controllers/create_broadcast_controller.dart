@@ -36,7 +36,7 @@ class CreateBroadcastController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-      showToastError: true,
+
     );
   }
 
