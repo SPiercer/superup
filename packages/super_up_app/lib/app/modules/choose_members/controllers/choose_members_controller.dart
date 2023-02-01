@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 class ChooseMembersController extends GetxController {
   final txtController = TextEditingController();
   VChatLoadingState loadingState = VChatLoadingState.ideal;
-  final _data = <dynamic>[];
+  final _data = <SSelectableUser>[];
+  final ProfileApiService profileApiService;
 
-  List<dynamic> get data => _data;
+  ChooseMembersController(this.profileApiService);
+
+  List<SSelectableUser> get data => _data;
+  final _filterDto = UserFilterDto(
+    limit: 30,
+    page: 1,
+  );
 
   @override
   void onInit() {
@@ -17,7 +25,7 @@ class ChooseMembersController extends GetxController {
   }
 
   Future<void> getData() async {
-    await vSafeApiCall<List<dynamic>>(
+    await vSafeApiCall<List<SSelectableUser>>(
       onLoading: () async {
         loadingState = VChatLoadingState.loading;
         update();
@@ -27,8 +35,8 @@ class ChooseMembersController extends GetxController {
         update();
       },
       request: () async {
-        await Future.delayed(const Duration(seconds: 4));
-        return [];
+        final users = await profileApiService.appUsers(_filterDto);
+        return users.map((e) => SSelectableUser(baseUser: e.baseUser)).toList();
       },
       onSuccess: (response) {
         loadingState = VChatLoadingState.success;
@@ -36,7 +44,6 @@ class ChooseMembersController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-
     );
   }
 
@@ -44,5 +51,21 @@ class ChooseMembersController extends GetxController {
   void onClose() {
     txtController.dispose();
     super.onClose();
+  }
+
+  void onSelectUser(SSelectableUser user, bool value) {
+    _data.firstWhereOrNull((e) => e == user)?.isSelected = value;
+    update();
+  }
+
+  void onNext() {
+    if (_data.firstWhereOrNull((e) => e.isSelected) == null) {
+      VAppAlert.showErrorSnackBar(
+        msg: "choose at lest member",
+        context: Get.context!,
+      );
+      return;
+    }
+    Get.back(result: _data.where((e) => e.isSelected).map((e) => e.baseUser).toList());
   }
 }

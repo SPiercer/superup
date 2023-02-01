@@ -1,42 +1,57 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
+import '../../../routes/app_pages.dart';
+
 class CreateGroupController extends GetxController {
+  final List<SBaseUser> users;
+
   final txtController = TextEditingController();
   VChatLoadingState loadingState = VChatLoadingState.ideal;
-  final _data = <dynamic>[];
 
-  List<dynamic> get data => _data;
+  CreateGroupController(this.users);
 
-  @override
-  void onInit() {
-    super.onInit();
-    getData();
-  }
+  VPlatformFileSource? image;
 
-  Future<void> getData() async {
-    await vSafeApiCall<List<dynamic>>(
+  Future<void> createGroup() async {
+    final title = txtController.text;
+    if (title.isEmpty) {
+      VAppAlert.showErrorSnackBar(
+        msg: "title is required",
+        context: Get.context!,
+      );
+      return;
+    }
+    await vSafeApiCall(
       onLoading: () async {
-        loadingState = VChatLoadingState.loading;
-        update();
+        VAppAlert.showLoading(context: Get.context!);
       },
       onError: (exception, trace) {
-        loadingState = VChatLoadingState.error;
-        update();
+        Get.back();
+        VAppAlert.showErrorSnackBar(
+          msg: exception,
+          context: Get.context!,
+        );
       },
       request: () async {
-        await Future.delayed(const Duration(seconds: 4));
-        return [];
+       await VChatController.I.nativeApi.remote.room.createGroup(
+          CreateGroupDto(
+            identifiers: users.map((e) => e.id).toList(),
+            title: title,
+            platformImage: image,
+          ),
+        );
+        await Future.delayed(const Duration(seconds: 3));
+        return;
       },
       onSuccess: (response) {
-        loadingState = VChatLoadingState.success;
-        data.addAll(response);
-        update();
+        Get.until((route) => route.settings.name == Routes.HOME);
       },
       ignoreTimeoutAndNoInternet: false,
-
     );
   }
 

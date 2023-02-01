@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:super_up_core/super_up_core.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../calls_tab/views/calls_tab_view.dart';
@@ -53,8 +54,13 @@ class HomeController extends GetxController
     // Get.find<RoomsTabController>().unSelectAllRoom();
   }
 
-  void onNewGroupClicked() {
-    Get.toNamed(Routes.CREATE_GROUP);
+  void onNewGroupClicked() async {
+    final users = await Get.toNamed(
+      Routes.CHOOSE_MEMBERS,
+    ) as List<SBaseUser>?;
+    if (users != null) {
+      Get.toNamed(Routes.CREATE_GROUP, arguments: users);
+    }
   }
 
   void onSettingsClicked() {

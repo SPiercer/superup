@@ -58,7 +58,8 @@ class SBaseUser {
 
 //</editor-fold>
 }
-class SSearchUser{
+
+class SSearchUser {
   final SBaseUser baseUser;
   final String bio;
   final String createdAt;
@@ -106,7 +107,7 @@ class SSearchUser{
 
   Map<String, dynamic> toMap() {
     return {
-      ... this.baseUser.toMap(),
+      ...this.baseUser.toMap(),
       'bio': this.bio,
       'createdAt': this.createdAt,
     };
@@ -121,4 +122,14 @@ class SSearchUser{
   }
 
 //</editor-fold>
+}
+
+class SSelectableUser {
+  final SBaseUser baseUser;
+  bool isSelected = false;
+
+  SSelectableUser({
+    required this.baseUser,
+    this.isSelected = false,
+  });
 }

@@ -49,7 +49,7 @@ class LoginController {
       onError: (exception, trace) {
         context.pop();
         VAppAlert.showOkAlertDialog(
-          context: context!,
+          context: context,
           title: "Error",
           content: exception.toString(),
         );

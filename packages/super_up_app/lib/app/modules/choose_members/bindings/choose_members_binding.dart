@@ -6,7 +6,7 @@ class ChooseMembersBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<ChooseMembersController>(
-      ChooseMembersController(),
+      ChooseMembersController(Get.find()),
     );
   }
 }

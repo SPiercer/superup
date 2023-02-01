@@ -32,15 +32,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  v_chat_utils: ^0.4.3
+  v_chat_sdk_core: ^0.4.3+1
+  v_chat_room_page: ^0.4.3
+  v_chat_message_page: ^0.4.3+1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
   responsive_framework: ^0.2.0
-  v_chat_utils: ^0.4.0
-  v_chat_sdk_core: ^0.4.0
-  v_chat_room_page: ^0.4.0
-  v_chat_message_page: ^0.4.0
   flutter_dotenv: ^5.0.2
   super_up_core:
     path: ../super_up_core

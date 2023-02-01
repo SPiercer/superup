@@ -6,7 +6,7 @@ class CreateGroupBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<CreateGroupController>(
-      CreateGroupController(),
+      CreateGroupController(Get.arguments),
     );
   }
 }

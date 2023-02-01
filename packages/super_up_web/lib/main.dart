@@ -30,28 +30,10 @@ void main() async {
       baseUrl: SConstants.vChatBaseUrl,
     ),
     vNavigator: VNavigator(
-      roomNavigator: roomDefaultNavigator,
-      messageNavigator: messageDefaultNavigator,
+      roomNavigator: vDefaultRoomNavigator,
+      messageNavigator: vDefaultMessageNavigator,
     ),
-    vMessagePageConfig: VMessagePageConfig(
-      onMentionPress: (context, id) {},
-      onMentionRequireSearch: (context, roomType, query) async {
-        return [
-          VMentionModel(
-            identifier: "identifier",
-            name: "user 1",
-            image:
-                "https://super-up-dev.s3.eu-west-3.amazonaws.com/default_user_image.png",
-          ),
-          VMentionModel(
-            identifier: "identifier2",
-            name: "user 2",
-            image:
-                "https://super-up-dev.s3.eu-west-3.amazonaws.com/default_user_image.png",
-          ),
-        ];
-      },
-    ),
+
   );
   runApp(const MyApp());
 }

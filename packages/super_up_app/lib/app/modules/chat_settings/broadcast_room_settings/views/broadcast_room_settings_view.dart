@@ -6,6 +6,7 @@ import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../controllers/broadcast_room_settings_controller.dart';
 
+
 class BroadcastRoomSettingsView
     extends GetView<BroadcastRoomSettingsController> {
   const BroadcastRoomSettingsView({Key? key}) : super(key: key);

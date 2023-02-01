@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:camera/camera.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
+import 'package:super_up/v_chat_config.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_firebase_fcm/v_chat_firebase_fcm.dart';
 import 'package:v_chat_message_page/v_chat_message_page.dart';
@@ -29,37 +33,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Get.put<AppService>(AppService());
+  await initVChat(_navigatorKey);
   FirebaseMessaging.onBackgroundMessage(vFirebaseMessagingBackgroundHandler);
-  await VChatController.init(
-    navigatorKey: _navigatorKey,
-    vChatConfig: VChatConfig(
-      encryptHashKey: kDebugMode
-          ? "V_CHAT_SDK_V2_VERY_STRONG_KEY"
-          : dotenv.env['encryptHashKey']!,
-      baseUrl: SConstants.vChatBaseUrl,
-      vPush: VPush(
-        enableVForegroundNotification: true,
-        vPushConfig: const VLocalNotificationPushConfig(),
-        fcmProvider: VPlatforms.isWeb ? null : VChatFcmProver(),
-        oneSignalProvider: VPlatforms.isWeb
-            ? null
-            : VChatOneSignalProver(
-                appId: dotenv.env['oneSignalKey']!,
-              ),
-      ),
-    ),
-    vMessagePageConfig: VMessagePageConfig(
-      onMentionPress: (context, id) {},
-      googleMapsApiKey: dotenv.env['googleMapsApiKey'],
-      onMentionRequireSearch: (context, roomType, query) async {
-        return [];
-      },
-    ),
-    vNavigator: VNavigator(
-      roomNavigator: roomDefaultNavigator,
-      messageNavigator: messageDefaultNavigator,
-    ),
-  );
   try {
     cameras = await availableCameras();
   } on CameraException catch (e) {
@@ -89,7 +64,7 @@ void main() async {
             supportedLocales: const <Locale>[
               Locale.fromSubtags(languageCode: 'en'),
               Locale.fromSubtags(languageCode: 'ar'),
-            ] ,
+            ],
             builder: (context, child) {
               return ResponsiveWrapper.builder(
                 BouncingScrollWrapper.builder(
@@ -146,4 +121,65 @@ void main() async {
       ),
     ),
   );
+}
+
+@pragma('vm:entry-point')
+Future<void> vFirebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await VAppPref.init();
+  final String? fromVChat = message.data['fromVChat'];
+  final String? vMessage = message.data['vMessage'];
+  if (fromVChat == null || vMessage == null) return Future<void>.value();
+  final msg = MessageFactory.createBaseMessage(
+    jsonDecode(vMessage) as Map<String, dynamic>,
+  );
+  final token = VAppPref.getHashedString(key: VStorageKeys.vAccessToken.name);
+  if (token != null) {
+    try {
+      await _setDeliverForThisRoom(msg.roomId, token);
+    } catch (err) {
+      if (kDebugMode) {
+        print(err);
+      }
+    }
+  }
+  final x = VLocalNativeApi();
+  await x.init();
+  final insertRes = await x.message.safeInsertMessage(msg);
+  if (insertRes == 1) {
+    await x.room.updateRoomUnreadCountAddOne(msg.roomId);
+  }
+  return Future<void>.value();
+}
+
+@pragma('vm:entry-point')
+Future _setDeliverForThisRoom(String roomId, String token) async {
+  if (kDebugMode) {
+    final res = await patch(
+      Uri.parse(
+        "${VAppConstants.emulatorBaseUrl}/channel/$roomId/deliver",
+      ),
+      headers: {
+        'authorization': "Bearer $token",
+        "clint-version": VAppConstants.clintVersion,
+        "Accept-Language": "en"
+      },
+    );
+    if (res.statusCode != 200) {
+      throw "cant deliver the message status in background for ${VPlatforms.currentPlatform}";
+    }
+  } else {
+    final res = await patch(
+      Uri.parse("${VAppConstants.baseUri.toString()}/channel/$roomId/deliver"),
+      headers: {
+        'authorization': "Bearer $token",
+        "clint-version": VAppConstants.clintVersion,
+        "Accept-Language": "en"
+      },
+    );
+    if (res.statusCode != 200) {
+      print(res.body);
+      print(res.statusCode);
+      throw "cant deliver the message status in background for ${VPlatforms.currentPlatform}";
+    }
+  }
 }

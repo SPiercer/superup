@@ -48,7 +48,6 @@ class AppMembersController extends GetxController {
         update();
       },
       ignoreTimeoutAndNoInternet: false,
-
     );
   }
 
@@ -62,8 +61,7 @@ class AppMembersController extends GetxController {
 
   Future onItemPress(SSearchUser item) async {
     VChatController.I.roomApi.openChatWith(
-      Get.context!,
-      item.baseUser.id,
+      peerIdentifier: item.baseUser.id,
     );
   }
 }
