@@ -6,7 +6,7 @@ class BroadcastMembersBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<BroadcastMembersController>(
-      BroadcastMembersController(),
+      BroadcastMembersController(Get.arguments),
     );
   }
 }

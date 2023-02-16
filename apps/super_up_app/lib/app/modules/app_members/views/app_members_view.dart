@@ -36,15 +36,10 @@ class AppMembersView extends GetView<AppMembersController> {
                 padding: const EdgeInsets.all(3),
                 itemBuilder: (context, index) {
                   final item = logic.data[index];
-                  return ListTile(
+                  return SUserItem(
                     onTap: () => logic.onItemPress(item),
-                    contentPadding: EdgeInsets.zero,
-                    subtitle: item.bio.text,
-                    dense: true,
-                    leading: VCircleAvatar(
-                      fullUrl: item.baseUser.userImage,
-                    ),
-                    title: item.baseUser.fullName.text,
+                    baseUser: item.baseUser,
+                    subtitle: item.bio,
                   );
                 },
                 itemCount: logic.data.length,

@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   get:
   v_chat_utils: ^0.6.0
+  v_chat_sdk_core:  ^0.6.0
   path: ^1.8.1
   http: ^0.13.5
   chopper: ^6.1.0

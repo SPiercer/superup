@@ -8,34 +8,43 @@ import '../controllers/group_members_controller.dart';
 
 class GroupMembersView extends GetView<GroupMembersController> {
   const GroupMembersView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('GroupMembersView'),
+        title: const Text('Group Members'),
       ),
-      body: GetBuilder<GroupMembersController>(
-        assignId: true,
-        builder: (logic) {
-          return VAsyncWidgetsBuilder(
-            loadingState: logic.loadingState,
-            onRefresh: controller.getData,
-            loadingWidget: () => const SLoadingWidget(),
-            errorWidget: () => const SErrorWidget(),
-            emptyWidget: () => const SEmptyWidget(),
-            successWidget: () {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final item = logic.data[index];
-                  return ListTile(
-                    title: "test".text,
-                  );
-                },
-                itemCount: logic.data.length,
-              );
-            },
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: GetBuilder<GroupMembersController>(
+          assignId: true,
+          builder: (logic) {
+            return VAsyncWidgetsBuilder(
+              loadingState: logic.loadingState,
+              onRefresh: controller.getData,
+              loadingWidget: () => const SLoadingWidget(),
+              errorWidget: () => const SErrorWidget(),
+              emptyWidget: () => const SEmptyWidget(),
+              successWidget: () {
+                return ListView.separated(
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: 10,
+                  ),
+                  itemBuilder: (context, index) => SUserItem(
+                    baseUser: SBaseUser.fromVChatBase(
+                      controller.users[index].userData,
+                    ),
+                    subtitle:controller.users[index].role.name ,
+                    onTap:() =>   controller.onUserTab(controller.users[index]),
+                    onLongPress:() =>   controller.onUserTab(controller.users[index]),
+                  ),
+                  itemCount: controller.users.length,
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -59,7 +59,7 @@ class _CameraTabViewState extends State<CameraTabView> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      _buildGalleryBar(),
+                    //  _buildGalleryBar(),
                       _buildControlBar(),
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),

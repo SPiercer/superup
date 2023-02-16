@@ -1,3 +1,5 @@
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
+
 class SBaseUser {
   final String id;
   final String userImage;
@@ -10,6 +12,14 @@ class SBaseUser {
     required this.fullName,
     required this.userImage,
   });
+
+ static SBaseUser fromVChatBase(VIdentifierUser identifierUser) {
+    return SBaseUser(
+      fullName: identifierUser.baseUser.fullName,
+      id: identifierUser.identifier,
+      userImage: identifierUser.baseUser.userImages.chatImage,
+    );
+  }
 
   @override
   String toString() {

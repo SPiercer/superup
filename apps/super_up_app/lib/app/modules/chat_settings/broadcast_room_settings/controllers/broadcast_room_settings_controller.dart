@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:super_up/app/routes/app_pages.dart';
+import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-import '../../widgets/single_rename.dart';
 
 class BroadcastRoomSettingsController extends GetxController {
   final txtController = TextEditingController();
@@ -77,7 +78,7 @@ class BroadcastRoomSettingsController extends GetxController {
   void onUpdateTitle() async {
     final newTitle = await Get.to(() => SingleRename(
           appbarTitle: "update broadcast title",
-          oldValue: settingsModel.title,
+          oldValue: settingsModel.title, subTitle: '',
         ));
     if (newTitle != settingsModel.title) {
       vSafeApiCall<String>(
@@ -100,5 +101,36 @@ class BroadcastRoomSettingsController extends GetxController {
     }
   }
 
-  void onGoShowMembers() {}
+  void onGoShowMembers() {
+    Get.toNamed(Routes.BROADCAST_MEMBERS, arguments: roomId);
+  }
+
+
+  void addParticipantsToBroadcast() async {
+    final users = await Get.toNamed(
+      Routes.CHOOSE_MEMBERS,
+    ) as List<SBaseUser>?;
+    if (users != null) {
+      _addGroupMembers(users.map((e) => e.id).toList());
+    }
+  }
+
+
+  void _addGroupMembers(List<String> list) async {
+    await vSafeApiCall<void>(
+      onLoading: () {
+        VAppAlert.showLoading(context: Get.context!);
+      },
+      request: () async {
+        await VChatController.I.roomApi.addParticipantsToBroadcast(roomId, list);
+      },
+      onSuccess: (response) {
+        VAppAlert.showOverlaySupport(title: "Users added successfully");
+        Get.back();
+      },
+      onError: (exception, trace) {
+        Get.back();
+      },
+    );
+  }
 }

@@ -46,6 +46,7 @@ dependencies:
     path: ../../packages/super_up_core
   passwordfield: ^0.1.0
   sidebarx: ^0.14.0
+  settings_ui: ^2.0.2
 
 dev_dependencies:
   flutter_lints: ^2.0.1

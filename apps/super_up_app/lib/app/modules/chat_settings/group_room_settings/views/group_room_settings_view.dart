@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:settings_ui/settings_ui.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 import '../../widgets/settings_divider.dart';
 import '../controllers/group_room_settings_controller.dart';
@@ -51,9 +52,6 @@ class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
                 )
               ],
             ),
-            const SizedBox(
-              height: 10,
-            ),
             GetBuilder<GroupRoomSettingsController>(
               builder: (logic) {
                 return VAsyncWidgetsBuilder(
@@ -61,83 +59,75 @@ class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
                   onRefresh: logic.getData,
                   successWidget: () {
                     bool isMeAdminOrSuper = logic.isMeAdminOrSuper;
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        ListTile(
-                          leading: const Icon(
-                            PhosphorIcons.notificationFill,
-                            color: Colors.green,
-                          ),
-                          title: "Mute notifications".text,
-                          trailing: Switch.adaptive(
-                            value: logic.isMuted,
-                            onChanged: logic.changeRoomNotification,
-                          ),
-                        ),
-                        const SettingsDivider(),
-                        ListTile(
-                          title: "Title".text,
-                          subtitle: controller.settingsModel.title.text,
-                          onTap: logic.onUpdateTitle,
-                          leading: const Icon(Icons.edit, color: Colors.green),
-                        ),
-                        const SettingsDivider(),
-                        ListTile(
-                          title: "Description".text,
-                          subtitle: controller.getGroupDesc == null
-                              ? null
-                              : controller.getGroupDesc!.text,
-                          onTap: logic.onChangeGroupDescriptionClicked,
-                          leading: const Icon(
-                            Icons.edit,
-                            color: Colors.green,
-                          ),
-                        ),
-                        if (isMeAdminOrSuper)
-                          Column(
-                            children: [
-                              const SettingsDivider(),
-                              ListTile(
-                                onTap: logic.addParticipantsToGroup,
+                    return SettingsList(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      sections: [
+                        SettingsSection(
+                          title: const Text('Group settings'),
+                          tiles: <SettingsTile>[
+                            SettingsTile.navigation(
+                              onPressed: (context) => logic.onUpdateTitle(),
+                              leading:
+                                  const Icon(Icons.edit, color: Colors.green),
+                              title: const Text('Title'),
+                              value: controller.settingsModel.title.text,
+                            ),
+                            SettingsTile.navigation(
+                              title: "Description".text,
+                              description: controller.getGroupDesc == null
+                                  ? null
+                                  : controller.getGroupDesc!.text,
+                              onPressed: (context) =>
+                                  logic.onChangeGroupDescriptionClicked(),
+                              leading: const Icon(
+                                Icons.edit,
+                                color: Colors.green,
+                              ),
+                            ),
+                            SettingsTile.switchTile(
+                              initialValue: logic.isMuted,
+                              onToggle: logic.changeRoomNotification,
+                              leading: const Icon(
+                                Icons.notifications_active,
+                                color: Colors.green,
+                              ),
+                              title: const Text('Mute notifications'),
+                            ),
+                            if (isMeAdminOrSuper)
+                              SettingsTile.navigation(
+                                onPressed: (context) =>
+                                    logic.addParticipantsToGroup(),
                                 title: "Add Participants".text,
                                 leading: const Icon(
                                   Icons.group_add,
                                   color: Colors.green,
                                 ),
+                                trailing: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.green,
+                                ),
                               ),
-                            ],
-                          ),
-                        const SettingsDivider(),
-                        ListTile(
-                          onTap: logic.onGoShowMembers,
-                          title:
-                              "Group Participants ${logic.groupInfo.membersCount}"
-                                  .text,
-                          leading: const Icon(
-                            PhosphorIcons.users,
-                            color: Colors.green,
-                          ),
-                          trailing: const Icon(
-                            PhosphorIcons.dotsNine,
-                            color: Colors.green,
-                          ),
+                            SettingsTile.navigation(
+                              onPressed: (context) => logic.onGoShowMembers(),
+                              title:
+                                  "Group Participants"
+                                      .text,
+                              description: "${logic.groupInfo.membersCount}".text,
+                              leading: const Icon(
+                                PhosphorIcons.users,
+                                color: Colors.green,
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.green,
+                              ),
+                            ),
+                          ],
                         ),
-                        const SettingsDivider(),
-                        ListTile(
-                          onTap: controller.onExitClicked,
-                          title: "Exit Group".text.color(Colors.red),
-                          leading: const Icon(
-                            Icons.transit_enterexit_sharp,
-                            color: Colors.red,
-                          ),
-                          subtitle: "Leave and delete the group".text,
-                        ),
-                        const SettingsDivider(),
                       ],
                     );
+
                   },
                 );
               },

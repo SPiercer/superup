@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:settings_ui/settings_ui.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
@@ -64,31 +65,47 @@ class BroadcastRoomSettingsView
                   loadingState: logic.loadingState,
                   onRefresh: logic.getData,
                   successWidget: () {
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        ListTile(
-                          title: "Title".text,
-                          subtitle: controller.settingsModel.title.text,
-                          onTap: logic.onUpdateTitle,
-                          leading: const Icon(Icons.edit, color: Colors.green),
-                        ),
-                        const SettingsDivider(),
-                        ListTile(
-                          onTap: logic.onGoShowMembers,
-                          title:
-                              "Broadcast Participants ${logic.info.totalUsers}"
-                                  .text,
-                          leading: const Icon(
-                            PhosphorIcons.users,
-                            color: Colors.green,
-                          ),
-                          trailing: const Icon(
-                            PhosphorIcons.dotsNine,
-                            color: Colors.green,
-                          ),
+                    return SettingsList(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      sections: [
+                        SettingsSection(
+                          title: const Text('Broadcast settings'),
+                          tiles: <SettingsTile>[
+                            SettingsTile.navigation(
+                              onPressed: (context) => logic.onUpdateTitle(),
+                              leading:
+                                  const Icon(Icons.edit, color: Colors.green),
+                              title: const Text('Title'),
+                              value: controller.settingsModel.title.text,
+                            ),
+                            SettingsTile.navigation(
+                              onPressed: (context) =>
+                                  logic.addParticipantsToBroadcast(),
+                              title: "Add Participants".text,
+                              leading: const Icon(
+                                Icons.group_add,
+                                color: Colors.green,
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.green,
+                              ),
+                            ),
+                            SettingsTile.navigation(
+                              onPressed: (context) => logic.onGoShowMembers(),
+                              title: "Broadcast Participants".text,
+                              description: "${logic.info.totalUsers}".text,
+                              leading: const Icon(
+                                PhosphorIcons.users,
+                                color: Colors.green,
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.green,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     );

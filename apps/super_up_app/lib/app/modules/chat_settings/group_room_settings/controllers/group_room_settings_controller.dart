@@ -143,7 +143,10 @@ class GroupRoomSettingsController extends GetxController {
   }
 
   void onGoShowMembers() {
-    Get.toNamed(Routes.GROUP_MEMBERS, arguments: roomId);
+    Get.toNamed(Routes.GROUP_MEMBERS, arguments: {
+      "roomId": roomId,
+      "groupInfo": groupInfo,
+    });
   }
 
   void onExitClicked() {
