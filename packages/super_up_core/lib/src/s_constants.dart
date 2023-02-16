@@ -7,6 +7,7 @@ abstract class SConstants {
   ///if you not setup production leave it empty
   static const _productionBaseUrl = "superupdev.online";
   static const appName = "Superup";
+  static const vChatAdminPassword = "v-chat-sdk-v2-strong-password";
   static const otpInterval = 60 * 2; //2 minutes
   static const maxMediaSize = 50 * 1000 * 1000; // 50 mb
 
@@ -17,7 +18,7 @@ abstract class SConstants {
         return Uri.parse("http://10.0.2.2:3001");
       }
       return Uri.parse("http://localhost:3001");
-    }
+    } //
     return Uri.parse("https://vchat.$_productionBaseUrl");
   }
 

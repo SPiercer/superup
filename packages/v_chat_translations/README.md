@@ -1,1 +1,0 @@
-- this package used to translate v chat sdk

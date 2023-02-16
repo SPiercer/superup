@@ -47,18 +47,40 @@ Map<String, dynamic> extractDataFromResponse(Response res) {
 
 class AuthInterceptor implements RequestInterceptor {
   final String? access;
+  final Map<String, String>? headers;
 
-  AuthInterceptor({this.access});
+  AuthInterceptor({
+    this.access,
+    this.headers,
+  });
 
   @override
   FutureOr<Request> onRequest(Request request) {
     final oldHeaders = Map.of(request.headers);
-    oldHeaders['authorization'] = "Bearer ${access ?? VAppPref.getHashedString(
-          key: SStorageKeys.accessToken.name,
-        )}";
+    oldHeaders['authorization'] =
+        "Bearer ${access ?? VAppPref.getHashedString(key: SStorageKeys.accessToken.name)}";
     oldHeaders["clint-version"] = SStorageKeys.clintVersion.name;
-    return request.copyWith(
-      headers: oldHeaders,
-    );
+    if (headers != null) {
+      oldHeaders.addAll(headers!);
+    }
+    return request.copyWith(headers: oldHeaders);
+  }
+}
+
+class VAdminHeaderKeySetterInterceptor implements RequestInterceptor {
+  @override
+  FutureOr<Request> onRequest(Request request) {
+    final oldHeaders = Map.of(request.headers);
+    oldHeaders['v-admin-key'] = SConstants.vChatAdminPassword;
+     return request.copyWith(headers: oldHeaders);
+  }
+}
+class SAdminHeaderKeySetterInterceptor implements RequestInterceptor {
+  @override
+  FutureOr<Request> onRequest(Request request) {
+    final oldHeaders = Map.of(request.headers);
+     oldHeaders['admin-key'] =
+    "${VAppPref.getHashedString(key: SStorageKeys.adminAccessPassword.name)}";
+    return request.copyWith(headers: oldHeaders);
   }
 }

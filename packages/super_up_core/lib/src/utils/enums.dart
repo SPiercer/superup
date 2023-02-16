@@ -5,6 +5,7 @@ enum SStorageKeys {
   appTheme,
   appLang,
   clintVersion,
+  adminAccessPassword,
 }
 
 enum RegisterStatus {

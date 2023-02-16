@@ -11,10 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
   get:
-  v_chat_utils: ^0.4.3
-  path: ^1.8.2
+  v_chat_utils: ^0.6.0
+  path: ^1.8.1
   http: ^0.13.5
-  chopper: ^6.0.0
+  chopper: ^6.1.0
+  flex_color_scheme: ^7.0.0-dev.2
   http_parser: ^4.0.2
   touchable_opacity: 1.2.0
 

@@ -3,15 +3,16 @@ repository: https://github.com/hatemragab/superup
 
 packages:
   - packages/**
+  - apps/**
 
 command:
   bootstrap:
-    usePubspecOverrides: false
+    runPubGetInParallel: false
+    usePubspecOverrides: true
 
 scripts:
-  lint:
-    run: melos run format && melos run analyze
 
+  postbootstrap: cd packages/s_translation && flutter gen-l10n
   analyze:
     run: |
       melos exec -c 1 -- \
