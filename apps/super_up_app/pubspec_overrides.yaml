@@ -1,0 +1,5 @@
+# melos_managed_dependency_overrides: camera_android,super_up_core
+dependency_overrides:
+  camera_android: ^0.10.4
+  super_up_core:
+    path: ../../packages/super_up_core

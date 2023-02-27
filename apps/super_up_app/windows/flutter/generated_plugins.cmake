@@ -8,12 +8,15 @@ list(APPEND FLUTTER_PLUGIN_LIST
   file_saver
   flutter_webrtc
   geolocator_windows
+  local_notifier
   permission_handler_windows
   platform_device_id_windows
   record_windows
+  screen_retriever
   share_plus
   sqlite3_flutter_libs
   url_launcher_windows
+  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

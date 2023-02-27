@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:super_up_core/super_up_core.dart';
-import 'package:super_up_web/src/pages/home/Home_controller.dart';
+import 'package:super_up_web/src/pages/home/home_controller.dart';
 import 'package:super_up_web/src/pages/home/web_chat_scaffold.dart';
 import 'package:super_up_web/src/pages/login/login_page.dart';
 import 'package:super_up_web/src/pages/splash.dart';
@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final controller = HomeController();
+  final controller = HomeController(GetIt.I.get<ProfileApiService>());
 
   @override
   void initState() {
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                               await GetIt.I.get<AuthApiService>().logout(
                                     isLogoutFromALl: false,
                                   );
-                              await VChatController.I.authApi.logout();
+                              await VChatController.I.profileApi.logout();
                             } catch (err) {
                               print(err);
                             }

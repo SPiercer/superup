@@ -20,6 +20,14 @@ scripts:
   format:
     run: melos exec -c 1 -- \
       flutter format .
+  g:
+    run: cd packages/super_up_core && flutter pub run build_runner build --delete-conflicting-outputs
+  build_android: cd apps/super_up_app && flutter build apk --split-per-abi
+  build_a: cd apps/super_up_app && flutter_distributor package --platform android --targets apk --skip-clean
+  build_mac: cd apps/super_up_app && flutter_distributor release --name dev --jobs release-macos --skip-clean && flutter pub run auto_updater:sign_update dist/0.0.2+16/super_up-0.0.2+16-macos.zip
+  build_dmg: cd apps/super_up_app/installers/dmg && appdmg ./config.json ./super_up.dmg
+  build_web: cd apps/super_up_web && flutter build web --target=lib/main.dart —release --web-renderer html
+  build_admin: cd apps/super_up_admin && flutter build web --target=lib/main.dart —release --web-renderer html
   fix:
     run: melos exec -c 1 -- \
       dart fix --apply

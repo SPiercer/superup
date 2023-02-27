@@ -7,6 +7,7 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:super_up_web/src/pages/splash.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'package:v_chat_message_page/v_chat_message_page.dart';
 import 'package:v_chat_room_page/v_chat_room_page.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
@@ -17,6 +18,7 @@ final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   _inject();
   await dotenv.load(fileName: ".env");
   await VChatController.init(

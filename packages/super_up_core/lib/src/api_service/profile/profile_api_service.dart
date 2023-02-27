@@ -35,6 +35,12 @@ class ProfileApiService {
     return true;
   }
 
+  Future<bool> setVisit() async {
+    final res = await _profileApi!.setVisit();
+    throwIfNotSuccess(res);
+    return true;
+  }
+
   Future<bool> updateUserName(String fullName) async {
     final res = await _profileApi!.updateUserName({"fullName": fullName});
     throwIfNotSuccess(res);

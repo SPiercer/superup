@@ -97,26 +97,26 @@ class RegisterView extends GetView<RegisterController> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FlutterSocialButton(
-                        onTap: controller.facebook,
-                        buttonType: ButtonType.facebook,
-                        mini: true,
-                      ),
-                      FlutterSocialButton(
-                        onTap: controller.apple,
-                        mini: true,
-                        buttonType: ButtonType.apple,
-                      ),
-                      FlutterSocialButton(
-                        onTap: controller.google,
-                        mini: true,
-                        buttonType: ButtonType.google,
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //     FlutterSocialButton(
+                  //       onTap: controller.facebook,
+                  //       buttonType: ButtonType.facebook,
+                  //       mini: true,
+                  //     ),
+                  //     FlutterSocialButton(
+                  //       onTap: controller.apple,
+                  //       mini: true,
+                  //       buttonType: ButtonType.apple,
+                  //     ),
+                  //     FlutterSocialButton(
+                  //       onTap: controller.google,
+                  //       mini: true,
+                  //       buttonType: ButtonType.google,
+                  //     ),
+                  //   ],
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),

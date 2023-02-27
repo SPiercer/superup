@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:super_up_admin/src/modules/home/widgets/home_slider.dart';
+import 'package:super_up_admin/src/modules/home_tabs/notifications/notifications_page.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../home_tabs/dashboard/dashboard_page.dart';
+import '../home_tabs/settings/settings_page.dart';
+import '../home_tabs/users/users_nested_navigator.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,16 +60,16 @@ class _HomePageState extends State<HomePage> {
                     if (value == 0) {
                       return const DashboardPage();
                     }
-
-                    return Scaffold(
-                      body: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          "start".text,
-                          "end".text,
-                        ],
-                      ),
-                    );
+                    if (value == 1) {
+                      return const UsersNestedNavigator();
+                    }
+                    if (value == 2) {
+                      return const NotificationsPage();
+                    }
+                    if (value == 3) {
+                      return const SettingsPage();
+                    }
+                    return const Scaffold();
                   },
                 ),
               ),

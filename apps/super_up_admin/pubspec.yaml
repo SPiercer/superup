@@ -41,12 +41,14 @@ dependencies:
   get_it: ^7.2.0
   flex_color_scheme: ^7.0.0-dev.2
   http: ^0.13.5
-  v_chat_utils: ^0.6.0
+  v_chat_utils: ^0.7.0
   super_up_core:
     path: ../../packages/super_up_core
   passwordfield: ^0.1.0
   sidebarx: ^0.14.0
   settings_ui: ^2.0.2
+  url_strategy: ^0.2.0
+  responsive_table: ^0.2.0+2
 
 dev_dependencies:
   flutter_lints: ^2.0.1

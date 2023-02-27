@@ -17,6 +17,7 @@ Future initVChat(GlobalKey<NavigatorState> navigatorKey) async {
   await VChatController.init(
     navigatorKey: navigatorKey,
     vChatConfig: VChatConfig(
+      googleMapsApiKey: dotenv.env['googleMapsApiKey'],
       encryptHashKey: kDebugMode
           ? "V_CHAT_SDK_V2_VERY_STRONG_KEY"
           : dotenv.env['encryptHashKey']!,
@@ -24,19 +25,16 @@ Future initVChat(GlobalKey<NavigatorState> navigatorKey) async {
       vPush: VPush(
         enableVForegroundNotification: true,
         vPushConfig: const VLocalNotificationPushConfig(),
-        fcmProvider: VPlatforms.isWeb ? null : VChatFcmProver(),
-        oneSignalProvider: VPlatforms.isWeb
-            ? null
-            : VChatOneSignalProver(
-                appId: dotenv.env['oneSignalKey']!,
-              ),
+        fcmProvider: VChatFcmProver(),
+        oneSignalProvider: VChatOneSignalProver(
+          appId: dotenv.env['oneSignalKey']!,
+        ),
       ),
     ),
-    vMessagePageConfig: VMessagePageConfig(
-      googleMapsApiKey: dotenv.env['googleMapsApiKey'],
-    ),
+
     vNavigator: VNavigator(
       roomNavigator: vDefaultRoomNavigator,
+
       callNavigator: vDefaultCallNavigator,
       messageNavigator: VMessageNavigator(
         toImageViewer: vDefaultMessageNavigator.toImageViewer,
@@ -51,11 +49,15 @@ Future initVChat(GlobalKey<NavigatorState> navigatorKey) async {
         toGroupSettings: (context, data) {
           Get.toNamed(Routes.GROUP_ROOM_SETTINGS, arguments: data);
         },
-        toSingleSettings: (context, identifier) {},
+        toSingleSettings: (context, data,identifier) {
+          Get.toNamed(Routes.SINGLE_ROOM_SETTINGS, arguments: data);
+        },
         toBroadcastSettings: (context, data) {
           Get.toNamed(Routes.BROADCAST_ROOM_SETTINGS, arguments: data);
         },
-        toUserProfilePage: (context, identifier) {},
+        toUserProfilePage: (context, identifier) {
+          Get.toNamed(Routes.PEER_PROFILE, arguments: identifier);
+        },
       ),
     ),
   );

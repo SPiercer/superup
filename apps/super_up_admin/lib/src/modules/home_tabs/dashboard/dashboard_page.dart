@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:v_chat_utils/v_chat_utils.dart';
 
 import 'dashboard_controller.dart';
 
@@ -26,10 +27,27 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white10,
       body: Center(
-        child: Text("DashboardPage"),
+        child: InkWell(
+          onTap: () {
+            context.toPage(const NestedView());
+          },
+          child: const Text("DashboardPage"),
+        ),
       ),
+    );
+  }
+}
+
+class NestedView extends StatelessWidget {
+  const NestedView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
     );
   }
 }

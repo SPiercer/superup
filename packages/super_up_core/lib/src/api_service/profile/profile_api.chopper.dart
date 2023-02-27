@@ -75,6 +75,17 @@ class _$ProfileApi extends ProfileApi {
   }
 
   @override
+  Future<Response<dynamic>> setVisit() {
+    final Uri $url = Uri.parse('profile/visit');
+    final Request $request = Request(
+      'PATCH',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> deleteFcm() {
     final Uri $url = Uri.parse('profile/fcm');
     final Request $request = Request(

@@ -2,10 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Super Up App</string>
+		<key>CFBundleDocumentTypes</key>
+    	<array>
+    		<dict>
+    			<key>CFBundleTypeName</key>
+    			<string>ShareHandler</string>
+    			<key>LSHandlerRank</key>
+    			<string>Alternate</string>
+    			<key>LSItemContentTypes</key>
+    			<array>
+    				<string>public.file-url</string>
+    				<string>public.image</string>
+    				<string>public.text</string>
+    				<string>public.movie</string>
+    				<string>public.url</string>
+    				<string>public.data</string>
+    			</array>
+    		</dict>
+    	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,10 +40,70 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+		<key>CFBundleURLTypes</key>
+    	<array>
+    		<dict>
+    			<key>CFBundleTypeRole</key>
+    			<string>Editor</string>
+    			<key>CFBundleURLSchemes</key>
+    			<array>
+    				<string>ShareMedia-$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    			</array>
+    		</dict>
+    	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+		<key>GoogleUtilitiesAppDelegateProxyEnabled</key>
+    	<false/>
+    	<key>LSApplicationQueriesSchemes</key>
+    	<array>
+    		<string>comgooglemaps</string>
+    		<string>baidumap</string>
+    		<string>iosamap</string>
+    		<string>waze</string>
+    		<string>yandexmaps</string>
+    		<string>yandexnavi</string>
+    		<string>citymapper</string>
+    		<string>mapswithme</string>
+    		<string>osmandmaps</string>
+    		<string>dgis</string>
+    		<string>qqmap</string>
+    		<string>here-location</string>
+    		<string>tomtomgo</string>
+    	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+    <string>No</string>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+    <key>NSAllowsArbitraryLoadsInWebContent</key>
+    <true/>
+    <key>NSCameraUsageDescription</key>
+    <string>to allow user to take photo and video and upload it to server</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>to allow user to connect with server server</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>The app needs access to location when in the background to send inside app messages with the new real location.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>The app needs access to location to send in chat.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>to allow user to take video with voice for more info and send it to the peer user and upload it to server</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Weellu would like to save photos from the app chat to your gallery</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>to allow user to select photo for his ads and upload it to server</string>
+    <key>NSUserActivityTypes</key>
+    <array>
+    	<string>INSendMessageIntent</string>
+    </array>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -43,9 +123,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>

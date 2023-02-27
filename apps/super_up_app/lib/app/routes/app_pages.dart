@@ -6,7 +6,9 @@ import '../modules/broadcast_members/bindings/broadcast_members_binding.dart';
 import '../modules/broadcast_members/views/broadcast_members_view.dart';
 import '../modules/chat_settings/broadcast_room_settings/bindings/broadcast_room_settings_binding.dart';
 import '../modules/chat_settings/broadcast_room_settings/views/broadcast_room_settings_view.dart';
+import '../modules/chat_settings/group_room_settings/bindings/group_room_settings_binding.dart';
 import '../modules/chat_settings/group_room_settings/views/group_room_settings_view.dart';
+import '../modules/chat_settings/single_room_settings/bindings/single_room_settings_binding.dart';
 import '../modules/chat_settings/single_room_settings/views/single_room_settings_view.dart';
 import '../modules/choose_members/bindings/choose_members_binding.dart';
 import '../modules/choose_members/views/choose_members_view.dart';
@@ -22,8 +24,7 @@ import '../modules/global_search/bindings/global_search_binding.dart';
 import '../modules/global_search/views/global_search_view.dart';
 import '../modules/group_members/bindings/group_members_binding.dart';
 import '../modules/group_members/views/group_members_view.dart';
-import '../modules/chat_settings/group_room_settings/bindings/group_room_settings_binding.dart';
- import '../modules/home_tabs/home/bindings/home_binding.dart';
+import '../modules/home_tabs/home/bindings/home_binding.dart';
 import '../modules/home_tabs/home/views/home_view.dart';
 import '../modules/link_web/bindings/link_web_binding.dart';
 import '../modules/link_web/views/link_web_view.dart';
@@ -31,6 +32,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my_status_details/bindings/my_status_details_binding.dart';
 import '../modules/my_status_details/views/my_status_details_view.dart';
+import '../modules/peer_profile/bindings/peer_profile_binding.dart';
+import '../modules/peer_profile/views/peer_profile_view.dart';
 import '../modules/privacy_policy/bindings/privacy_policy_binding.dart';
 import '../modules/privacy_policy/views/privacy_policy_view.dart';
 import '../modules/register/bindings/register_binding.dart';
@@ -39,8 +42,7 @@ import '../modules/reset_password/bindings/reset_password_binding.dart';
 import '../modules/reset_password/views/reset_password_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
-import '../modules/chat_settings/single_room_settings/bindings/single_room_settings_binding.dart';
- import '../modules/splash/bindings/splash_binding.dart';
+import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/star_messages/bindings/star_messages_binding.dart';
 import '../modules/star_messages/views/star_messages_view.dart';
@@ -169,6 +171,11 @@ class AppPages {
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.PEER_PROFILE,
+      page: () => const PeerProfileView(),
+      binding: PeerProfileBinding(),
     ),
   ];
 }

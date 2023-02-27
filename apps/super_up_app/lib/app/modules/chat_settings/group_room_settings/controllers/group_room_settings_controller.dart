@@ -101,9 +101,10 @@ class GroupRoomSettingsController extends GetxController {
           appbarTitle: "Update group description",
           oldValue: groupInfo.groupSettings!.desc,
           subTitle: '',
-        ));
+        )) as String?;
+    if (newTitle == null || newTitle.toString().isEmpty) return;
     if (newTitle != settingsModel.title) {
-      vSafeApiCall<String>(
+     await vSafeApiCall<String>(
         onLoading: () {
           VAppAlert.showLoading(context: Get.context!);
         },
@@ -115,10 +116,11 @@ class GroupRoomSettingsController extends GetxController {
         onSuccess: (response) {
           groupInfo = groupInfo.copyWith(
               groupSettings: groupInfo.groupSettings!.copyWith(desc: newTitle));
-          Get.back();
+
           update();
         },
       );
+     Get.back();
     }
   }
 
@@ -159,8 +161,9 @@ class GroupRoomSettingsController extends GetxController {
           oldValue: settingsModel.title,
           subTitle: '',
         ));
+    if (newTitle == null || newTitle.toString().isEmpty) return;
     if (newTitle != settingsModel.title) {
-      vSafeApiCall<String>(
+      await vSafeApiCall<String>(
         onLoading: () {
           VAppAlert.showLoading(context: Get.context!);
         },
@@ -173,10 +176,11 @@ class GroupRoomSettingsController extends GetxController {
           settingsModel = settingsModel.copyWith(
             title: response,
           );
-          Get.back();
+
           update();
         },
       );
+      Get.back();
     }
   }
 

@@ -26,6 +26,7 @@ abstract class Routes {
   static const USER_STATUS = _Paths.USER_STATUS;
   static const SETTINGS = _Paths.SETTINGS;
   static const HOME = _Paths.HOME;
+  static const PEER_PROFILE = _Paths.PEER_PROFILE;
 }
 
 abstract class _Paths {
@@ -53,4 +54,5 @@ abstract class _Paths {
   static const USER_STATUS = '/user-status';
   static const SETTINGS = '/settings';
   static const HOME = '/home';
+  static const PEER_PROFILE = '/peer-profile';
 }

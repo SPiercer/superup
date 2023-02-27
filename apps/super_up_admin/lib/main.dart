@@ -7,10 +7,12 @@ import 'package:super_up_admin/src/modules/home/home_page.dart';
 import 'package:super_up_admin/src/modules/home/widgets/slider_colors.dart';
 import 'package:super_up_admin/src/modules/login/login_screen.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   await VAppPref.init();
   _inject();
   runApp(const MyApp());
@@ -77,7 +79,7 @@ class MyApp extends StatelessWidget {
                   child: child!,
                 ),
               ),
-              maxWidth: 1200,
+              maxWidth: 1000,
               minWidth: 450,
               defaultScale: true,
               backgroundColor: Colors.black,

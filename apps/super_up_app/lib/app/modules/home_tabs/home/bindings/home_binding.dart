@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:super_up_core/super_up_core.dart';
 
 import '../../calls_tab/controllers/calls_tab_controller.dart';
 import '../../rooms_tab/controllers/rooms_tab_controller.dart';
@@ -9,7 +10,9 @@ class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<HomeController>(
-      HomeController(),
+      HomeController(
+         Get.find<ProfileApiService>()
+      ),
     );
 
     Get.put<CallsTabController>(

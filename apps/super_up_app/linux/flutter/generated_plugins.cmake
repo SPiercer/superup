@@ -7,10 +7,13 @@ list(APPEND FLUTTER_PLUGIN_LIST
   emoji_picker_flutter
   file_saver
   flutter_webrtc
+  local_notifier
   platform_device_id_linux
   record_linux
+  screen_retriever
   sqlite3_flutter_libs
   url_launcher_linux
+  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

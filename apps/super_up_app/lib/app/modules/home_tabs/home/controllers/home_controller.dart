@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:super_up_core/super_up_core.dart';
-import 'package:v_chat_receive_share/v_chat_receive_share.dart';
+ import 'package:v_chat_utils/v_chat_utils.dart';
 import 'package:v_chat_web_rtc/v_chat_web_rtc.dart';
 
 import '../../../../routes/app_pages.dart';
@@ -15,6 +15,9 @@ class HomeController extends GetxController
   late TabController tabController;
   final tabIndex = 1.obs;
   final tabsWidgets = <Widget>[];
+  final ProfileApiService profileApiService;
+
+  HomeController(this.profileApiService);
 
   @override
   void onInit() {
@@ -38,7 +41,8 @@ class HomeController extends GetxController
       const CallsTabView(),
     ]);
     vInitCallListener();
-    vInitReceiveShareHandler();
+    // vInitReceiveShareHandler();
+    _setVisit();
   }
 
   @override
@@ -78,7 +82,7 @@ class HomeController extends GetxController
     Get.toNamed(Routes.LINK_WEB);
   }
 
-  void onNewBroadcastClicked() async{
+  void onNewBroadcastClicked() async {
     final users = await Get.toNamed(
       Routes.CHOOSE_MEMBERS,
     ) as List<SBaseUser>?;
@@ -89,5 +93,15 @@ class HomeController extends GetxController
 
   void onSearchPress() {
     Get.toNamed(Routes.GLOBAL_SEARCH);
+  }
+
+  void _setVisit() {
+    vSafeApiCall(
+      request: () async {
+        return profileApiService.setVisit();
+      },
+      onSuccess: (response) {},
+      ignoreTimeoutAndNoInternet: true,
+    );
   }
 }

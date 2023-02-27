@@ -78,7 +78,7 @@ class LoginController extends GetxController {
         final status = response.registerStatus;
         await VAppPref.setMap(SStorageKeys.myProfile.name, response.toMap());
 
-        await VChatController.I.authApi.login(
+        await VChatController.I.profileApi.login(
           identifier: response.baseUser.id,
           deviceLanguage: response.language,
         );

@@ -24,10 +24,10 @@ class HomeController extends ValueNotifier<int>{
       icon: Icons.settings,
       label: 'Settings',
     ),
-    const SidebarXItem(
-      icon: Icons.exit_to_app,
-      label: 'Logout',
-    ),
+    // const SidebarXItem(
+    //   icon: Icons.exit_to_app,
+    //   label: 'Logout',
+    // ),
   ];
   final sidebarXController = SidebarXController(
     selectedIndex: 0,

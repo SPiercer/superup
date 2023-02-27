@@ -31,11 +31,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  v_chat_web_rtc: ^0.6.0
-  v_chat_utils: ^0.6.0
-  v_chat_sdk_core: ^0.6.0
-  v_chat_room_page: ^0.6.0
-  v_chat_message_page: ^0.6.0
+  v_chat_web_rtc: ^0.7.0
+  v_chat_utils: ^0.7.0
+  v_chat_sdk_core: ^0.7.0
+  v_chat_room_page: ^0.7.0
+  v_chat_message_page: ^0.7.0+1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
@@ -46,6 +46,7 @@ dependencies:
   email_validator: ^2.1.17
   get_it: ^7.2.0
   settings_ui: ^2.0.2
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1

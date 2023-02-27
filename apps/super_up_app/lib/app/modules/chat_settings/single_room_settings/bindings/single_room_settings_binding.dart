@@ -6,7 +6,7 @@ class SingleRoomSettingsBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<SingleRoomSettingsController>(
-      SingleRoomSettingsController(),
+      SingleRoomSettingsController(Get.arguments),
     );
   }
 }

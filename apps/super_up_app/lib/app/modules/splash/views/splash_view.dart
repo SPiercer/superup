@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
-
 import '../controllers/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
@@ -33,7 +32,11 @@ class SplashView extends GetView<SplashController> {
                     "v chat".h6.color(Colors.green).black
                   ],
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Obx(() =>controller.version.value.cap )
             ],
           ),
         ),

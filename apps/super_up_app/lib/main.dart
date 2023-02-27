@@ -1,22 +1,15 @@
-import 'dart:convert';
-
 import 'package:camera/camera.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
-import 'package:responsive_framework/responsive_wrapper.dart';
-import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:super_up/v_chat_config.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_firebase_fcm/v_chat_firebase_fcm.dart';
 import 'package:v_chat_message_page/v_chat_message_page.dart';
-import 'package:v_chat_one_signal/v_chat_one_signal.dart';
-import 'package:v_chat_room_page/v_chat_room_page.dart';
-import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'app/core/app_service.dart';
 import 'app/core/lazy_injection.dart';
@@ -28,6 +21,10 @@ final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (VPlatforms.isDeskTop) {
+    await _setDesktopWindow();
+  }
+
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -36,7 +33,9 @@ void main() async {
   await initVChat(_navigatorKey);
   // FirebaseMessaging.onBackgroundMessage(vFirebaseMessagingBackgroundHandler);
   try {
-    cameras = await availableCameras();
+    if (VPlatforms.isMobile) {
+      cameras = await availableCameras();
+    }
   } on CameraException catch (e) {
     if (kDebugMode) {
       print(e.toString());
@@ -124,3 +123,21 @@ void main() async {
   );
 }
 
+Future<void> _setDesktopWindow() async {
+  await windowManager.ensureInitialized();
+  WindowOptions windowOptions = const WindowOptions(
+    minimumSize: Size(500, 900),
+    size: Size(500, 900),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    title: SConstants.appName,
+    titleBarStyle: TitleBarStyle.normal,
+    maximumSize: Size(700, 1500),
+    fullScreen: false,
+  );
+  await windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
+}

@@ -28,5 +28,26 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSCameraUsageDescription</key>
+	<string>to mac video call we need to start video chat</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>to download chat files to your system</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>to mac voice recording</string>
+	<key>SUPublicEDKey</key>
+	<string>OeHKzDFE9l1w/BUaqDnGWSVb9s0DywB1gFDCldxz42E=</string>
+	<key>SUFeedURL</key>
+	<string>https://superupdev.online/apps/appcast.xml</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.social-networking</string>
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+	<key>SUEnableInstallerConnectionService</key>
+	<true/>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)-spks</string>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)-spki</string>
+	</array>
 </dict>
 </plist>

@@ -31,6 +31,9 @@ abstract class ProfileApi extends ChopperService {
   @Post(path: "/fcm")
   Future<Response> addFcm(@Body() Map<String, dynamic> body);
 
+  @Patch(path: "/visit",optionalBody: true)
+  Future<Response> setVisit( );
+
   ///delete fcm
   @Delete(path: "/fcm")
   Future<Response> deleteFcm();

@@ -42,7 +42,7 @@ class SettingsController extends GetxController {
           await authApiService.logout(
             isLogoutFromALl: false,
           );
-          await VChatController.I.authApi.logout();
+          await VChatController.I.profileApi.logout();
         } catch (err) {
           print(err);
         }

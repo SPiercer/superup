@@ -89,7 +89,7 @@ class RegisterController extends GetxController {
       onSuccess: (response) async {
         final status = response.registerStatus;
         await VAppPref.setMap(SStorageKeys.myProfile.name, response.toMap());
-        await VChatController.I.authApi.register(
+        await VChatController.I.profileApi.register(
           identifier: response.baseUser.id,
           fullName: response.baseUser.fullName,
           deviceLanguage: response.language,

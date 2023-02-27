@@ -20,8 +20,8 @@ abstract class SConstants {
       return Uri.parse("http://localhost:3001");
     } //
     return Uri.parse("https://vchat.$_productionBaseUrl");
-  }
-
+  }//https://superupdev.online/apps/appcast.xml
+  static String get feedUrl =>"https://$_productionBaseUrl/apps/appcast.xml";
   static Uri get sApiBaseUrl {
     if (kDebugMode) {
       if (VPlatforms.isAndroid) {

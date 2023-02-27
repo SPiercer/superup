@@ -27,10 +27,8 @@ class VWebChatNavigation {
               position: animation.drive(tween),
               child: child,
             );
-            break;
           case TransitionType.noAnimation:
             return child;
-            break;
         }
       },
     );
@@ -99,6 +97,7 @@ class ChatRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return VMessagePage(
       vRoom: room,
+      context: vWebChatNavigation.key.currentContext,
     );
   }
 }
