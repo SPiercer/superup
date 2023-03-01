@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:super_up_web/src/pages/home/home_page.dart';
-import 'package:v_chat_sdk_core/v_chat_sdk_core.dart' hide AuthApiService;
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 class LoginController {
@@ -77,7 +77,7 @@ class LoginController {
         );
         if (status == RegisterStatus.accepted) {
           await VAppPref.setBool(SStorageKeys.isLogin.name, true);
-          context.toPageAndRemoveAll(HomePage());
+          context.toPageAndRemoveAll(const HomePage());
         } else {
           // Get.offAll(
           //       () => SWaitingPage(
@@ -87,7 +87,6 @@ class LoginController {
         }
       },
       ignoreTimeoutAndNoInternet: false,
-
     );
   }
 

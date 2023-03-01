@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 class SingleRename extends StatefulWidget {
@@ -69,7 +68,7 @@ class _SingleRenameState extends State<SingleRename> {
                         flex: 1,
                         child: TextButton(
                           onPressed: () {
-                            Get.back(result: controller.text);
+                            context.pop(controller.text);
                           },
                           child: "Cancel".text,
                         ),
@@ -81,7 +80,7 @@ class _SingleRenameState extends State<SingleRename> {
                         flex: 1,
                         child: TextButton(
                           onPressed: () {
-                            Get.back(result: controller.text);
+                            context.pop(controller.text);
                           },
                           child: "Ok".text,
                         ),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:responsive_table/responsive_table.dart';
 import 'package:super_up_admin/src/modules/home_tabs/users/users_controller.dart';
 import 'package:super_up_admin/src/modules/home_tabs/users/users_nested_navigator.dart';
-import 'package:super_up_admin/src/modules/user_page/user_page.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 class UsersPage extends StatefulWidget {
@@ -23,7 +22,7 @@ class _UsersPageState extends State<UsersPage> {
   int _total = 100;
   int? _currentPerPage = 10;
   List<bool>? _expanded;
-  String? _searchKey = "id";
+  final String _searchKey = "id";
 
   int _currentPage = 1;
   bool _isSearch = false;
@@ -36,7 +35,7 @@ class _UsersPageState extends State<UsersPage> {
   final String _selectableKey = "id";
 
   String? _sortColumn;
-  bool _sortAscending = true;
+  final bool _sortAscending = true;
   bool _isLoading = true;
   final bool _showSelect = true;
   var random = Random();
@@ -50,7 +49,7 @@ class _UsersPageState extends State<UsersPage> {
     for (var data in source) {
       temps.add({
         "id": i,
-        "sku": "$i\000$i",
+        "sku": "${i}000$i",
         "name": "Product $i",
         "category": "Category-$i",
         "price": i * 10.00,
@@ -103,7 +102,7 @@ class _UsersPageState extends State<UsersPage> {
         _sourceFiltered = _sourceOriginal;
       } else {
         _sourceFiltered = _sourceOriginal
-            .where((data) => data[_searchKey!]
+            .where((data) => data[_searchKey]
                 .toString()
                 .toLowerCase()
                 .contains(value.toString().toLowerCase()))
@@ -205,14 +204,14 @@ class _UsersPageState extends State<UsersPage> {
                 shadowColor: Colors.black,
                 clipBehavior: Clip.none,
                 child: ResponsiveDatatable(
-                  reponseScreenSizes: [ScreenSize.xs],
+                  reponseScreenSizes: const [ScreenSize.xs],
                   actions: [
                     if (_isSearch)
                       Expanded(
                           child: TextField(
                         decoration: InputDecoration(
                             hintText:
-                                'Enter search term based on ${_searchKey!.replaceAll(RegExp('[\\W_]+'), ' ').toUpperCase()}',
+                                'Enter search term based on ${_searchKey.replaceAll(RegExp('[\\W_]+'), ' ').toUpperCase()}',
                             prefixIcon: IconButton(
                                 icon: const Icon(Icons.cancel),
                                 onPressed: () {
@@ -347,7 +346,9 @@ class _UsersPageState extends State<UsersPage> {
                     )
                   ],
                   headerDecoration: BoxDecoration(
-                      color: context.isDark ? Color(0xff494545) : Colors.grey,
+                      color: context.isDark
+                          ? const Color(0xff494545)
+                          : Colors.grey,
                       border: const Border(
                           bottom: BorderSide(color: Colors.red, width: 1))),
                   selectedDecoration: BoxDecoration(

@@ -13,7 +13,7 @@ class SBaseUser {
     required this.userImage,
   });
 
- static SBaseUser fromVChatBase(VIdentifierUser identifierUser) {
+  static SBaseUser fromVChatBase(VIdentifierUser identifierUser) {
     return SBaseUser(
       fullName: identifierUser.baseUser.fullName,
       id: identifierUser.identifier,
@@ -96,11 +96,7 @@ class SSearchUser {
 
   @override
   String toString() {
-    return 'SSearchUser{' +
-        ' baseUser: $baseUser,' +
-        ' bio: $bio,' +
-        ' createdAt: $createdAt,' +
-        '}';
+    return 'SSearchUser{ baseUser: $baseUser, bio: $bio, createdAt: $createdAt,}';
   }
 
   SSearchUser copyWith({
@@ -117,9 +113,9 @@ class SSearchUser {
 
   Map<String, dynamic> toMap() {
     return {
-      ...this.baseUser.toMap(),
-      'bio': this.bio,
-      'createdAt': this.createdAt,
+      ...baseUser.toMap(),
+      'bio': bio,
+      'createdAt': createdAt,
     };
   }
 

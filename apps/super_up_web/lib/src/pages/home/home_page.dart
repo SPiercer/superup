@@ -3,13 +3,10 @@ import 'package:get_it/get_it.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:super_up_web/src/pages/home/home_controller.dart';
 import 'package:super_up_web/src/pages/home/web_chat_scaffold.dart';
-import 'package:super_up_web/src/pages/login/login_page.dart';
 import 'package:super_up_web/src/pages/splash.dart';
 import 'package:v_chat_room_page/v_chat_room_page.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
-
-import '../../../main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -83,11 +80,10 @@ class _HomePageState extends State<HomePage> {
                             context.toPage(const SplashPage());
                           },
                           ignoreTimeoutAndNoInternet: false,
-
                         );
                       }
                     },
-                    child: Icon(Icons.exit_to_app),
+                    child: const Icon(Icons.exit_to_app),
                   )
                 ],
               ),

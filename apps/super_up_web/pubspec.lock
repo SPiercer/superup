@@ -426,7 +426,7 @@ packages:
     source: hosted
     version: "1.0.6"
   flex_color_scheme:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flex_color_scheme
       sha256: "3cde2b6953707a5fb4f4dcfc2d65b998350484058b4861dfc98dee5b31ef67eb"

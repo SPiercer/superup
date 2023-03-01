@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class SErrorWidget extends StatelessWidget {
-  const SErrorWidget({Key? key}) : super(key: key);
+  final String? err;
+  const SErrorWidget({
+    Key? key,
+    this.err,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: const Text("Some thing went wrong try again!"),
+      child: Text(err ?? "Some thing went wrong try again!"),
     );
   }
 }

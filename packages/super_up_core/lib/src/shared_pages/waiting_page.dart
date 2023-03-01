@@ -7,7 +7,7 @@ class SWaitingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Scaffold(
+    return Scaffold(
       appBar: AppBar(),
       body: Text(profile.toMap().toString()),
     );

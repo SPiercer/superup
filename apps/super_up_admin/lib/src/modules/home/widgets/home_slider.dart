@@ -76,7 +76,9 @@ class HomeSlider extends StatelessWidget {
               ),
             ),
             "Admin".h5,
-            const SizedBox(height: 20,)
+            const SizedBox(
+              height: 20,
+            )
           ],
         );
       },

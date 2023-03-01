@@ -4,8 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:super_up_admin/src/modules/home/home_page.dart';
-import 'package:super_up_admin/src/modules/home/widgets/slider_colors.dart';
-import 'package:super_up_admin/src/modules/login/login_screen.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';

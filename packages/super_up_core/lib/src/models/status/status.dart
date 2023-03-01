@@ -99,13 +99,7 @@ class Status {
 
   @override
   String toString() {
-    return 'Status{'
-            ' id: $id,'
-            ' user: $user,'
-            ' createdAt: $createdAt,'
-            ' seenIndex: $seenIndex,' +
-        ' statusList: $statusList,' +
-        '}';
+    return 'Status{ id: $id, user: $user, createdAt: $createdAt, seenIndex: $seenIndex, statusList: $statusList,}';
   }
 
   Status copyWith({

@@ -28,11 +28,7 @@ class SMyProfile {
 
   @override
   String toString() {
-    return 'MyProfile{' +
-        ' baseUser: $baseUser,' +
-        ' language: $language,' +
-        ' registerStatus: $registerStatus,' +
-        '}';
+    return 'MyProfile{ baseUser: $baseUser, language: $language, registerStatus: $registerStatus,}';
   }
 
   Map<String, dynamic> toMap() {

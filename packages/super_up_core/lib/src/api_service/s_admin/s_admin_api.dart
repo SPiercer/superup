@@ -1,11 +1,9 @@
 import 'dart:io';
 
 import 'package:chopper/chopper.dart';
-import 'package:http/http.dart' hide Response, Request;
 import 'package:http/io_client.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-import '../../../super_up_core.dart';
 import '../interceptors.dart';
 
 part 's_admin_api.chopper.dart';

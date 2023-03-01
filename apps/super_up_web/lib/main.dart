@@ -37,7 +37,6 @@ void main() async {
       roomNavigator: vDefaultRoomNavigator,
       messageNavigator: vDefaultMessageNavigator,
     ),
-
   );
   runApp(const MyApp());
 }

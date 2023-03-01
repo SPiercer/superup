@@ -5,8 +5,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../super_up_core.dart';
-
 final sLightTheme = FlexThemeData.light(
   scheme: FlexScheme.yellowM3,
   surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,

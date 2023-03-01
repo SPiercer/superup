@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void _login() async {
     await vSafeApiCall(
       request: () async {
-        return  await GetIt.I.get<VAdminApiService>().getDashboard();
+        return await GetIt.I.get<VAdminApiService>().getDashboard();
         return true;
       },
       onSuccess: (response) async {

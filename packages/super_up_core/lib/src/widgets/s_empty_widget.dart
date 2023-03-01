@@ -7,7 +7,7 @@ class SEmptyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Text("Empty Data"),
+      child: const Text("Empty Data"),
     );
   }
 }

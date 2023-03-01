@@ -1,6 +1,5 @@
 import 'package:super_up_core/src/api_service/profile/profile_api.dart';
 import 'package:super_up_core/src/models/model.dart';
-import 'package:super_up_core/src/models/user/my_profile.dart';
 import 'package:super_up_core/src/s_constants.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 

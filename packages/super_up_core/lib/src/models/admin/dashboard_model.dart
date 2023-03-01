@@ -201,12 +201,7 @@ class AdminRoomCounter {
 
   @override
   String toString() {
-    return 'AdminRoomCounter{' +
-        ' single: $single,' +
-        ' order: $order,' +
-        ' group: $group,' +
-        ' broadcast: $broadcast,' +
-        '}';
+    return 'AdminRoomCounter{ single: $single, order: $order, group: $group, broadcast: $broadcast,}';
   }
 
   AdminRoomCounter copyWith({

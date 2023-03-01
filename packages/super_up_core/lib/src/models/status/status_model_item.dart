@@ -43,10 +43,10 @@ class StatusModelItem {
   @override
   String toString() {
     return 'StatusModelItem{'
-            ' url: $url,'
-            ' statusType: $statusType,'
-            ' statusText: $statusText,'
-            ' statusColor: $statusColor,' +
+        ' url: $url,'
+        ' statusType: $statusType,'
+        ' statusText: $statusText,'
+        ' statusColor: $statusColor,'
         '}';
   }
 

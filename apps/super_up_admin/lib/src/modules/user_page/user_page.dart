@@ -35,7 +35,7 @@ class _UserPageState extends State<UserPage> {
             title: "xxxx  $index".text,
           );
         },
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => const Divider(),
         itemCount: 29,
       ),
     );

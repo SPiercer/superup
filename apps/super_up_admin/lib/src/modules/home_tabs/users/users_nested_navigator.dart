@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:super_up_admin/src/modules/home_tabs/users/users_page.dart';
-import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../../user_page/user_page.dart';
 import 'users_controller.dart';
+
 final usersKey = GlobalKey<NavigatorState>();
+
 class UsersNestedNavigator extends StatefulWidget {
   const UsersNestedNavigator({Key? key}) : super(key: key);
 
@@ -14,7 +15,6 @@ class UsersNestedNavigator extends StatefulWidget {
 
 class _UsersNestedNavigatorState extends State<UsersNestedNavigator> {
   final controller = UsersController();
-
 
   @override
   void initState() {
@@ -66,6 +66,3 @@ class _UsersNestedNavigatorState extends State<UsersNestedNavigator> {
     return null;
   }
 }
-
-
-

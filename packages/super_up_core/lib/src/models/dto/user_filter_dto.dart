@@ -1,14 +1,14 @@
-class UserFilterDto{
-    int limit;
-    int page;
-    String? fullName;
+class UserFilterDto {
+  int limit;
+  int page;
+  String? fullName;
 
 //<editor-fold desc="Data Methods">
 
-    UserFilterDto({
+  UserFilterDto({
     required this.limit,
     required this.page,
-      this.fullName,
+    this.fullName,
   });
 
   @override
@@ -25,11 +25,7 @@ class UserFilterDto{
 
   @override
   String toString() {
-    return 'UserFilterDto{' +
-        ' limit: $limit,' +
-        ' page: $page,' +
-        ' fullName: $fullName,' +
-        '}';
+    return 'UserFilterDto{ limit: $limit, page: $page, fullName: $fullName,}';
   }
 
   UserFilterDto copyWith({
@@ -46,9 +42,9 @@ class UserFilterDto{
 
   Map<String, dynamic> toMap() {
     return {
-      'limit': this.limit,
-      'page': this.page,
-      'fullName': this.fullName,
+      'limit': limit,
+      'page': page,
+      'fullName': fullName,
     };
   }
 

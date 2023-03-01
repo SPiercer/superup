@@ -72,15 +72,16 @@ class VAdminHeaderKeySetterInterceptor implements RequestInterceptor {
   FutureOr<Request> onRequest(Request request) {
     final oldHeaders = Map.of(request.headers);
     oldHeaders['v-admin-key'] = SConstants.vChatAdminPassword;
-     return request.copyWith(headers: oldHeaders);
+    return request.copyWith(headers: oldHeaders);
   }
 }
+
 class SAdminHeaderKeySetterInterceptor implements RequestInterceptor {
   @override
   FutureOr<Request> onRequest(Request request) {
     final oldHeaders = Map.of(request.headers);
-     oldHeaders['admin-key'] =
-    "${VAppPref.getHashedString(key: SStorageKeys.adminAccessPassword.name)}";
+    oldHeaders['admin-key'] =
+        "${VAppPref.getHashedString(key: SStorageKeys.adminAccessPassword.name)}";
     return request.copyWith(headers: oldHeaders);
   }
 }

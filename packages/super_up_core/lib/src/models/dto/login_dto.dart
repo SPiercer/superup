@@ -2,7 +2,7 @@ import '../../../super_up_core.dart';
 
 class LoginDto {
   final String email;
-  final Map<String,dynamic> deviceInfo;
+  final Map<String, dynamic> deviceInfo;
   final String deviceId;
   final String language;
   String? pushKey;

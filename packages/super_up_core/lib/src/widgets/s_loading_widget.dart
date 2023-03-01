@@ -5,6 +5,6 @@ class SLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: const CircularProgressIndicator.adaptive());
+    return const Center(child: CircularProgressIndicator.adaptive());
   }
 }

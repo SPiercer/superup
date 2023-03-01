@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-class HomeController extends ValueNotifier<int>{
+class HomeController extends ValueNotifier<int> {
   SidebarXItem get currentTab {
     return tabs[sidebarXController.selectedIndex];
   }

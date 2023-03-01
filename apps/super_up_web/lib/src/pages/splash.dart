@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
     return const Scaffold();
   }
 
-  void init()async {
+  void init() async {
     await Future.delayed(const Duration(milliseconds: 200));
     final isLogin = VAppPref.getBool(SStorageKeys.isLogin.name);
     if (isLogin) {
