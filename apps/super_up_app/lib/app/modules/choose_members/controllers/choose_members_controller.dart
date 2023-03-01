@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-class ChooseMembersController extends GetxController {
+import '../../../core/s_base_controller.dart';
+
+class ChooseMembersController
+    extends SLoadingController<List<SSelectableUser>> {
   final txtController = TextEditingController();
-  VChatLoadingState loadingState = VChatLoadingState.ideal;
-  final _data = <SSelectableUser>[];
   final ProfileApiService profileApiService;
+  final BuildContext context;
 
-  ChooseMembersController(this.profileApiService);
+  ChooseMembersController(this.profileApiService, this.context)
+      : super(SLoadingState(<SSelectableUser>[]));
 
-  List<SSelectableUser> get data => _data;
   final _filterDto = UserFilterDto(
     limit: 30,
     page: 1,
@@ -20,18 +21,17 @@ class ChooseMembersController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     getData();
   }
 
   Future<void> getData() async {
     await vSafeApiCall<List<SSelectableUser>>(
       onLoading: () async {
-        loadingState = VChatLoadingState.loading;
+        setStateLoading();
         update();
       },
       onError: (exception, trace) {
-        loadingState = VChatLoadingState.error;
+        setStateError();
         update();
       },
       request: () async {
@@ -39,7 +39,7 @@ class ChooseMembersController extends GetxController {
         return users.map((e) => SSelectableUser(baseUser: e.baseUser)).toList();
       },
       onSuccess: (response) {
-        loadingState = VChatLoadingState.success;
+        setStateSuccess();
         data.addAll(response);
         update();
       },
@@ -50,22 +50,22 @@ class ChooseMembersController extends GetxController {
   @override
   void onClose() {
     txtController.dispose();
-    super.onClose();
   }
 
   void onSelectUser(SSelectableUser user, bool value) {
-    _data.firstWhereOrNull((e) => e == user)?.isSelected = value;
+    data.firstWhereOrNull((e) => e == user)?.isSelected = value;
     update();
   }
 
   void onNext() {
-    if (_data.firstWhereOrNull((e) => e.isSelected) == null) {
+    if (data.firstWhereOrNull((e) => e.isSelected) == null) {
       VAppAlert.showErrorSnackBar(
         msg: "Choose at lest member",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
-    Get.back(result: _data.where((e) => e.isSelected).map((e) => e.baseUser).toList());
+    context
+        .pop(data.where((e) => e.isSelected).map((e) => e.baseUser).toList());
   }
 }

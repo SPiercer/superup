@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_social_button/flutter_social_button.dart';
-import 'package:get/get.dart';
-import 'package:super_up/app/routes/app_pages.dart';
+import 'package:get_it/get_it.dart';
+import 'package:super_up/app/modules/forget_password/views/forget_password_view.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../controllers/login_controller.dart';
 
-class LoginView extends GetView<LoginController> {
+class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  late final LoginController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = LoginController(GetIt.I.get<AuthApiService>(),
+        GetIt.I.get<ProfileApiService>(), context);
+    controller.onInit();
+  }
+
+  @override
+  void dispose() {
+    controller.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +38,7 @@ class LoginView extends GetView<LoginController> {
           children: [
             Container(
               alignment: Alignment.center,
-              height: context.height / 3,
+              height: context.mediaQuerySize.height / 3,
               color: context.isDark ? const Color(0xff575353) : Colors.amber,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +57,7 @@ class LoginView extends GetView<LoginController> {
               ),
             ),
             SizedBox(
-              height: context.height * .02,
+              height: context.mediaQuerySize.height * .02,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -62,7 +82,7 @@ class LoginView extends GetView<LoginController> {
                   ),
                   InkWell(
                       onTap: () {
-                        Get.toNamed(Routes.FORGET_PASSWORD);
+                        context.toPage(const ForgetPasswordView());
                       },
                       child: "Forget password".text.color(Colors.blue).black),
                   const SizedBox(
@@ -123,7 +143,7 @@ class LoginView extends GetView<LoginController> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.back();
+                          context.pop();
                         },
                         child: "Register".text.color(Colors.blue).black,
                       )

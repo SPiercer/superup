@@ -1,52 +1,75 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../controllers/choose_members_controller.dart';
 
-class ChooseMembersView extends GetView<ChooseMembersController> {
+class ChooseMembersView extends StatefulWidget {
   const ChooseMembersView({Key? key}) : super(key: key);
+
+  @override
+  State<ChooseMembersView> createState() => _ChooseMembersViewState();
+}
+
+class _ChooseMembersViewState extends State<ChooseMembersView> {
+  late final ChooseMembersController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        ChooseMembersController(GetIt.I.get<ProfileApiService>(), context);
+    controller.onInit();
+  }
+
+  @override
+  void dispose() {
+    controller.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: controller.onNext,
-        child: Icon(Icons.send),
+        child: const Icon(Icons.send),
       ),
       appBar: AppBar(
         title: const Text('ChooseMembersView'),
       ),
-      body: GetBuilder<ChooseMembersController>(
-        assignId: true,
-        builder: (logic) {
+      body: ValueListenableBuilder<SLoadingState<List<SSelectableUser>>>(
+        valueListenable: controller,
+        builder: (_, value, ___) {
           return VAsyncWidgetsBuilder(
-            loadingState: logic.loadingState,
+            loadingState: value.loadingState,
             onRefresh: controller.getData,
             loadingWidget: () => const SLoadingWidget(),
             errorWidget: () => const SErrorWidget(),
             emptyWidget: () => const SEmptyWidget(),
             successWidget: () {
               return ListView.builder(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 itemBuilder: (context, index) {
-                  final item = logic.data[index];
+                  final item = value.data[index];
                   return CheckboxListTile(
-                    onChanged:(value) =>  controller.onSelectUser(item,value??false),
+                    onChanged: (value) =>
+                        controller.onSelectUser(item, value ?? false),
                     value: item.isSelected,
-
                     title: Row(
                       children: [
                         VCircleAvatar(fullUrl: item.baseUser.userImage),
-                        SizedBox(width: 15,),
+                        const SizedBox(
+                          width: 15,
+                        ),
                         item.baseUser.fullName.text,
                       ],
                     ),
                   );
                 },
-                itemCount: logic.data.length,
+                itemCount: value.data.length,
               );
             },
           );

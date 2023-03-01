@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-class SingleRoomSettingsController extends GetxController {
-  final VToChatSettingsModel settingsModel;
+import '../../../../core/s_base_controller.dart';
 
-  SingleRoomSettingsController(this.settingsModel);
+class SingleRoomSettingsController extends ValueNotifier
+    implements SBaseController {
+  final VToChatSettingsModel settingsModel;
+  final BuildContext context;
+
+  SingleRoomSettingsController(this.settingsModel, this.context) : super(null);
 
   bool isMuted = true;
 
@@ -17,14 +19,13 @@ class SingleRoomSettingsController extends GetxController {
   @override
   void onInit() {
     isMuted = settingsModel.room.isMuted;
-    super.onInit();
     getData();
   }
 
   void changeRoomNotification(bool value) {
     vSafeApiCall<bool>(
       onLoading: () {
-        VAppAlert.showLoading(context: Get.context!);
+        VAppAlert.showLoading(context: context);
       },
       request: () async {
         final res = await VChatController.I.roomApi.changeRoomNotification(
@@ -35,8 +36,8 @@ class SingleRoomSettingsController extends GetxController {
       },
       onSuccess: (response) {
         isMuted = response;
-        Get.back();
-        update();
+        context.pop();
+        notifyListeners();
       },
     );
   }
@@ -44,11 +45,11 @@ class SingleRoomSettingsController extends GetxController {
   Future<void> getData() async {
     // await vSafeApiCall<List<dynamic>>(
     //   onLoading: () async {
-    //     loadingState = VChatLoadingState.loading;
+    //     setStateLoading();
     //     update();
     //   },
     //   onError: (exception, trace) {
-    //     loadingState = VChatLoadingState.error;
+    //     setStateError();
     //     update();
     //   },
     //   request: () async {
@@ -56,7 +57,7 @@ class SingleRoomSettingsController extends GetxController {
     //     return [];
     //   },
     //   onSuccess: (response) {
-    //     loadingState = VChatLoadingState.success;
+    //     setStateSuccess();
     //     update();
     //   },
     //   ignoreTimeoutAndNoInternet: false,
@@ -64,16 +65,13 @@ class SingleRoomSettingsController extends GetxController {
   }
 
   @override
-  void onClose() {
-    super.onClose();
-  }
+  void onClose() {}
 
   void openFullImage() {
-    Get.to(() => VImageViewer(
-          platformFileSource:
-              VPlatformFileSource.fromUrl(url: settingsModel.image),
-          appName: SConstants.appName,
-        ));
+    context.toPage(VImageViewer(
+      platformFileSource: VPlatformFileSource.fromUrl(url: settingsModel.image),
+      appName: SConstants.appName,
+    ));
   }
 
   starMessage(BuildContext context) {}

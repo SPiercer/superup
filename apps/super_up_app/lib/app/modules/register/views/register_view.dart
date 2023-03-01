@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_social_button/flutter_social_button.dart';
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
+import 'package:super_up/app/modules/login/views/login_view.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-import '../../../routes/app_pages.dart';
 import '../controllers/register_controller.dart';
 
-class RegisterView extends GetView<RegisterController> {
+class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
+  late final RegisterController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = RegisterController(GetIt.I.get<AuthApiService>(),
+        GetIt.I.get<ProfileApiService>(), context);
+    controller.onInit();
+  }
+
+  @override
+  void dispose() {
+    controller.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +38,7 @@ class RegisterView extends GetView<RegisterController> {
           children: [
             Container(
               alignment: Alignment.center,
-              height: context.height / 3,
+              height: context.mediaQuerySize.height / 3,
               color: context.isDark ? const Color(0xff575353) : Colors.amber,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +57,7 @@ class RegisterView extends GetView<RegisterController> {
               ),
             ),
             SizedBox(
-              height: context.height * .02,
+              height: context.mediaQuerySize.height * .02,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -129,7 +149,7 @@ class RegisterView extends GetView<RegisterController> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.toNamed(Routes.LOGIN);
+                          context.toPage(const LoginView());
                         },
                         child: "Login".text.color(Colors.blue).black,
                       )

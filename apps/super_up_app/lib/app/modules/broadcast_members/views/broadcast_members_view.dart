@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../controllers/broadcast_members_controller.dart';
 
-class BroadcastMembersView extends GetView<BroadcastMembersController> {
-  const BroadcastMembersView({Key? key}) : super(key: key);
+class BroadcastMembersView extends StatefulWidget {
+  final String roomId;
+
+  const BroadcastMembersView({Key? key, required this.roomId})
+      : super(key: key);
+
+  @override
+  State<BroadcastMembersView> createState() => _BroadcastMembersViewState();
+}
+
+class _BroadcastMembersViewState extends State<BroadcastMembersView> {
+  late final BroadcastMembersController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = BroadcastMembersController(widget.roomId, context);
+    controller.onInit();
+  }
+
+  @override
+  void dispose() {
+    controller.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +38,11 @@ class BroadcastMembersView extends GetView<BroadcastMembersController> {
       appBar: AppBar(
         title: const Text('Broadcast Members'),
       ),
-      body: GetBuilder<BroadcastMembersController>(
-        assignId: true,
-        builder: (logic) {
+      body: ValueListenableBuilder<SLoadingState<List<VBroadcastMember>>>(
+        valueListenable: controller,
+        builder: (_, value, __) {
           return VAsyncWidgetsBuilder(
-            loadingState: logic.loadingState,
+            loadingState: value.loadingState,
             onRefresh: controller.getData,
             loadingWidget: () => const SLoadingWidget(),
             errorWidget: () => const SErrorWidget(),
@@ -32,12 +55,13 @@ class BroadcastMembersView extends GetView<BroadcastMembersController> {
                 padding: const EdgeInsets.only(top: 15),
                 itemBuilder: (context, index) {
                   return SUserItem(
-                    onTap: () => controller.onUserTab(controller.data[index].userData),
-                    baseUser: SBaseUser.fromVChatBase(
-                        controller.data[index].userData),
+                    onTap: () =>
+                        controller.onUserTab(value.data[index].userData),
+                    baseUser:
+                        SBaseUser.fromVChatBase(value.data[index].userData),
                   );
                 },
-                itemCount: logic.data.length,
+                itemCount: value.data.length,
               );
             },
           );

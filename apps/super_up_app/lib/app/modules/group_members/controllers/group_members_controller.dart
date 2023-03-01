@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-class GroupMembersController extends GetxController {
+import '../../../core/s_base_controller.dart';
+
+class GroupMembersController extends SLoadingController<List<VGroupMember>> {
   final txtController = TextEditingController();
-  VChatLoadingState loadingState = VChatLoadingState.ideal;
   final String roomId;
   final VMyGroupInfo myGroupInfo;
 
-  GroupMembersController(this.roomId, this.myGroupInfo);
-
-  final users = <VGroupMember>[];
+  GroupMembersController(this.roomId, this.myGroupInfo, this.context)
+      : super(SLoadingState(<VGroupMember>[]));
+  final BuildContext context;
 
   @override
   void onInit() {
-    super.onInit();
     getData();
   }
 
   Future<void> getData() async {
     await vSafeApiCall<List<VGroupMember>>(
       onLoading: () async {
-        loadingState = VChatLoadingState.loading;
-        update();
+        setStateLoading();
       },
       onError: (exception, trace) {
-        loadingState = VChatLoadingState.error;
-        update();
+        setStateError();
       },
       request: () async {
         return VChatController.I.roomApi.getGroupMembers(roomId);
       },
       onSuccess: (response) {
-        loadingState = VChatLoadingState.success;
-        users.clear();
-        users.addAll(response);
-        update();
+        data.clear();
+        data.addAll(response);
+        setStateSuccess();
       },
       ignoreTimeoutAndNoInternet: false,
     );
@@ -46,7 +42,6 @@ class GroupMembersController extends GetxController {
   @override
   void onClose() {
     txtController.dispose();
-    super.onClose();
   }
 
   Future onUserTab(VGroupMember user) async {
@@ -86,7 +81,7 @@ class GroupMembersController extends GetxController {
     final res = await VAppAlert.showModalSheet(
       content: data,
       title: "${user.userData.baseUser.fullName} Actions",
-      context: Get.context!,
+      context: context,
     ) as ModelSheetItem<int>?;
     if (res == null) {
       return;
@@ -101,7 +96,7 @@ class GroupMembersController extends GetxController {
       return;
     }
     final yesOkRes = await VAppAlert.showAskYesNoDialog(
-      context: Get.context!,
+      context: context,
       title: "Are you sure?",
       content: getContent(res.id, user.userData.baseUser.fullName),
     );
@@ -124,7 +119,7 @@ class GroupMembersController extends GetxController {
   void _setToAdmin(String identifier) async {
     await vSafeApiCall(
       onLoading: () {
-        VAppAlert.showLoading(context: Get.context!, isDismissible: true);
+        VAppAlert.showLoading(context: context, isDismissible: true);
       },
       request: () async {
         await VChatController.I.roomApi.changeGroupMemberRole(
@@ -135,17 +130,17 @@ class GroupMembersController extends GetxController {
       },
       onSuccess: (response) {},
       onError: (exception, trace) {
-        VAppAlert.showErrorSnackBar(msg: exception, context: Get.context!);
+        VAppAlert.showErrorSnackBar(msg: exception, context: context);
       },
     );
-    Get.back();
+    context.pop();
     await getData();
   }
 
   void _setToMember(String identifier) async {
     await vSafeApiCall(
       onLoading: () {
-        VAppAlert.showLoading(context: Get.context!, isDismissible: true);
+        VAppAlert.showLoading(context: context, isDismissible: true);
       },
       request: () async {
         await VChatController.I.roomApi.changeGroupMemberRole(
@@ -156,17 +151,17 @@ class GroupMembersController extends GetxController {
       },
       onSuccess: (response) {},
       onError: (exception, trace) {
-        VAppAlert.showErrorSnackBar(msg: exception, context: Get.context!);
+        VAppAlert.showErrorSnackBar(msg: exception, context: context);
       },
     );
-    Get.back();
+    context.pop();
     await getData();
   }
 
   void _kickMember(String identifier) async {
     await vSafeApiCall(
       onLoading: () {
-        VAppAlert.showLoading(context: Get.context!, isDismissible: true);
+        VAppAlert.showLoading(context: context, isDismissible: true);
       },
       request: () async {
         await VChatController.I.roomApi.kickGroupUser(
@@ -176,10 +171,10 @@ class GroupMembersController extends GetxController {
       },
       onSuccess: (response) {},
       onError: (exception, trace) {
-        VAppAlert.showErrorSnackBar(msg: exception, context: Get.context!);
+        VAppAlert.showErrorSnackBar(msg: exception, context: context);
       },
     );
-    Get.back();
+    context.pop();
     await getData();
   }
 

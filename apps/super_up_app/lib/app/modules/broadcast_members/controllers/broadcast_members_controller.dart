@@ -1,43 +1,41 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-class BroadcastMembersController extends GetxController {
+import '../../../core/s_base_controller.dart';
+
+class BroadcastMembersController
+    extends SLoadingController<List<VBroadcastMember>> {
   final txtController = TextEditingController();
-  VChatLoadingState loadingState = VChatLoadingState.ideal;
-  final _data = <VBroadcastMember>[];
   final String roomId;
+  final BuildContext context;
 
-  BroadcastMembersController(this.roomId);
-
-  List<VBroadcastMember> get data => _data;
+  BroadcastMembersController(
+    this.roomId,
+    this.context,
+  ) : super(SLoadingState(<VBroadcastMember>[]));
 
   @override
   void onInit() {
-    super.onInit();
     getData();
   }
 
   Future<void> getData() async {
     await vSafeApiCall<List<VBroadcastMember>>(
       onLoading: () async {
-        loadingState = VChatLoadingState.loading;
-        update();
+        setStateLoading();
       },
       onError: (exception, trace) {
-        loadingState = VChatLoadingState.error;
-        update();
+        setStateError(exception);
       },
       request: () async {
         return VChatController.I.roomApi.getBroadcastMembers(roomId);
       },
       onSuccess: (response) {
-        loadingState = VChatLoadingState.success;
-        _data.clear();
-        _data.addAll(response);
-        update();
+        data.clear();
+        data.addAll(response);
+        setStateSuccess();
       },
       ignoreTimeoutAndNoInternet: false,
     );
@@ -46,7 +44,6 @@ class BroadcastMembersController extends GetxController {
   @override
   void onClose() {
     txtController.dispose();
-    super.onClose();
   }
 
   Future onUserTab(VIdentifierUser user) async {
@@ -69,7 +66,7 @@ class BroadcastMembersController extends GetxController {
     final res = await VAppAlert.showModalSheet(
       content: data,
       title: "${user.baseUser.fullName} Actions",
-      context: Get.context!,
+      context: context,
     ) as ModelSheetItem<int>?;
     if (res == null) {
       return;
@@ -84,7 +81,7 @@ class BroadcastMembersController extends GetxController {
       return;
     }
     final yesOkRes = await VAppAlert.showAskYesNoDialog(
-      context: Get.context!,
+      context: context,
       title: "Are you sure?",
       content: getContent(res.id, user.baseUser.fullName),
     );
@@ -102,7 +99,7 @@ class BroadcastMembersController extends GetxController {
   void _kickMember(String identifier) async {
     await vSafeApiCall(
       onLoading: () {
-        VAppAlert.showLoading(context: Get.context!, isDismissible: true);
+        VAppAlert.showLoading(context: context, isDismissible: true);
       },
       request: () async {
         await VChatController.I.roomApi.kickBroadcastUser(
@@ -112,10 +109,10 @@ class BroadcastMembersController extends GetxController {
       },
       onSuccess: (response) {},
       onError: (exception, trace) {
-        VAppAlert.showErrorSnackBar(msg: exception, context: Get.context!);
+        VAppAlert.showErrorSnackBar(msg: exception, context: context);
       },
     );
-    Get.back();
+    context.pop();
     await getData();
   }
 }

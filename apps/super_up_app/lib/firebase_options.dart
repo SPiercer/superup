@@ -60,7 +60,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '810218634692',
     projectId: 'super-up-27b67',
     storageBucket: 'super-up-27b67.appspot.com',
-    iosClientId: '810218634692-afum8ah88qhpv7g3sda00mriitqg28h3.apps.googleusercontent.com',
+    iosClientId:
+        '810218634692-afum8ah88qhpv7g3sda00mriitqg28h3.apps.googleusercontent.com',
     iosBundleId: 'com.app.superup',
   );
 
@@ -70,7 +71,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '810218634692',
     projectId: 'super-up-27b67',
     storageBucket: 'super-up-27b67.appspot.com',
-    iosClientId: '810218634692-afum8ah88qhpv7g3sda00mriitqg28h3.apps.googleusercontent.com',
+    iosClientId:
+        '810218634692-afum8ah88qhpv7g3sda00mriitqg28h3.apps.googleusercontent.com',
     iosBundleId: 'com.app.superup',
   );
 }

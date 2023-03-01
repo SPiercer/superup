@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:super_up/app/modules/chat_settings/widgets/single_rename.dart';
-
+import 'package:v_chat_utils/v_chat_utils.dart';
 
 enum SelectedPopUpMenuItem { addParticipant, changeSubject }
 
@@ -19,18 +18,15 @@ class RoomSettingPopUpMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<SelectedPopUpMenuItem>(
       onSelected: (value) async {
-        switch(value) {
+        switch (value) {
           case SelectedPopUpMenuItem.addParticipant:
             onAddParticipant();
             break;
           case SelectedPopUpMenuItem.changeSubject:
-            final text = await Get.to(
-                  () => SingleRename(
-
-                appbarTitle:  "group name",
-                oldValue: oldValue,
-              ),
-            ) as String?;
+            final text = await context.toPage(SingleRename(
+              appbarTitle: "group name",
+              oldValue: oldValue,
+            )) as String?;
             if (text != null) {
               onChangeSubject(text);
             }

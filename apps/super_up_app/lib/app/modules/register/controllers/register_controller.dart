@@ -1,22 +1,25 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import 'package:super_up/app/routes/app_pages.dart';
+import 'package:super_up/app/modules/home_mobile_tabs/home_mobile/views/home_view.dart';
 import 'package:super_up_core/super_up_core.dart';
-import 'package:v_chat_sdk_core/v_chat_sdk_core.dart' hide AuthApiService;
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-class RegisterController extends GetxController {
+import '../../../core/s_base_controller.dart';
+
+class RegisterController implements SBaseController {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmController = TextEditingController();
   final AuthApiService authService;
   final ProfileApiService profileService;
+  final BuildContext context;
 
   RegisterController(
     this.authService,
     this.profileService,
+    this.context,
   );
 
   Future<void> register() async {
@@ -25,14 +28,14 @@ class RegisterController extends GetxController {
     if (name.isEmpty) {
       VAppAlert.showErrorSnackBar(
         msg: "Name must have value",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
     if (!EmailValidator.validate(email)) {
       VAppAlert.showErrorSnackBar(
         msg: "Email not valid",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
@@ -42,7 +45,7 @@ class RegisterController extends GetxController {
     if (password.isEmpty) {
       VAppAlert.showErrorSnackBar(
         msg: "Password must have value",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
@@ -50,23 +53,22 @@ class RegisterController extends GetxController {
     if (password != confirm) {
       VAppAlert.showErrorSnackBar(
         msg: "Password not match",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
 
     await vSafeApiCall<SMyProfile>(
       onLoading: () async {
-        VAppAlert.showLoading(context: Get.context!);
+        VAppAlert.showLoading(context: context);
       },
       onError: (exception, trace) {
-        Get.back();
+        context.pop();
         VAppAlert.showOkAlertDialog(
-          context: Get.context!,
+          context: context,
           title: "Error",
           content: exception.toString(),
         );
-        print(trace);
       },
       request: () async {
         final deviceHelper = DeviceInfoHelper();
@@ -97,17 +99,14 @@ class RegisterController extends GetxController {
 
         if (status == RegisterStatus.accepted) {
           await VAppPref.setBool(SStorageKeys.isLogin.name, true);
-          Get.offAllNamed(Routes.HOME);
+          context.toPageAndRemoveAll(const HomeMobileView());
         } else {
-          Get.offAll(
-            () => SWaitingPage(
-              profile: response,
-            ),
-          );
+          context.toPageAndRemoveAll(SWaitingPage(
+            profile: response,
+          ));
         }
       },
       ignoreTimeoutAndNoInternet: false,
-
     );
   }
 
@@ -117,7 +116,6 @@ class RegisterController extends GetxController {
     nameController.dispose();
     confirmController.dispose();
     passwordController.dispose();
-    super.onClose();
   }
 
   void facebook() {}
@@ -125,4 +123,9 @@ class RegisterController extends GetxController {
   void apple() {}
 
   void google() {}
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+  }
 }

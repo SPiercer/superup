@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-import 'package:super_up/app/routes/app_pages.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
+import 'package:super_up/app/modules/broadcast_members/views/broadcast_members_view.dart';
+import 'package:super_up/app/modules/choose_members/views/choose_members_view.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-class BroadcastRoomSettingsController extends GetxController {
+import '../../../../core/s_base_controller.dart';
+
+class BroadcastRoomSettingsController
+    extends SLoadingController<VMyBroadcastInfo> {
   final txtController = TextEditingController();
-  VChatLoadingState loadingState = VChatLoadingState.ideal;
+
   VToChatSettingsModel settingsModel;
   late VMyBroadcastInfo info;
+  final BuildContext context;
 
   BroadcastRoomSettingsController(
     this.settingsModel,
-  );
+    this.context,
+  ) : super(SLoadingState(VMyBroadcastInfo.empty()));
 
   @override
   void onInit() {
-    super.onInit();
     getData();
   }
 
@@ -29,7 +33,7 @@ class BroadcastRoomSettingsController extends GetxController {
     if (image != null) {
       vSafeApiCall<String>(
         onLoading: () {
-          VAppAlert.showLoading(context: Get.context!);
+          VAppAlert.showLoading(context: context);
         },
         request: () async {
           return VChatController.I.roomApi.updateBroadcastImage(
@@ -39,7 +43,7 @@ class BroadcastRoomSettingsController extends GetxController {
         },
         onSuccess: (response) {
           settingsModel = settingsModel.copyWith(image: response);
-          Get.back();
+          context.pop();
           update();
         },
       );
@@ -49,20 +53,17 @@ class BroadcastRoomSettingsController extends GetxController {
   Future<void> getData() async {
     await vSafeApiCall<VMyBroadcastInfo>(
       onLoading: () async {
-        loadingState = VChatLoadingState.loading;
-        update();
+        setStateLoading();
       },
       onError: (exception, trace) {
-        loadingState = VChatLoadingState.error;
-        update();
+        setStateError(exception);
       },
       request: () async {
         return VChatController.I.roomApi.getBroadcastMyInfo(roomId: roomId);
       },
       onSuccess: (response) {
         info = response;
-        loadingState = VChatLoadingState.success;
-        update();
+        setStateSuccess();
       },
       ignoreTimeoutAndNoInternet: false,
     );
@@ -71,20 +72,19 @@ class BroadcastRoomSettingsController extends GetxController {
   @override
   void onClose() {
     txtController.dispose();
-    super.onClose();
   }
 
   void onUpdateTitle() async {
-    final newTitle = await Get.to(() => SingleRename(
-          appbarTitle: "update broadcast title",
-          oldValue: settingsModel.title,
-          subTitle: '',
-        ));
+    final newTitle = await context.toPage(SingleRename(
+      appbarTitle: "update broadcast title",
+      oldValue: settingsModel.title,
+      subTitle: '',
+    ));
     if (newTitle == null) return;
     if (newTitle != settingsModel.title) {
       await vSafeApiCall<String>(
         onLoading: () {
-          VAppAlert.showLoading(context: Get.context!);
+          VAppAlert.showLoading(context: context);
         },
         request: () async {
           await VChatController.I.roomApi
@@ -99,17 +99,19 @@ class BroadcastRoomSettingsController extends GetxController {
           update();
         },
       );
-      Get.back();
+      context.pop();
     }
   }
 
   void onGoShowMembers() {
-    Get.toNamed(Routes.BROADCAST_MEMBERS, arguments: roomId);
+    context.toPage(BroadcastMembersView(
+      roomId: roomId,
+    ));
   }
 
   void addParticipantsToBroadcast() async {
-    final users = await Get.toNamed(
-      Routes.CHOOSE_MEMBERS,
+    final users = await context.toPage(
+      const ChooseMembersView(),
     ) as List<SBaseUser>?;
     if (users != null) {
       _addGroupMembers(users.map((e) => e.id).toList());
@@ -119,7 +121,7 @@ class BroadcastRoomSettingsController extends GetxController {
   void _addGroupMembers(List<String> list) async {
     await vSafeApiCall<void>(
       onLoading: () {
-        VAppAlert.showLoading(context: Get.context!);
+        VAppAlert.showLoading(context: context);
       },
       request: () async {
         await VChatController.I.roomApi
@@ -127,11 +129,8 @@ class BroadcastRoomSettingsController extends GetxController {
       },
       onSuccess: (response) {
         VAppAlert.showOverlaySupport(title: "Users added successfully");
-        Get.back();
-      },
-      onError: (exception, trace) {
-        Get.back();
       },
     );
+    context.pop();
   }
 }

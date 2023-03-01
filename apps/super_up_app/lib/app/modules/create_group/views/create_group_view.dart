@@ -1,35 +1,53 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../controllers/create_group_controller.dart';
 
-class CreateGroupView extends GetView<CreateGroupController> {
-  const CreateGroupView({Key? key}) : super(key: key);
+class CreateGroupView extends StatefulWidget {
+  const CreateGroupView({Key? key, required this.users}) : super(key: key);
+  final List<SBaseUser> users;
+  @override
+  State<CreateGroupView> createState() => _CreateGroupViewState();
+}
+
+class _CreateGroupViewState extends State<CreateGroupView> {
+  late final CreateGroupController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = CreateGroupController(widget.users, context);
+    controller.onInit();
+  }
+
+  @override
+  void dispose() {
+    controller.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.done),
         onPressed: controller.createGroup,
+        child: const Icon(Icons.done),
       ),
       appBar: AppBar(
         title: const Text('Create Group'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: GetBuilder<CreateGroupController>(
-          assignId: true,
-          builder: (logic) {
+        child: ValueListenableBuilder(
+          valueListenable: controller,
+          builder: (_, __, ___) {
             return Center(
               child: Column(
                 children: [
                   VImagePicker(
                     onDone: (VPlatformFileSource file) {
-                      controller.image =file;
+                      controller.image = file;
                     },
                     initImage: VPlatformFileSource.fromAssets(
                       assetsPath: "assets/ss.png",
@@ -37,7 +55,7 @@ class CreateGroupView extends GetView<CreateGroupController> {
                     withCrop: true,
                     size: 120,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   STextFiled(

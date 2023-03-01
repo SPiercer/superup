@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:customizable_space_bar/customizable_space_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
@@ -37,11 +36,10 @@ class SliverHeader extends StatelessWidget {
               onTap: onImagePress,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: CachedNetworkImage(
-                  imageUrl: peerImage,
-                  height: maxValue,
+                child: VPlatformCacheImageWidget(
+                  source: VPlatformFileSource.fromUrl(url: peerImage),
+                  size: Size(maxValue, maxValue),
                   fit: BoxFit.cover,
-                  width: maxValue,
                 ),
               ),
             ),

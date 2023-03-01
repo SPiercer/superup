@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
+import 'package:super_up/app/modules/choose_members/views/choose_members_view.dart';
+import 'package:super_up/app/modules/group_members/views/group_members_view.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-import '../../../../routes/app_pages.dart';
+import '../../../../core/s_base_controller.dart';
 
-class GroupRoomSettingsController extends GetxController {
+class GroupRoomSettingsController extends SLoadingController<VMyGroupInfo> {
   final txtController = TextEditingController();
-  VChatLoadingState loadingState = VChatLoadingState.ideal;
+  final BuildContext context;
   VToChatSettingsModel settingsModel;
   bool isMuted = true;
   late VMyGroupInfo groupInfo;
 
   GroupRoomSettingsController(
     this.settingsModel,
-  );
+    this.context,
+  ) : super(SLoadingState(VMyGroupInfo.empty()));
 
   bool get isMeAdminOrSuper {
     if (groupInfo.myRole == VGroupMemberRole.member) return false;
@@ -33,27 +35,24 @@ class GroupRoomSettingsController extends GetxController {
   @override
   void onInit() {
     isMuted = settingsModel.room.isMuted;
-    super.onInit();
+
     getData();
   }
 
   Future<void> getData() async {
     await vSafeApiCall<VMyGroupInfo>(
       onLoading: () async {
-        loadingState = VChatLoadingState.loading;
-        update();
+        setStateLoading();
       },
       onError: (exception, trace) {
-        loadingState = VChatLoadingState.error;
-        update();
+        setStateError(exception);
       },
       request: () async {
         return VChatController.I.roomApi.getGroupVMyGroupInfo(roomId: roomId);
       },
       onSuccess: (response) {
         groupInfo = response;
-        loadingState = VChatLoadingState.success;
-        update();
+        setStateSuccess();
       },
       ignoreTimeoutAndNoInternet: false,
     );
@@ -62,7 +61,6 @@ class GroupRoomSettingsController extends GetxController {
   @override
   void onClose() {
     txtController.dispose();
-    super.onClose();
   }
 
   void onChangeImage() async {
@@ -70,7 +68,7 @@ class GroupRoomSettingsController extends GetxController {
     if (image != null) {
       vSafeApiCall<String>(
         onLoading: () {
-          VAppAlert.showLoading(context: Get.context!);
+          VAppAlert.showLoading(context: context);
         },
         request: () async {
           return VChatController.I.roomApi.updateGroupImage(
@@ -80,7 +78,7 @@ class GroupRoomSettingsController extends GetxController {
         },
         onSuccess: (response) {
           settingsModel = settingsModel.copyWith(image: response);
-          Get.back();
+          context.pop();
           update();
         },
       );
@@ -88,25 +86,24 @@ class GroupRoomSettingsController extends GetxController {
   }
 
   void addParticipantsToGroup() async {
-    final users = await Get.toNamed(
-      Routes.CHOOSE_MEMBERS,
-    ) as List<SBaseUser>?;
+    final users =
+        await context.toPage(const ChooseMembersView()) as List<SBaseUser>?;
     if (users != null) {
       _addGroupMembers(users.map((e) => e.id).toList());
     }
   }
 
   void onChangeGroupDescriptionClicked() async {
-    final newTitle = await Get.to(() => SingleRename(
-          appbarTitle: "Update group description",
-          oldValue: groupInfo.groupSettings!.desc,
-          subTitle: '',
-        )) as String?;
+    final newTitle = await context.toPage(SingleRename(
+      appbarTitle: "Update group description",
+      oldValue: groupInfo.groupSettings!.desc,
+      subTitle: '',
+    )) as String?;
     if (newTitle == null || newTitle.toString().isEmpty) return;
     if (newTitle != settingsModel.title) {
-     await vSafeApiCall<String>(
+      await vSafeApiCall<String>(
         onLoading: () {
-          VAppAlert.showLoading(context: Get.context!);
+          VAppAlert.showLoading(context: context);
         },
         request: () async {
           await VChatController.I.roomApi
@@ -120,14 +117,14 @@ class GroupRoomSettingsController extends GetxController {
           update();
         },
       );
-     Get.back();
+      context.pop();
     }
   }
 
   void changeRoomNotification(bool value) {
     vSafeApiCall<bool>(
       onLoading: () {
-        VAppAlert.showLoading(context: Get.context!);
+        VAppAlert.showLoading(context: context);
       },
       request: () async {
         final res = await VChatController.I.roomApi.changeRoomNotification(
@@ -138,34 +135,32 @@ class GroupRoomSettingsController extends GetxController {
       },
       onSuccess: (response) {
         isMuted = response;
-        Get.back();
+        context.pop();
         update();
       },
     );
   }
 
   void onGoShowMembers() {
-    Get.toNamed(Routes.GROUP_MEMBERS, arguments: {
-      "roomId": roomId,
-      "groupInfo": groupInfo,
-    });
+    context.toPage(GroupMembersView(roomId: roomId, myGroupInfo: groupInfo));
   }
 
   void onExitClicked() {
-    Get.until((route) => route.settings.name == Routes.HOME);
+    context.pop();
+    context.pop();
   }
 
   void onUpdateTitle() async {
-    final newTitle = await Get.to(() => SingleRename(
-          appbarTitle: "Update group title",
-          oldValue: settingsModel.title,
-          subTitle: '',
-        ));
+    final newTitle = await context.toPage(SingleRename(
+      appbarTitle: "Update group title",
+      oldValue: settingsModel.title,
+      subTitle: '',
+    ));
     if (newTitle == null || newTitle.toString().isEmpty) return;
     if (newTitle != settingsModel.title) {
       await vSafeApiCall<String>(
         onLoading: () {
-          VAppAlert.showLoading(context: Get.context!);
+          VAppAlert.showLoading(context: context);
         },
         request: () async {
           await VChatController.I.roomApi
@@ -180,24 +175,24 @@ class GroupRoomSettingsController extends GetxController {
           update();
         },
       );
-      Get.back();
+      context.pop();
     }
   }
 
   void _addGroupMembers(List<String> list) async {
     await vSafeApiCall<void>(
       onLoading: () {
-        VAppAlert.showLoading(context: Get.context!);
+        VAppAlert.showLoading(context: context);
       },
       request: () async {
         await VChatController.I.roomApi.addParticipantsToGroup(roomId, list);
       },
       onSuccess: (response) {
         VAppAlert.showOverlaySupport(title: "Users added successfully");
-        Get.back();
+        context.pop();
       },
       onError: (exception, trace) {
-        Get.back();
+        context.pop();
       },
     );
   }

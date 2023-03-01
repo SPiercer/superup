@@ -1,28 +1,27 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:super_up/app/routes/app_pages.dart';
+import 'package:super_up/app/core/s_base_controller.dart';
+import 'package:super_up/app/modules/home_mobile_tabs/home_mobile/views/home_view.dart';
 import 'package:super_up_core/super_up_core.dart';
-import 'package:v_chat_sdk_core/v_chat_sdk_core.dart' hide AuthApiService;
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-class LoginController extends GetxController {
+class LoginController implements SBaseController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final AuthApiService authService;
   final ProfileApiService profileService;
-
+  final BuildContext context;
   LoginController(
     this.authService,
     this.profileService,
+    this.context,
   );
 
   @override
   onInit() {
     emailController.text = "user1@gmail.com";
     passwordController.text = "12345678";
-    super.onInit();
-
   }
 
   Future<void> login() async {
@@ -31,7 +30,7 @@ class LoginController extends GetxController {
     if (!EmailValidator.validate(email)) {
       VAppAlert.showErrorSnackBar(
         msg: "Email not valid",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
@@ -40,19 +39,19 @@ class LoginController extends GetxController {
     if (password.isEmpty) {
       VAppAlert.showErrorSnackBar(
         msg: "Password must have value",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
 
     await vSafeApiCall<SMyProfile>(
       onLoading: () async {
-        VAppAlert.showLoading(context: Get.context!);
+        VAppAlert.showLoading(context: context);
       },
       onError: (exception, trace) {
-        Get.back();
+        context.pop();
         VAppAlert.showOkAlertDialog(
-          context: Get.context!,
+          context: context,
           title: "Error",
           content: exception.toString(),
         );
@@ -84,26 +83,23 @@ class LoginController extends GetxController {
         );
         if (status == RegisterStatus.accepted) {
           await VAppPref.setBool(SStorageKeys.isLogin.name, true);
-          Get.offAllNamed(Routes.HOME);
+          context.toPageAndRemoveAll(const HomeMobileView());
         } else {
-          Get.offAll(
-            () => SWaitingPage(
+          context.toPageAndRemoveAll(
+            SWaitingPage(
               profile: response,
             ),
           );
         }
       },
       ignoreTimeoutAndNoInternet: false,
-
     );
   }
 
   @override
   void onClose() {
     emailController.dispose();
-
     passwordController.dispose();
-    super.onClose();
   }
 
   void facebook() {}

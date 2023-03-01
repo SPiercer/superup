@@ -1,23 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
+import 'package:super_up/app/modules/home_mobile_tabs/home_mobile/views/home_view.dart';
+import 'package:super_up/app/modules/register/views/register_view.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-import '../../../routes/app_pages.dart';
+import '../../../core/s_base_controller.dart';
 
-class SplashController extends GetxController {
-  final version = "".obs;
+class SplashController extends SLoadingController<String> {
+  String get version => data;
+  final BuildContext context;
+
+  SplashController(this.context) : super(SLoadingState(""));
 
   @override
   void onInit() {
     getAppVersion();
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
     startNavigate();
   }
 
@@ -25,9 +25,9 @@ class SplashController extends GetxController {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String version = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
-
-    this.version.value = "$version $buildNumber";
-    print(this.version.value);
+    value.data = "$version $buildNumber";
+    setStateSuccess();
+    print(value.data);
   }
 
   void startNavigate() async {
@@ -37,23 +37,23 @@ class SplashController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 1300));
     final isLogin = VAppPref.getBool(SStorageKeys.isLogin.name);
     if (isLogin) {
-      Get.offAllNamed(Routes.HOME);
+      context.toPageAndRemoveAll(const HomeMobileView());
+
       return;
     }
     final map = VAppPref.getMap(SStorageKeys.myProfile.name);
     if (map == null) {
-      Get.offAllNamed(Routes.REGISTER);
+      context.toPageAndRemoveAll(const RegisterView());
+
       return;
     }
     final myProfile = SMyProfile.fromMap(map);
     if (myProfile.registerStatus == RegisterStatus.accepted) {
-      Get.offAllNamed(Routes.HOME);
+      context.toPageAndRemoveAll(const HomeMobileView());
     } else {
-      Get.offAll(
-        () => SWaitingPage(
-          profile: myProfile,
-        ),
-      );
+      context.toPageAndRemoveAll(SWaitingPage(
+        profile: myProfile,
+      ));
     }
   }
 
@@ -63,7 +63,6 @@ class SplashController extends GetxController {
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.light,
     ));
-    super.onClose();
   }
 
   Future _setDesktopAutoUpdater() async {}

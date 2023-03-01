@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:textless/textless.dart';
+import 'package:v_chat_utils/v_chat_utils.dart';
 
 class SingleRename extends StatefulWidget {
   final String appbarTitle;
@@ -10,7 +9,6 @@ class SingleRename extends StatefulWidget {
   const SingleRename({
     super.key,
     required this.appbarTitle,
-
     this.oldValue,
   });
 
@@ -55,7 +53,6 @@ class _SingleRenameState extends State<SingleRename> {
                   const SizedBox(
                     height: 20,
                   ),
-
                 ],
               ),
               Column(
@@ -69,7 +66,7 @@ class _SingleRenameState extends State<SingleRename> {
                         Expanded(
                           child: TextButton(
                             onPressed: () {
-                              Get.back(result: controller.text);
+                              context.pop(controller.text);
                             },
                             child: "Cancel".text,
                           ),
@@ -80,7 +77,7 @@ class _SingleRenameState extends State<SingleRename> {
                         Expanded(
                           child: TextButton(
                             onPressed: () {
-                              Get.back(result: controller.text);
+                              context.pop(controller.text);
                             },
                             child: "Ok".text,
                           ),

@@ -1,12 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
-import '../../widgets/settings_divider.dart';
+
+import '../../../../core/states/s_list_loading_state.dart';
 import '../controllers/group_room_settings_controller.dart';
 
-class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
-  const GroupRoomSettingsView({Key? key}) : super(key: key);
+class GroupRoomSettingsView extends StatefulWidget {
+  final VToChatSettingsModel settingsModel;
+  const GroupRoomSettingsView({Key? key, required this.settingsModel})
+      : super(key: key);
+
+  @override
+  State<GroupRoomSettingsView> createState() => _GroupRoomSettingsViewState();
+}
+
+class _GroupRoomSettingsViewState extends State<GroupRoomSettingsView> {
+  late final GroupRoomSettingsController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = GroupRoomSettingsController(widget.settingsModel, context);
+    controller.onInit();
+  }
+
+  @override
+  void dispose() {
+    controller.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +43,15 @@ class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
           children: [
             Stack(
               children: [
-                GetBuilder<GroupRoomSettingsController>(
-                  assignId: true,
-                  builder: (logic) {
+                ValueListenableBuilder<SLoadingState<VMyGroupInfo>>(
+                  valueListenable: controller,
+                  builder: (_, value, __) {
                     return VPlatformCacheImageWidget(
                       source: VPlatformFileSource.fromUrl(
                         url: controller.settingsModel.image,
                       ),
                       fit: BoxFit.cover,
-                      size: Size(context.width, 400),
+                      size: Size(context.mediaQuerySize.width, 400),
                     );
                   },
                 ),
@@ -52,13 +75,14 @@ class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
                 )
               ],
             ),
-            GetBuilder<GroupRoomSettingsController>(
-              builder: (logic) {
+            ValueListenableBuilder<SLoadingState<VMyGroupInfo>>(
+              valueListenable: controller,
+              builder: (_, value, __) {
                 return VAsyncWidgetsBuilder(
-                  loadingState: logic.loadingState,
-                  onRefresh: logic.getData,
+                  loadingState: value.loadingState,
+                  onRefresh: controller.getData,
                   successWidget: () {
-                    bool isMeAdminOrSuper = logic.isMeAdminOrSuper;
+                    bool isMeAdminOrSuper = controller.isMeAdminOrSuper;
                     return SettingsList(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -67,7 +91,8 @@ class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
                           title: const Text('Group settings'),
                           tiles: <SettingsTile>[
                             SettingsTile.navigation(
-                              onPressed: (context) => logic.onUpdateTitle(),
+                              onPressed: (context) =>
+                                  controller.onUpdateTitle(),
                               leading:
                                   const Icon(Icons.edit, color: Colors.green),
                               title: const Text('Title'),
@@ -79,15 +104,15 @@ class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
                                   ? null
                                   : controller.getGroupDesc!.text,
                               onPressed: (context) =>
-                                  logic.onChangeGroupDescriptionClicked(),
+                                  controller.onChangeGroupDescriptionClicked(),
                               leading: const Icon(
                                 Icons.edit,
                                 color: Colors.green,
                               ),
                             ),
                             SettingsTile.switchTile(
-                              initialValue: logic.isMuted,
-                              onToggle: logic.changeRoomNotification,
+                              initialValue: controller.isMuted,
+                              onToggle: controller.changeRoomNotification,
                               leading: const Icon(
                                 Icons.notifications_active,
                                 color: Colors.green,
@@ -97,7 +122,7 @@ class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
                             if (isMeAdminOrSuper)
                               SettingsTile.navigation(
                                 onPressed: (context) =>
-                                    logic.addParticipantsToGroup(),
+                                    controller.addParticipantsToGroup(),
                                 title: "Add Participants".text,
                                 leading: const Icon(
                                   Icons.group_add,
@@ -109,11 +134,11 @@ class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
                                 ),
                               ),
                             SettingsTile.navigation(
-                              onPressed: (context) => logic.onGoShowMembers(),
-                              title:
-                                  "Group Participants"
-                                      .text,
-                              description: "${logic.groupInfo.membersCount}".text,
+                              onPressed: (context) =>
+                                  controller.onGoShowMembers(),
+                              title: "Group Participants".text,
+                              description:
+                                  "${controller.groupInfo.membersCount}".text,
                               leading: const Icon(
                                 PhosphorIcons.users,
                                 color: Colors.green,
@@ -127,7 +152,6 @@ class GroupRoomSettingsView extends GetView<GroupRoomSettingsController> {
                         ),
                       ],
                     );
-
                   },
                 );
               },

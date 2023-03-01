@@ -1,16 +1,37 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:super_up_core/super_up_core.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-import '../../widgets/settings_divider.dart';
 import '../controllers/broadcast_room_settings_controller.dart';
 
-class BroadcastRoomSettingsView
-    extends GetView<BroadcastRoomSettingsController> {
-  const BroadcastRoomSettingsView({Key? key}) : super(key: key);
+class BroadcastRoomSettingsView extends StatefulWidget {
+  final VToChatSettingsModel settingsModel;
+
+  const BroadcastRoomSettingsView({Key? key, required this.settingsModel})
+      : super(key: key);
+
+  @override
+  State<BroadcastRoomSettingsView> createState() =>
+      _BroadcastRoomSettingsViewState();
+}
+
+class _BroadcastRoomSettingsViewState extends State<BroadcastRoomSettingsView> {
+  late final BroadcastRoomSettingsController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = BroadcastRoomSettingsController(widget.settingsModel, context);
+    controller.onInit();
+  }
+
+  @override
+  void dispose() {
+    controller.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +45,15 @@ class BroadcastRoomSettingsView
           children: [
             Stack(
               children: [
-                GetBuilder<BroadcastRoomSettingsController>(
-                  assignId: true,
-                  builder: (logic) {
+                ValueListenableBuilder<SLoadingState<VMyBroadcastInfo>>(
+                  valueListenable: controller,
+                  builder: (_, ___, __) {
                     return VPlatformCacheImageWidget(
                       source: VPlatformFileSource.fromUrl(
                         url: controller.settingsModel.image,
                       ),
                       fit: BoxFit.cover,
-                      size: Size(context.width, 400),
+                      size: Size(context.mediaQuerySize.width, 400),
                     );
                   },
                 ),
@@ -59,11 +80,12 @@ class BroadcastRoomSettingsView
             const SizedBox(
               height: 10,
             ),
-            GetBuilder<BroadcastRoomSettingsController>(
-              builder: (logic) {
+            ValueListenableBuilder<SLoadingState<VMyBroadcastInfo>>(
+              valueListenable: controller,
+              builder: (_, value, __) {
                 return VAsyncWidgetsBuilder(
-                  loadingState: logic.loadingState,
-                  onRefresh: logic.getData,
+                  loadingState: value.loadingState,
+                  onRefresh: controller.getData,
                   successWidget: () {
                     return SettingsList(
                       shrinkWrap: true,
@@ -73,7 +95,8 @@ class BroadcastRoomSettingsView
                           title: const Text('Broadcast settings'),
                           tiles: <SettingsTile>[
                             SettingsTile.navigation(
-                              onPressed: (context) => logic.onUpdateTitle(),
+                              onPressed: (context) =>
+                                  controller.onUpdateTitle(),
                               leading:
                                   const Icon(Icons.edit, color: Colors.green),
                               title: const Text('Title'),
@@ -81,7 +104,7 @@ class BroadcastRoomSettingsView
                             ),
                             SettingsTile.navigation(
                               onPressed: (context) =>
-                                  logic.addParticipantsToBroadcast(),
+                                  controller.addParticipantsToBroadcast(),
                               title: "Add Participants".text,
                               leading: const Icon(
                                 Icons.group_add,
@@ -93,9 +116,10 @@ class BroadcastRoomSettingsView
                               ),
                             ),
                             SettingsTile.navigation(
-                              onPressed: (context) => logic.onGoShowMembers(),
+                              onPressed: (context) =>
+                                  controller.onGoShowMembers(),
                               title: "Broadcast Participants".text,
-                              description: "${logic.info.totalUsers}".text,
+                              description: "${controller.info.totalUsers}".text,
                               leading: const Icon(
                                 PhosphorIcons.users,
                                 color: Colors.green,

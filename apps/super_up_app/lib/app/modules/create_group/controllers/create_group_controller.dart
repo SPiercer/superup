@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:super_up/app/core/s_base_controller.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-import '../../../routes/app_pages.dart';
-
-class CreateGroupController extends GetxController {
+class CreateGroupController extends ValueNotifier implements SBaseController {
   final List<SBaseUser> users;
-
+  final BuildContext context;
   final txtController = TextEditingController();
   VChatLoadingState loadingState = VChatLoadingState.ideal;
 
-  CreateGroupController(this.users);
+  CreateGroupController(this.users, this.context) : super(null);
 
   VPlatformFileSource? image;
 
@@ -22,23 +19,23 @@ class CreateGroupController extends GetxController {
     if (title.isEmpty) {
       VAppAlert.showErrorSnackBar(
         msg: "title is required",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
     await vSafeApiCall(
       onLoading: () async {
-        VAppAlert.showLoading(context: Get.context!);
+        VAppAlert.showLoading(context: context);
       },
       onError: (exception, trace) {
-        Get.back();
+        context.pop();
         VAppAlert.showErrorSnackBar(
           msg: exception,
-          context: Get.context!,
+          context: context,
         );
       },
       request: () async {
-       await VChatController.I.nativeApi.remote.room.createGroup(
+        await VChatController.I.nativeApi.remote.room.createGroup(
           CreateGroupDto(
             identifiers: users.map((e) => e.id).toList(),
             title: title,
@@ -49,7 +46,8 @@ class CreateGroupController extends GetxController {
         return;
       },
       onSuccess: (response) {
-        Get.until((route) => route.settings.name == Routes.HOME);
+        context.pop();
+        context.pop();
       },
       ignoreTimeoutAndNoInternet: false,
     );
@@ -58,6 +56,8 @@ class CreateGroupController extends GetxController {
   @override
   void onClose() {
     txtController.dispose();
-    super.onClose();
   }
+
+  @override
+  void onInit() {}
 }

@@ -1,7 +1,22 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:super_up/app/core/states/s_list_loading_state.dart';
 
-class PeerProfileController extends GetxController {
-   final String identifier;
+import '../../../core/s_base_controller.dart';
 
-  PeerProfileController(this.identifier);
+class PeerProfileController extends SLoadingController<Object> {
+  final String identifier;
+  final BuildContext context;
+
+  PeerProfileController(this.identifier, this.context)
+      : super(SLoadingState("data"));
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+  }
 }

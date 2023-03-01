@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-import '../../../routes/app_pages.dart';
+import '../../../core/s_base_controller.dart';
 
-class CreateBroadcastController extends GetxController {
+class CreateBroadcastController extends ValueNotifier
+    implements SBaseController {
   final List<SBaseUser> users;
   final txtController = TextEditingController();
-  VChatLoadingState loadingState = VChatLoadingState.ideal;
 
-  CreateBroadcastController(this.users);
+  final BuildContext context;
+
+  CreateBroadcastController(this.users, this.context) : super(null);
 
   VPlatformFileSource? image;
 
@@ -21,19 +21,19 @@ class CreateBroadcastController extends GetxController {
     if (title.isEmpty) {
       VAppAlert.showErrorSnackBar(
         msg: "Title is required",
-        context: Get.context!,
+        context: context,
       );
       return;
     }
     await vSafeApiCall(
       onLoading: () async {
-        VAppAlert.showLoading(context: Get.context!);
+        VAppAlert.showLoading(context: context);
       },
       onError: (exception, trace) {
-        Get.back();
+        context.pop();
         VAppAlert.showErrorSnackBar(
           msg: exception,
-          context: Get.context!,
+          context: context,
         );
       },
       request: () async {
@@ -48,7 +48,8 @@ class CreateBroadcastController extends GetxController {
         return;
       },
       onSuccess: (response) {
-        Get.until((route) => route.settings.name == Routes.HOME);
+        context.pop();
+        context.pop();
       },
       ignoreTimeoutAndNoInternet: false,
     );
@@ -57,6 +58,8 @@ class CreateBroadcastController extends GetxController {
   @override
   void onClose() {
     txtController.dispose();
-    super.onClose();
   }
+
+  @override
+  void onInit() {}
 }
