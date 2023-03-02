@@ -25,8 +25,10 @@ class _HomeMobileViewState extends State<HomeMobileView>
       vsync: this,
       animationDuration: Duration.zero,
     );
-    controller =
-        HomeMobileController(GetIt.I.get<ProfileApiService>(), context);
+    controller = HomeMobileController(
+      GetIt.I.get<ProfileApiService>(),
+      context,
+    );
     controller.tabController = tabController;
     controller.onInit();
   }

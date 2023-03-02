@@ -18,7 +18,7 @@ import 'app/core/lazy_injection.dart';
 import 'firebase_options.dart';
 
 List<CameraDescription>? cameras;
-final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+final _navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

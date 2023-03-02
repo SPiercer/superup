@@ -7,6 +7,7 @@ import 'package:super_up/app/modules/register/views/register_view.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
+import '../../../core/platforms.dart';
 import '../../../core/s_base_controller.dart';
 import '../../home_wide_modules/home/view/home_wide_view.dart';
 
@@ -32,7 +33,8 @@ class SplashController extends SLoadingController<String> {
   }
 
   void _homeNav() {
-    if (VPlatforms.isWeb || VPlatforms.isDeskTop) {
+    if ((VPlatforms.isWeb && !VPlatformsX.isWebRunOnMobile) ||
+        VPlatforms.isDeskTop) {
       context.toPageAndRemoveAll(const HomeWideView());
     } else {
       context.toPageAndRemoveAll(const HomeMobileView());

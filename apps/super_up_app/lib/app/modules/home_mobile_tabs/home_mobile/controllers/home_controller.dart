@@ -13,6 +13,7 @@ import 'package:v_chat_receive_share/v_chat_receive_share.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 import 'package:v_chat_web_rtc/v_chat_web_rtc.dart';
 
+import '../../../../core/controllers/version_checker_controller.dart';
 import '../../../../core/s_base_controller.dart';
 import '../../calls_tab/controllers/calls_tab_controller.dart';
 import '../../calls_tab/views/calls_tab_view.dart';
@@ -74,6 +75,7 @@ class HomeMobileController extends SLoadingController<int> {
     vInitCallListener();
     vInitReceiveShareHandler();
     _setVisit();
+    GetIt.I.get<VersionCheckerController>().check();
   }
 
   @override

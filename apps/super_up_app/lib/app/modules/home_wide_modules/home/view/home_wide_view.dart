@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:super_up/app/core/controllers/version_checker_controller.dart';
 import 'package:super_up/app/modules/home_wide_modules/home/view/web_chat_scaffold.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_room_page/v_chat_room_page.dart';
@@ -45,17 +46,11 @@ class _HomeWideViewState extends State<HomeWideView> {
           child: Row(
             children: [
               SizedBox(
-                width: isSmall ? 85 : 300,
+                width: 300,
                 child: VChatPage(
                   context: context,
                   appBar: AppBar(
-                    title: isSmall
-                        ? Image.asset(
-                            "assets/logo.png",
-                            height: 30,
-                            width: 30,
-                          )
-                        : const Text("start chat"),
+                    title: _buildAppBarTitle(),
                     actions: [
                       InkWell(
                         onTap: () async {
@@ -66,7 +61,7 @@ class _HomeWideViewState extends State<HomeWideView> {
                     ],
                   ),
                   controller: controller.vRoomController,
-                  useIconForRoomItem: isSmall,
+                  useIconForRoomItem: false,
                   onRoomItemPress: (room) {
                     controller.onRoomItemPress(room);
                   },
@@ -94,5 +89,33 @@ class _HomeWideViewState extends State<HomeWideView> {
   bool get isSmall {
     final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
     return data.size.shortestSide < 600;
+  }
+
+  Widget _buildAppBarTitle() {
+    // if (isSmall) {
+    //   return Image.asset(
+    //     "assets/logo.png",
+    //     height: 30,
+    //     width: 30,
+    //   );
+    // }
+    return ValueListenableBuilder<CheckVersion?>(
+      valueListenable: GetIt.I.get<VersionCheckerController>(),
+      builder: (context, value, child) {
+        if (value == null) {
+          return const Text("Start chat");
+        }
+        if (value.isNewVersionAvailable) {
+          return InkWell(
+            onTap: controller.onUpdateVersion,
+            child: "new update ${value.lastVersion.semVer} is available"
+                .b1
+                .underline
+                .color(Colors.green),
+          );
+        }
+        return const Text("Start chat");
+      },
+    );
   }
 }

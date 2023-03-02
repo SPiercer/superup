@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:super_up/app/core/s_base_controller.dart';
 import 'package:super_up/app/modules/splash/views/splash_view.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:universal_html/html.dart';
 import 'package:v_chat_room_page/v_chat_room_page.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 import 'package:v_chat_web_rtc/v_chat_web_rtc.dart';
 
+import '../../../../core/controllers/version_checker_controller.dart';
 import '../view/web_chat_scaffold.dart';
 
 class HomeWideController implements SBaseController {
@@ -28,6 +31,7 @@ class HomeWideController implements SBaseController {
   void onInit() {
     setVisit();
     vInitCallListener();
+    GetIt.I.get<VersionCheckerController>().check();
   }
 
   void onRoomItemPress(VRoom room) {
@@ -88,6 +92,12 @@ class HomeWideController implements SBaseController {
         },
         ignoreTimeoutAndNoInternet: false,
       );
+    }
+  }
+
+  void onUpdateVersion() {
+    if (VPlatforms.isWeb) {
+      window.location.reload();
     }
   }
 }
