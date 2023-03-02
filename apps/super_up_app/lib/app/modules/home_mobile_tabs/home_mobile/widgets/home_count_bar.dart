@@ -7,7 +7,7 @@ import 'package:super_up_core/super_up_core.dart';
 import 'home_tab_bar.dart';
 
 class HomeCountAppbar extends StatefulWidget {
-  final HomeController controller;
+  final HomeMobileController controller;
   const HomeCountAppbar({Key? key, required this.controller}) : super(key: key);
 
   @override

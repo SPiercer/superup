@@ -40,6 +40,7 @@ class _SingleRoomSettingsViewState extends State<SingleRoomSettingsView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Stack(
+              alignment: Alignment.center,
               children: [
                 InkWell(
                   onTap: controller.openFullImage,
@@ -48,7 +49,7 @@ class _SingleRoomSettingsViewState extends State<SingleRoomSettingsView> {
                       url: controller.settingsModel.image,
                     ),
                     fit: BoxFit.cover,
-                    size: Size(context.mediaQuerySize.width, 400),
+                    size: Size(700, 400),
                   ),
                 )
               ],

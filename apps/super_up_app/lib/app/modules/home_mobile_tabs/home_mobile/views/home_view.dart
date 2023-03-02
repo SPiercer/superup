@@ -14,7 +14,7 @@ class HomeMobileView extends StatefulWidget {
 
 class _HomeMobileViewState extends State<HomeMobileView>
     with TickerProviderStateMixin {
-  late final HomeController controller;
+  late final HomeMobileController controller;
 
   @override
   void initState() {
@@ -25,7 +25,8 @@ class _HomeMobileViewState extends State<HomeMobileView>
       vsync: this,
       animationDuration: Duration.zero,
     );
-    controller = HomeController(GetIt.I.get<ProfileApiService>(), context);
+    controller =
+        HomeMobileController(GetIt.I.get<ProfileApiService>(), context);
     controller.tabController = tabController;
     controller.onInit();
   }

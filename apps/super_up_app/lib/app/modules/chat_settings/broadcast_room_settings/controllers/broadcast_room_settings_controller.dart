@@ -109,19 +109,22 @@ class BroadcastRoomSettingsController
     ));
   }
 
-  void addParticipantsToBroadcast() async {
+  void addParticipantsToBroadcast(BuildContext context) async {
     final users = await context.toPage(
       const ChooseMembersView(),
     ) as List<SBaseUser>?;
     if (users != null) {
-      _addGroupMembers(users.map((e) => e.id).toList());
+      _addBroadcastMembers(context, users.map((e) => e.id).toList());
     }
   }
 
-  void _addGroupMembers(List<String> list) async {
+  void _addBroadcastMembers(BuildContext context, List<String> list) async {
     await vSafeApiCall<void>(
       onLoading: () {
-        VAppAlert.showLoading(context: context);
+        VAppAlert.showLoading(
+          context: context,
+          isDismissible: true,
+        );
       },
       request: () async {
         await VChatController.I.roomApi

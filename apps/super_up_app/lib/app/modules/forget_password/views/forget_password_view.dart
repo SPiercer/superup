@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../core/widgets/wide_constraints.dart';
 import '../controllers/forget_password_controller.dart';
 
 class ForgetPasswordView extends StatefulWidget {
@@ -28,9 +30,17 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('ForgetPasswordView'),
-        ),
-        body: const Text("ForgetPasswordView"));
+      appBar: AppBar(
+        title: const Text('ForgetPasswordView'),
+      ),
+      body: ResponsiveBuilder(
+        builder: (context, sizingInformation) {
+          return WideConstraints(
+            enable: sizingInformation.isDesktop,
+            child: const Text("ForgetPasswordView"),
+          );
+        },
+      ),
+    );
   }
 }

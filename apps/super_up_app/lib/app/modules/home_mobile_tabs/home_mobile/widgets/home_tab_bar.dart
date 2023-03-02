@@ -4,7 +4,7 @@ import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../controllers/home_controller.dart';
 
-TabBar homeTabBar(HomeController controller, BuildContext context) {
+TabBar homeTabBar(HomeMobileController controller, BuildContext context) {
   final orjWidth = MediaQuery.of(context).size.width;
   final cameraWidth = orjWidth / 20;
   final yourWidth = (orjWidth - cameraWidth) / 5;

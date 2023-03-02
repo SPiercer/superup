@@ -68,7 +68,7 @@ class GroupRoomSettingsController extends SLoadingController<VMyGroupInfo> {
     if (image != null) {
       vSafeApiCall<String>(
         onLoading: () {
-          VAppAlert.showLoading(context: context);
+          VAppAlert.showLoading(context: context, isDismissible: true);
         },
         request: () async {
           return VChatController.I.roomApi.updateGroupImage(
@@ -103,7 +103,7 @@ class GroupRoomSettingsController extends SLoadingController<VMyGroupInfo> {
     if (newTitle != settingsModel.title) {
       await vSafeApiCall<String>(
         onLoading: () {
-          VAppAlert.showLoading(context: context);
+          VAppAlert.showLoading(context: context, isDismissible: true);
         },
         request: () async {
           await VChatController.I.roomApi
@@ -124,7 +124,7 @@ class GroupRoomSettingsController extends SLoadingController<VMyGroupInfo> {
   void changeRoomNotification(bool value) {
     vSafeApiCall<bool>(
       onLoading: () {
-        VAppAlert.showLoading(context: context);
+        VAppAlert.showLoading(context: context, isDismissible: true);
       },
       request: () async {
         final res = await VChatController.I.roomApi.changeRoomNotification(
@@ -160,7 +160,7 @@ class GroupRoomSettingsController extends SLoadingController<VMyGroupInfo> {
     if (newTitle != settingsModel.title) {
       await vSafeApiCall<String>(
         onLoading: () {
-          VAppAlert.showLoading(context: context);
+          VAppAlert.showLoading(context: context, isDismissible: true);
         },
         request: () async {
           await VChatController.I.roomApi
@@ -182,7 +182,7 @@ class GroupRoomSettingsController extends SLoadingController<VMyGroupInfo> {
   void _addGroupMembers(List<String> list) async {
     await vSafeApiCall<void>(
       onLoading: () {
-        VAppAlert.showLoading(context: context);
+        VAppAlert.showLoading(context: context, isDismissible: true);
       },
       request: () async {
         await VChatController.I.roomApi.addParticipantsToGroup(roomId, list);

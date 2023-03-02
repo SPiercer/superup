@@ -42,6 +42,7 @@ class _GroupRoomSettingsViewState extends State<GroupRoomSettingsView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Stack(
+              alignment: Alignment.center,
               children: [
                 ValueListenableBuilder<SLoadingState<VMyGroupInfo>>(
                   valueListenable: controller,
@@ -51,7 +52,7 @@ class _GroupRoomSettingsViewState extends State<GroupRoomSettingsView> {
                         url: controller.settingsModel.image,
                       ),
                       fit: BoxFit.cover,
-                      size: Size(context.mediaQuerySize.width, 400),
+                      size: Size(700, 400),
                     );
                   },
                 ),

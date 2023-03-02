@@ -98,9 +98,7 @@ class BroadcastMembersController
 
   void _kickMember(String identifier) async {
     await vSafeApiCall(
-      onLoading: () {
-        VAppAlert.showLoading(context: context, isDismissible: true);
-      },
+      onLoading: () {},
       request: () async {
         await VChatController.I.roomApi.kickBroadcastUser(
           roomId: roomId,
@@ -112,7 +110,7 @@ class BroadcastMembersController
         VAppAlert.showErrorSnackBar(msg: exception, context: context);
       },
     );
-    context.pop();
+
     await getData();
   }
 }

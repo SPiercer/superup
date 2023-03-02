@@ -22,7 +22,7 @@ import '../../rooms_tab/views/rooms_tab_view.dart';
 import '../../status_tab/controllers/status_tab_controller.dart';
 import '../../status_tab/views/status_tab_view.dart';
 
-class HomeController extends SLoadingController<int> {
+class HomeMobileController extends SLoadingController<int> {
   late TabController tabController;
 
   int get tabIndex => data;
@@ -30,7 +30,7 @@ class HomeController extends SLoadingController<int> {
   final ProfileApiService profileApiService;
   final BuildContext context;
 
-  HomeController(this.profileApiService, this.context)
+  HomeMobileController(this.profileApiService, this.context)
       : super(SLoadingState(1));
 
   void registerLazySingletons() {

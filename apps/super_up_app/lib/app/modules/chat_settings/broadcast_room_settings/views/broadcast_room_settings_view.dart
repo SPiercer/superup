@@ -44,6 +44,7 @@ class _BroadcastRoomSettingsViewState extends State<BroadcastRoomSettingsView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Stack(
+              alignment: Alignment.center,
               children: [
                 ValueListenableBuilder<SLoadingState<VMyBroadcastInfo>>(
                   valueListenable: controller,
@@ -53,7 +54,7 @@ class _BroadcastRoomSettingsViewState extends State<BroadcastRoomSettingsView> {
                         url: controller.settingsModel.image,
                       ),
                       fit: BoxFit.cover,
-                      size: Size(context.mediaQuerySize.width, 400),
+                      size: Size(700, 400),
                     );
                   },
                 ),
@@ -103,8 +104,8 @@ class _BroadcastRoomSettingsViewState extends State<BroadcastRoomSettingsView> {
                               value: controller.settingsModel.title.text,
                             ),
                             SettingsTile.navigation(
-                              onPressed: (context) =>
-                                  controller.addParticipantsToBroadcast(),
+                              onPressed: (context) => controller
+                                  .addParticipantsToBroadcast(context),
                               title: "Add Participants".text,
                               leading: const Icon(
                                 Icons.group_add,

@@ -6,6 +6,7 @@ import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../../../core/s_base_controller.dart';
+import '../../home_wide_modules/home/view/home_wide_view.dart';
 
 class RegisterController implements SBaseController {
   final nameController = TextEditingController();
@@ -99,7 +100,7 @@ class RegisterController implements SBaseController {
 
         if (status == RegisterStatus.accepted) {
           await VAppPref.setBool(SStorageKeys.isLogin.name, true);
-          context.toPageAndRemoveAll(const HomeMobileView());
+          _homeNav();
         } else {
           context.toPageAndRemoveAll(SWaitingPage(
             profile: response,
@@ -127,5 +128,13 @@ class RegisterController implements SBaseController {
   @override
   void onInit() {
     // TODO: implement onInit
+  }
+
+  void _homeNav() {
+    if (VPlatforms.isWeb || VPlatforms.isDeskTop) {
+      context.toPageAndRemoveAll(const HomeWideView());
+    } else {
+      context.toPageAndRemoveAll(const HomeMobileView());
+    }
   }
 }

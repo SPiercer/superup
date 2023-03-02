@@ -8,6 +8,7 @@ import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../../../core/s_base_controller.dart';
+import '../../home_wide_modules/home/view/home_wide_view.dart';
 
 class SplashController extends SLoadingController<String> {
   String get version => data;
@@ -30,6 +31,14 @@ class SplashController extends SLoadingController<String> {
     print(value.data);
   }
 
+  void _homeNav() {
+    if (VPlatforms.isWeb || VPlatforms.isDeskTop) {
+      context.toPageAndRemoveAll(const HomeWideView());
+    } else {
+      context.toPageAndRemoveAll(const HomeMobileView());
+    }
+  }
+
   void startNavigate() async {
     if (VPlatforms.isDeskTop) {
       await _setDesktopAutoUpdater();
@@ -37,7 +46,7 @@ class SplashController extends SLoadingController<String> {
     await Future.delayed(const Duration(milliseconds: 1300));
     final isLogin = VAppPref.getBool(SStorageKeys.isLogin.name);
     if (isLogin) {
-      context.toPageAndRemoveAll(const HomeMobileView());
+      _homeNav();
 
       return;
     }
@@ -49,7 +58,7 @@ class SplashController extends SLoadingController<String> {
     }
     final myProfile = SMyProfile.fromMap(map);
     if (myProfile.registerStatus == RegisterStatus.accepted) {
-      context.toPageAndRemoveAll(const HomeMobileView());
+      _homeNav();
     } else {
       context.toPageAndRemoveAll(SWaitingPage(
         profile: myProfile,

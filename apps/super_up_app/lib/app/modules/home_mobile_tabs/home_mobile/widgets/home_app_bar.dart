@@ -5,7 +5,7 @@ import '../controllers/home_controller.dart';
 import 'home_tab_bar.dart';
 
 class HomeAppbar extends StatelessWidget {
-  final HomeController controller;
+  final HomeMobileController controller;
 
   const HomeAppbar({
     Key? key,

@@ -118,9 +118,6 @@ class GroupMembersController extends SLoadingController<List<VGroupMember>> {
 
   void _setToAdmin(String identifier) async {
     await vSafeApiCall(
-      onLoading: () {
-        VAppAlert.showLoading(context: context, isDismissible: true);
-      },
       request: () async {
         await VChatController.I.roomApi.changeGroupMemberRole(
           roomId: roomId,
@@ -133,15 +130,11 @@ class GroupMembersController extends SLoadingController<List<VGroupMember>> {
         VAppAlert.showErrorSnackBar(msg: exception, context: context);
       },
     );
-    context.pop();
     await getData();
   }
 
   void _setToMember(String identifier) async {
     await vSafeApiCall(
-      onLoading: () {
-        VAppAlert.showLoading(context: context, isDismissible: true);
-      },
       request: () async {
         await VChatController.I.roomApi.changeGroupMemberRole(
           roomId: roomId,
@@ -154,15 +147,11 @@ class GroupMembersController extends SLoadingController<List<VGroupMember>> {
         VAppAlert.showErrorSnackBar(msg: exception, context: context);
       },
     );
-    context.pop();
     await getData();
   }
 
   void _kickMember(String identifier) async {
     await vSafeApiCall(
-      onLoading: () {
-        VAppAlert.showLoading(context: context, isDismissible: true);
-      },
       request: () async {
         await VChatController.I.roomApi.kickGroupUser(
           roomId: roomId,
@@ -174,7 +163,6 @@ class GroupMembersController extends SLoadingController<List<VGroupMember>> {
         VAppAlert.showErrorSnackBar(msg: exception, context: context);
       },
     );
-    context.pop();
     await getData();
   }
 
