@@ -30,7 +30,8 @@ this code will run pub get for you
 ### Admin panel test coming soon
 -----------
 ### Mac version coming soon
------------
+<a href="https://superupdev.online/apps/super_up.dmg"> <img src="https://user-images.githubusercontent.com/37384769/222607065-1bfd6d69-3102-46ce-870d-1ebefce0d599.jpeg" width ="300" /></a> <br />
+
 ### Windows version coming soon
 -----------
 
