@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -24,12 +26,16 @@ class SplashController extends SLoadingController<String> {
   }
 
   Future<void> getAppVersion() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String version = packageInfo.version;
-    String buildNumber = packageInfo.buildNumber;
-    value.data = "$version $buildNumber";
-    setStateSuccess();
-    print(value.data);
+    try {
+      final packageInfo = await PackageInfo.fromPlatform();
+      final version = packageInfo.version;
+      final buildNumber = packageInfo.buildNumber;
+      value.data = "$version+$buildNumber";
+      setStateSuccess();
+      log(value.data);
+    } catch (err) {
+      log(err.toString());
+    }
   }
 
   void _homeNav() {
