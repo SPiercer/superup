@@ -19,6 +19,9 @@ abstract class ProfileApi extends ChopperService {
     @PartFile("file") MultipartFile file,
   );
 
+  @Patch(path: '/version')
+  Future<Response> checkVersion(@Body() Map<String, dynamic> body);
+
   ///update password
   @Patch(path: "/lang")
   Future<Response> updateLang(@Body() Map<String, dynamic> body);

@@ -34,6 +34,12 @@ class ProfileApiService {
     return true;
   }
 
+  Future<CheckVersion> checkVersion(String current) async {
+    final res = await _profileApi!.checkVersion({"semVer": current});
+    throwIfNotSuccess(res);
+    return CheckVersion.fromMap(extractDataFromResponse(res));
+  }
+
   Future<bool> setVisit() async {
     final res = await _profileApi!.setVisit();
     throwIfNotSuccess(res);

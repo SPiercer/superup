@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  auto_updater:
+    dependency: "direct main"
+    description:
+      name: auto_updater
+      sha256: bd7525c70ec7a0ff2da32325cc1a5c87e0466f8f8d586ccf9e672e6b3d51bf4f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   badges:
     dependency: "direct main"
     description:
@@ -1425,10 +1433,10 @@ packages:
     dependency: "direct main"
     description:
       name: responsive_builder
-      sha256: "824fa4a5822096a3c70804652b85e856d04099cb4f637e99fbee468db08e7177"
+      sha256: "982943eded76d1c42476a618d940394d573b87ac17298fd716c22541bc215ebf"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.0"
+    version: "0.6.1"
   responsive_framework:
     dependency: "direct main"
     description:

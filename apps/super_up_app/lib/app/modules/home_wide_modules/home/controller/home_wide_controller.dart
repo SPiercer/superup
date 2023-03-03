@@ -1,3 +1,4 @@
+import 'package:auto_updater/auto_updater.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:super_up/app/core/s_base_controller.dart';
@@ -95,9 +96,11 @@ class HomeWideController implements SBaseController {
     }
   }
 
-  void onUpdateVersion() {
+  void onUpdateVersion() async {
     if (VPlatforms.isWeb) {
       window.location.reload();
+    } else if (VPlatforms.isDeskTop) {
+      await autoUpdater.checkForUpdates(inBackground: false);
     }
   }
 }

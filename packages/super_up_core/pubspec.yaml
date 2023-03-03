@@ -19,6 +19,7 @@ dependencies:
   flex_color_scheme: ^7.0.0-dev.2
   http_parser: ^4.0.2
   touchable_opacity: 1.2.0
+  version: ^3.0.2
 
 
 dev_dependencies:

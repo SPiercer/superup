@@ -20,6 +20,9 @@ class VersionCheckerController extends ValueNotifier<CheckVersion?> {
       onSuccess: (response) {
         return response;
       },
+      onError: (exception, trace) {
+        print(exception);
+      },
     );
     value = res;
     return res;

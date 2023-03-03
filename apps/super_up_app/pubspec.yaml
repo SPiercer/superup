@@ -1,5 +1,5 @@
 name: super_up
-version: 0.0.1+17
+version: 0.0.1+18
 publish_to: none
 description: Super up app is social media chat system whats app clone
 environment: 
@@ -45,9 +45,10 @@ dependencies:
   get_it: ^7.2.0
   url_strategy: ^0.2.0
   path_provider: ^2.0.13
-  responsive_builder: ^0.6.0
+  responsive_builder: ^0.6.1
   version: ^3.0.2
   universal_html: ^2.0.9
+  auto_updater: ^0.1.6
 dependency_overrides:
   camera_android: ^0.10.4
 dev_dependencies:

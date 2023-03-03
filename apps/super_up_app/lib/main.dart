@@ -1,3 +1,4 @@
+import 'package:auto_updater/auto_updater.dart';
 import 'package:camera/camera.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
@@ -158,4 +159,6 @@ Future<void> _setDesktopWindow() async {
     await windowManager.show();
     await windowManager.focus();
   });
+  await autoUpdater.setFeedURL('https://superupdev.online/apps/appcast.xml');
+  await autoUpdater.setScheduledCheckInterval(3600 + 6);
 }

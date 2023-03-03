@@ -36,6 +36,19 @@ class _$ProfileApi extends ProfileApi {
   }
 
   @override
+  Future<Response<dynamic>> checkVersion(Map<String, dynamic> body) {
+    final Uri $url = Uri.parse('profile/version');
+    final $body = body;
+    final Request $request = Request(
+      'PATCH',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> updateLang(Map<String, dynamic> body) {
     final Uri $url = Uri.parse('profile/lang');
     final $body = body;
