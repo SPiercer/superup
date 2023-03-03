@@ -97,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  bubble:
+    dependency: transitive
+    description:
+      name: bubble
+      sha256: "65b992b8f8ba2e7e2871190cbdfaa0818b6de2f340bef37cb5ee1b61debe0226"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
   build_context:
     dependency: transitive
     description:
@@ -173,10 +181,10 @@ packages:
     dependency: transitive
     description:
       name: characters
-      sha256: e6a326c8af69605aec75ed6c187d06b349707a27fbff8222ca9cc2cff167975c
+      sha256: "04a925763edad70e8443c99234dc3328f442e811f1d8fd1a72f1c8ad0f69a605"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.1"
+    version: "1.3.0"
   charcode:
     dependency: transitive
     description:
@@ -213,10 +221,10 @@ packages:
     dependency: transitive
     description:
       name: collection
-      sha256: cfc915e6923fe5ce6e153b0723c753045de46de1b4d63771530504004a45fae0
+      sha256: "4a07be6cb69c84d677a6c3096fcf960cc3285a8330b4603e0d463d15d9bd934c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.0"
+    version: "1.17.1"
   convert:
     dependency: transitive
     description:
@@ -841,10 +849,10 @@ packages:
     dependency: transitive
     description:
       name: image
-      sha256: "8e9d133755c3e84c73288363e6343157c383a0c6c56fc51afcc5d4d7180306d6"
+      sha256: "483a389d6ccb292b570c31b3a193779b1b0178e7eb571986d9a49904b6861227"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "4.0.15"
   image_cropper:
     dependency: transitive
     description:
@@ -889,10 +897,10 @@ packages:
     dependency: transitive
     description:
       name: intl
-      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
+      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
       url: "https://pub.dev"
     source: hosted
-    version: "0.17.0"
+    version: "0.18.0"
   ionicons:
     dependency: "direct main"
     description:
@@ -905,10 +913,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: "5528c2f391ededb7775ec1daa69e65a2d61276f7552de2b5f7b8d34ee9fd4ab7"
+      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.7"
   just_audio:
     dependency: transitive
     description:
@@ -1001,10 +1009,10 @@ packages:
     dependency: transitive
     description:
       name: matcher
-      sha256: "16db949ceee371e9b99d22f88fa3a73c4e59fd0afed0bd25fc336eb76c198b72"
+      sha256: c94db23593b89766cda57aab9ac311e3616cf87c6fa4e9749df032f66f30dcb8
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.13"
+    version: "0.12.14"
   material_color_utilities:
     dependency: transitive
     description:
@@ -1017,10 +1025,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: "6c268b42ed578a53088d834796959e4a1814b5e9e164f147f580a386e5decf42"
+      sha256: "12307e7f0605ce3da64cf0db90e5fcab0869f3ca03f76be6bb2991ce0a55e82b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.0"
+    version: "1.9.0"
   mime:
     dependency: transitive
     description:
@@ -1105,10 +1113,10 @@ packages:
     dependency: transitive
     description:
       name: path
-      sha256: db9d4f58c908a4ba5953fcee2ae317c94889433e5024c27ce74a37f94267945b
+      sha256: "8829d8a55c13fc0e37127c29fedf290c102f4e40ae94ada574091fe0ff96c917"
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.2"
+    version: "1.8.3"
   path_provider:
     dependency: "direct main"
     description:
@@ -1321,10 +1329,10 @@ packages:
     dependency: transitive
     description:
       name: platform_local_notifications
-      sha256: "2e20165a7b002d5c1c6171ad2c306e1435974e3615f29fdb61a195191c3c5e95"
+      sha256: "187ee33c04120f44dc71f8301ec1b2b21b5e3b3ade6c6e3356de4247fe4c6cce"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -1545,10 +1553,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences
-      sha256: "5949029e70abe87f75cfe59d17bf5c397619c4b74a099b10116baeb34786fad9"
+      sha256: ee6257848f822b8481691f20c3e6d2bfee2e9eccb2a3d249907fcfb198c55b41
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.17"
+    version: "2.0.18"
   shared_preferences_android:
     dependency: transitive
     description:
@@ -1630,10 +1638,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite
-      sha256: "78324387dc81df14f78df06019175a86a2ee0437624166c382e145d0a7fd9a4f"
+      sha256: "851d5040552cf911f4cabda08d003eca76b27da3ed0002978272e27c8fbf8ecc"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.4+1"
+    version: "2.2.5"
   sqflite_common:
     dependency: transitive
     description:
@@ -1642,6 +1650,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.2+2"
+  sqflite_common_ffi:
+    dependency: transitive
+    description:
+      name: sqflite_common_ffi
+      sha256: e435a9dcd0ca79ba6aea677468e6f7cb8859891294a8f34226685f2cf2002ea2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.1+1"
+  sqlite3:
+    dependency: transitive
+    description:
+      name: sqlite3
+      sha256: db6350456720a4088a364bbe02052d43056a5ffbd4816fe9d28310dcfbe0dc05
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.9.1"
   sqlite3_flutter_libs:
     dependency: transitive
     description:
@@ -1741,10 +1765,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: ad540f65f92caa91bf21dfc8ffb8c589d6e4dc0c2267818b4cc2792857706206
+      sha256: "6182294da5abf431177fccc1ee02401f6df30f766bc6130a0852c6b6d7ee6b2d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.16"
+    version: "0.4.18"
   textless:
     dependency: transitive
     description:
@@ -1757,10 +1781,10 @@ packages:
     dependency: transitive
     description:
       name: timeago
-      sha256: "46c128312ab0ea144b146c0ac6426ddd96810efec2de3fccc425d00179cd8254"
+      sha256: a415b9a05ef64b845c859a91161fc9f689f88eaaa4c04759517d201891b99e90
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.0"
   timezone:
     dependency: transitive
     description:
@@ -1805,10 +1829,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher
-      sha256: e8f2efc804810c0f2f5b485f49e7942179f56eabcfe81dce3387fec4bb55876b
+      sha256: "75f2846facd11168d007529d6cd8fcb2b750186bea046af9711f10b907e1587e"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.9"
+    version: "6.1.10"
   url_launcher_android:
     dependency: transitive
     description:
@@ -1885,26 +1909,26 @@ packages:
     dependency: "direct main"
     description:
       name: v_chat_firebase_fcm
-      sha256: dc818ff2420adfa25079c29d397ffd852c3d8cb55dd8811a0d002fe456137e70
+      sha256: "7c8da8ebea4b964aeb7f54ac90b331776848da82985fceaed6f992707721202a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   v_chat_input_ui:
     dependency: transitive
     description:
       name: v_chat_input_ui
-      sha256: d424a32679bc5833f146e307d1821316a7f1c44cf316de300ca8afcf7e9f9f3f
+      sha256: be31c6d9c6b5e54d29fecd9249d4efebea8f89ee539093242388bc58d508608b
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   v_chat_media_editor:
     dependency: transitive
     description:
       name: v_chat_media_editor
-      sha256: "9280b66dd3142b63832e15fc2ab44e44d0cad8a2d445441ff95256e72bf93588"
+      sha256: "8dcb9ed4051ea8187e76f904be28dfcf32a2f880ad603b5495a1a8e2701241f1"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   v_chat_mention_controller:
     dependency: transitive
     description:
@@ -1917,66 +1941,66 @@ packages:
     dependency: "direct main"
     description:
       name: v_chat_message_page
-      sha256: "013e31e05f13de878fda39497f4f6b44f628a8f50fac611b866a6c760371e0c9"
+      sha256: "8a6e1057867cb31cac780ae878f737cf686c2bf01bb76c2b90a09af2acc109c9"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0+1"
+    version: "0.7.1"
   v_chat_one_signal:
     dependency: "direct main"
     description:
       name: v_chat_one_signal
-      sha256: c94d91d13fe024f00a1590131221f947d79a4a9a3a9489d804d13f3c2b25717b
+      sha256: "8e1fe858d6b1d1ba247e8d8a5b6f09cf86a6740d2b535a53b606555a224c9a7f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   v_chat_receive_share:
     dependency: "direct main"
     description:
       name: v_chat_receive_share
-      sha256: "6b0cc390f5d5764fd8523d2576e580cbeba5fdea2dc92e8c270779204f269ea6"
+      sha256: f72dc52f4b30add37759f49e55654c1acc1d987c942c3bc61438fd0d68d3aa39
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   v_chat_room_page:
     dependency: "direct main"
     description:
       name: v_chat_room_page
-      sha256: "6e308b6d72a65cf3c57db3315d9a74e8e470f33a1040322df9a81160b45f9157"
+      sha256: b8e4a60f8044cc525fcaec6c41b604f180c41e25309588a94a5fb7c09f70c42d
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   v_chat_sdk_core:
     dependency: "direct main"
     description:
       name: v_chat_sdk_core
-      sha256: ad22aae5954906da6f12a0c6aca3c747224ccad48006cc6fa9bbc2de989d6d1a
+      sha256: "9fed7e5b7472c0960c26d577bbaa1dc39376fbea94beb70a8f6574e252d1f559"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   v_chat_utils:
     dependency: "direct main"
     description:
       name: v_chat_utils
-      sha256: "9aeb6bcdd57e6d4528823b5498fd30f569a581cae142430f5088e09e3efd355c"
+      sha256: c2da9cff09b11e43c9ee8e3f65631e88eec8c64c70d901ceebb16607d96c3243
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   v_chat_voice_player:
     dependency: transitive
     description:
       name: v_chat_voice_player
-      sha256: "072cbeadd55c87b7cce2faf5d54c37ccad1d0c24f54dadbfb0d7d2ee10a8f7e5"
+      sha256: "5e8d7136e3f8c83487c797ee0719b9e86ceea01020aa329286f9cd42458f1cd8"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   v_chat_web_rtc:
     dependency: "direct main"
     description:
       name: v_chat_web_rtc
-      sha256: "803fb5b578f57971aacf9f2d84b035c8a9feda6206eb4efa5b3ebec404c26c7c"
+      sha256: "3063ead2964d71aa299fa9e98332998c4b9a9063f4f4e43ecdfa100a60c95607"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   vector_math:
     dependency: transitive
     description:
@@ -1997,10 +2021,10 @@ packages:
     dependency: transitive
     description:
       name: video_player
-      sha256: "59f7f31c919c59cbedd37c617317045f5f650dc0eeb568b0b0de9a36472bdb28"
+      sha256: "58dc3d6ceb199b82e652ec27f16485e33167ef021fe4221a954ff1aa12b1a5c0"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.1"
+    version: "2.5.3"
   video_player_android:
     dependency: transitive
     description:
