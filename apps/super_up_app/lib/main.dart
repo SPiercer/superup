@@ -69,6 +69,9 @@ void main() async {
               Locale.fromSubtags(languageCode: 'ar'),
             ],
             builder: (context, child) {
+              if (VPlatforms.isMobile || VPlatforms.isWebRunOnMobile) {
+                return child!;
+              }
               return ResponsiveWrapper.builder(
                 BouncingScrollWrapper.builder(
                   context,
@@ -160,5 +163,5 @@ Future<void> _setDesktopWindow() async {
     await windowManager.focus();
   });
   await autoUpdater.setFeedURL('https://superupdev.online/apps/appcast.xml');
-  await autoUpdater.setScheduledCheckInterval(3600 + 6);
+  await autoUpdater.setScheduledCheckInterval(3600 + 12);
 }
