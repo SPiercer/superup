@@ -124,7 +124,6 @@ void main() async {
                 )
               ],
             ),
-            // The Mandy red, dark theme.
             darkTheme: FlexThemeData.dark(
               scheme: FlexScheme.green,
               useMaterial3: true,

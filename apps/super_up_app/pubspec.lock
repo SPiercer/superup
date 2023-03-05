@@ -785,10 +785,10 @@ packages:
     dependency: transitive
     description:
       name: google_maps_flutter
-      sha256: "0c6b72b4b1e0f6204973e2b40868a75fe6380725d498f215cd7e35ed920d1c57"
+      sha256: "24392ef192f3b00bcd93151375676805a9933574423a5bd5509a0ead2e8a4215"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.3"
+    version: "2.2.5"
   google_maps_flutter_android:
     dependency: transitive
     description:
@@ -1917,10 +1917,10 @@ packages:
     dependency: transitive
     description:
       name: v_chat_input_ui
-      sha256: be31c6d9c6b5e54d29fecd9249d4efebea8f89ee539093242388bc58d508608b
+      sha256: "40520d4fbb4ba5daca6227e11ecbfa70252f0b5524593879109c11c1ee3a7e10"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.1+1"
   v_chat_media_editor:
     dependency: transitive
     description:
@@ -1941,10 +1941,10 @@ packages:
     dependency: "direct main"
     description:
       name: v_chat_message_page
-      sha256: "8a6e1057867cb31cac780ae878f737cf686c2bf01bb76c2b90a09af2acc109c9"
+      sha256: e2e7055261f3539f8c453c4e3edf0c7f3b9a1a731b66db6c00cddec02cb9a350
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.1+1"
   v_chat_one_signal:
     dependency: "direct main"
     description:

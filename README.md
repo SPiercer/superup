@@ -9,6 +9,8 @@ melos bs
 ```
 this code will run pub get for you 
 
+Rename the .env.example to ```.env``` and set your data to it
+
 
 ### 1- Super up is one of apps using v chat  you can check the demo from here
 ### check v chat sdk from here

@@ -5,7 +5,6 @@ import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 
-import '../../../core/platforms.dart';
 import '../../../core/s_base_controller.dart';
 import '../../home_wide_modules/home/view/home_wide_view.dart';
 
@@ -132,7 +131,7 @@ class RegisterController implements SBaseController {
   }
 
   void _homeNav() {
-    if ((VPlatforms.isWeb && !VPlatformsX.isWebRunOnMobile) ||
+    if ((VPlatforms.isWeb && !VPlatforms.isWebRunOnMobile) ||
         VPlatforms.isDeskTop) {
       context.toPageAndRemoveAll(const HomeWideView());
     } else {
