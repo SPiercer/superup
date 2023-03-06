@@ -49,7 +49,7 @@ class _SingleRoomSettingsViewState extends State<SingleRoomSettingsView> {
                       url: controller.settingsModel.image,
                     ),
                     fit: BoxFit.cover,
-                    size: Size(700, 400),
+                    size: const Size(700, 400),
                   ),
                 )
               ],

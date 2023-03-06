@@ -52,7 +52,7 @@ class _GroupRoomSettingsViewState extends State<GroupRoomSettingsView> {
                         url: controller.settingsModel.image,
                       ),
                       fit: BoxFit.cover,
-                      size: Size(700, 400),
+                      size: const Size(700, 400),
                     );
                   },
                 ),

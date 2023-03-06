@@ -147,13 +147,13 @@ void main() async {
 Future<void> _setDesktopWindow() async {
   await windowManager.ensureInitialized();
   WindowOptions windowOptions = const WindowOptions(
-    // minimumSize: Size(500, 900),
+    minimumSize: Size(500, 900),
     // size: Size(500, 900),
-    center: true,
+    //center: true,
     backgroundColor: Colors.transparent,
-    skipTaskbar: false,
+    skipTaskbar: true,
     title: SConstants.appName,
-    titleBarStyle: TitleBarStyle.normal,
+    titleBarStyle: TitleBarStyle.hidden,
     // maximumSize: Size(700, 1500),
     fullScreen: false,
   );
