@@ -10,6 +10,7 @@ import 'package:super_up/app/modules/settings/views/settings_view.dart';
 import 'package:super_up/app/modules/star_messages/views/star_messages_view.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_receive_share/v_chat_receive_share.dart';
+import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 import 'package:v_chat_web_rtc/v_chat_web_rtc.dart';
 
@@ -72,9 +73,8 @@ class HomeMobileController extends SLoadingController<int> {
       const StatusTabView(),
       const CallsTabView(),
     ]);
-    vInitCallListener();
-    vInitReceiveShareHandler();
-    _setVisit();
+    _connectToVChatSdk();
+
     GetIt.I.get<VersionCheckerController>().check();
   }
 
@@ -89,6 +89,18 @@ class HomeMobileController extends SLoadingController<int> {
     tabController.animateTo(id);
     value.data = id;
     update();
+  }
+
+  void _connectToVChatSdk() async {
+    final map = VAppPref.getMap(SStorageKeys.myProfile.name);
+    await VChatController.I.profileApi.connect(
+      //todo add device language
+      identifier: SMyProfile.fromMap(map!).baseUser.id,
+      fullName: SMyProfile.fromMap(map).baseUser.fullName,
+    );
+    vInitCallListener();
+    vInitReceiveShareHandler();
+    _setVisit();
   }
 
   void clearAllSelection() {

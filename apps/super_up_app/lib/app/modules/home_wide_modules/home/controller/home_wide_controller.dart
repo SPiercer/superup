@@ -30,8 +30,7 @@ class HomeWideController implements SBaseController {
 
   @override
   void onInit() {
-    setVisit();
-    vInitCallListener();
+    _connectToVChatSdk();
     GetIt.I.get<VersionCheckerController>().check();
   }
 
@@ -44,6 +43,17 @@ class HomeWideController implements SBaseController {
     vRoomController.setRoomSelected(room.id);
     vWebChatNavigation.key.currentState!
         .pushReplacementNamed(ChatRoute.route, arguments: room);
+  }
+
+  void _connectToVChatSdk() async {
+    final map = VAppPref.getMap(SStorageKeys.myProfile.name);
+    await VChatController.I.profileApi.connect(
+      //todo add device language
+      identifier: SMyProfile.fromMap(map!).baseUser.id,
+      fullName: SMyProfile.fromMap(map).baseUser.fullName,
+    );
+    setVisit();
+    vInitCallListener();
   }
 
   void setVisit() {
