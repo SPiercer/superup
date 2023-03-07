@@ -1,5 +1,5 @@
 name: super_up
-version: 0.0.1+19
+version: 0.0.1+20
 publish_to: none
 description: Super up app is social media chat system whats app clone
 environment: 
@@ -7,14 +7,14 @@ environment:
 
 dependencies:
   yaml: ^3.1.1
-  v_chat_web_rtc: ^0.7.1
-  v_chat_message_page: ^0.7.1+1
-  v_chat_sdk_core: ^0.7.1
-  v_chat_room_page: ^0.7.1
-  v_chat_one_signal: ^0.7.1
-  v_chat_firebase_fcm: ^0.7.1
-  v_chat_receive_share: ^0.7.1
-  v_chat_utils: ^0.7.1
+  v_chat_web_rtc: ^0.7.2
+  v_chat_message_page: ^0.7.2
+  v_chat_sdk_core: ^0.7.2
+  v_chat_room_page: ^0.7.2
+  v_chat_one_signal: ^0.7.2
+  v_chat_firebase_fcm: ^0.7.2
+  v_chat_receive_share: ^0.7.2
+  v_chat_utils: ^0.7.2
   cupertino_icons: ^1.0.5
   story_view: ^0.14.0
   customizable_space_bar: ^0.2.0

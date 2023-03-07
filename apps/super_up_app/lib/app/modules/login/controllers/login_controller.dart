@@ -5,6 +5,7 @@ import 'package:super_up/app/modules/home_mobile_tabs/home_mobile/views/home_vie
 import 'package:super_up_core/super_up_core.dart';
 import 'package:v_chat_sdk_core/v_chat_sdk_core.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
+
 import '../../home_wide_modules/home/view/home_wide_view.dart';
 
 class LoginController implements SBaseController {
@@ -13,6 +14,7 @@ class LoginController implements SBaseController {
   final AuthApiService authService;
   final ProfileApiService profileService;
   final BuildContext context;
+
   LoginController(
     this.authService,
     this.profileService,
@@ -71,9 +73,9 @@ class LoginController implements SBaseController {
         await authService.login(LoginDto(
           email: email,
           method: RegisterMethod.email,
-          pushKey: await VChatController
-              .I.vChatConfig.currentPushProviderService!
-              .getToken(),
+          pushKey: await (await VChatController
+                  .I.vChatConfig.currentPushProviderService)
+              ?.getToken(),
           deviceInfo: await deviceHelper.getDeviceMapInfo(),
           deviceId: await deviceHelper.getId(),
           //todo fix
@@ -87,10 +89,6 @@ class LoginController implements SBaseController {
         final status = response.registerStatus;
         await VAppPref.setMap(SStorageKeys.myProfile.name, response.toMap());
 
-        await VChatController.I.profileApi.login(
-          identifier: response.baseUser.id,
-          deviceLanguage: response.language,
-        );
         if (status == RegisterStatus.accepted) {
           await VAppPref.setBool(SStorageKeys.isLogin.name, true);
           _homeNav();

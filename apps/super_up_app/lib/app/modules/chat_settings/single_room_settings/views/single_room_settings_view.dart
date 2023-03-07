@@ -9,6 +9,7 @@ class SingleRoomSettingsView extends StatefulWidget {
   const SingleRoomSettingsView({Key? key, required this.settingsModel})
       : super(key: key);
   final VToChatSettingsModel settingsModel;
+
   @override
   State<SingleRoomSettingsView> createState() => _SingleRoomSettingsViewState();
 }
@@ -66,7 +67,13 @@ class _SingleRoomSettingsViewState extends State<SingleRoomSettingsView> {
                       tiles: <SettingsTile>[
                         SettingsTile.switchTile(
                           initialValue: controller.isMuted,
-                          onToggle: controller.changeRoomNotification,
+                          onToggle: (value) {
+                            if (value) {
+                              controller.muteRoomNotification();
+                            } else {
+                              controller.unMuteRoomNotification();
+                            }
+                          },
                           leading: const Icon(
                             Icons.notifications_active,
                             color: Colors.green,
@@ -77,7 +84,7 @@ class _SingleRoomSettingsViewState extends State<SingleRoomSettingsView> {
                           onPressed: (context) =>
                               controller.starMessage(context),
                           leading: const Icon(Icons.star, color: Colors.green),
-                          title: const Text('star message'),
+                          title: const Text('Star message'),
                         ),
                         SettingsTile.navigation(
                           onPressed: (context) =>

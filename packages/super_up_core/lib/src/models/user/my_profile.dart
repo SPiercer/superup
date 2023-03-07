@@ -46,7 +46,7 @@ class SMyProfile {
         (map['currentDevice'] as Map<String, dynamic>)['language'] as String,
       ),
       registerStatus:
-          RegisterStatus.values.byName(map['me']['registerStatus'] as String),
+          RegisterStatus.values.byName(map['registerStatus'] as String),
     );
   }
 

@@ -77,9 +77,9 @@ class RegisterController implements SBaseController {
           email: email,
           method: RegisterMethod.email,
           fullName: name,
-          pushKey: await VChatController
-              .I.vChatConfig.currentPushProviderService!
-              .getToken(),
+          pushKey: await (await VChatController
+                  .I.vChatConfig.currentPushProviderService)
+              ?.getToken(),
           deviceInfo: await deviceHelper.getDeviceMapInfo(),
           deviceId: await deviceHelper.getId(),
           //todo fix
@@ -92,12 +92,6 @@ class RegisterController implements SBaseController {
       onSuccess: (response) async {
         final status = response.registerStatus;
         await VAppPref.setMap(SStorageKeys.myProfile.name, response.toMap());
-        await VChatController.I.profileApi.register(
-          identifier: response.baseUser.id,
-          fullName: response.baseUser.fullName,
-          deviceLanguage: response.language,
-        );
-
         if (status == RegisterStatus.accepted) {
           await VAppPref.setBool(SStorageKeys.isLogin.name, true);
           _homeNav();

@@ -121,22 +121,50 @@ class GroupRoomSettingsController extends SLoadingController<VMyGroupInfo> {
     }
   }
 
-  void changeRoomNotification(bool value) {
-    vSafeApiCall<bool>(
+  void muteRoomNotification() {
+    vSafeApiCall<void>(
       onLoading: () {
-        VAppAlert.showLoading(context: context, isDismissible: true);
+        VAppAlert.showLoading(context: context);
       },
       request: () async {
-        final res = await VChatController.I.roomApi.changeRoomNotification(
+        await VChatController.I.nativeApi.remote.room.muteRoomNotification(
           roomId: roomId,
-          isMuted: value,
         );
-        return res;
+        await VChatController.I.nativeApi.local.room.updateRoomIsMuted(
+          VUpdateRoomMuteEvent(
+            roomId: roomId,
+            isMuted: true,
+          ),
+        );
       },
       onSuccess: (response) {
-        isMuted = response;
+        isMuted = !isMuted;
         context.pop();
-        update();
+        notifyListeners();
+      },
+    );
+  }
+
+  void unMuteRoomNotification() {
+    vSafeApiCall<void>(
+      onLoading: () {
+        VAppAlert.showLoading(context: context);
+      },
+      request: () async {
+        await VChatController.I.nativeApi.remote.room.unMuteRoomNotification(
+          roomId: roomId,
+        );
+        await VChatController.I.nativeApi.local.room.updateRoomIsMuted(
+          VUpdateRoomMuteEvent(
+            roomId: roomId,
+            isMuted: false,
+          ),
+        );
+      },
+      onSuccess: (response) {
+        isMuted = !isMuted;
+        context.pop();
+        notifyListeners();
       },
     );
   }

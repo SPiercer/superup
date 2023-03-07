@@ -113,7 +113,13 @@ class _GroupRoomSettingsViewState extends State<GroupRoomSettingsView> {
                             ),
                             SettingsTile.switchTile(
                               initialValue: controller.isMuted,
-                              onToggle: controller.changeRoomNotification,
+                              onToggle: (value) {
+                                if (value) {
+                                  controller.muteRoomNotification();
+                                } else {
+                                  controller.unMuteRoomNotification();
+                                }
+                              },
                               leading: const Icon(
                                 Icons.notifications_active,
                                 color: Colors.green,

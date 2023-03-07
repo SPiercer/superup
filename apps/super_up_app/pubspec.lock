@@ -781,6 +781,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  google_api_availability:
+    dependency: transitive
+    description:
+      name: google_api_availability
+      sha256: a1f58c5213abae549fb1e1451bc68eb499da7033039f77bc289fd6faca384295
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   google_maps_flutter:
     dependency: transitive
     description:
@@ -817,10 +825,10 @@ packages:
     dependency: transitive
     description:
       name: html
-      sha256: d9793e10dbe0e6c364f4c59bf3e01fb33a9b2a674bc7a1081693dba0614b6269
+      sha256: "79d498e6d6761925a34ee5ea8fa6dfef38607781d2fa91e37523474282af55cb"
       url: "https://pub.dev"
     source: hosted
-    version: "0.15.1"
+    version: "0.15.2"
   http:
     dependency: "direct main"
     description:
@@ -1909,26 +1917,26 @@ packages:
     dependency: "direct main"
     description:
       name: v_chat_firebase_fcm
-      sha256: "7c8da8ebea4b964aeb7f54ac90b331776848da82985fceaed6f992707721202a"
+      sha256: "01a656bf6764ac8e75b80b69dafb4e9a3caf227f7be69b23a3debff4f11242f3"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   v_chat_input_ui:
     dependency: transitive
     description:
       name: v_chat_input_ui
-      sha256: "40520d4fbb4ba5daca6227e11ecbfa70252f0b5524593879109c11c1ee3a7e10"
+      sha256: c0e14c2993b266a6a640f94d6bb4dac7bf0826e2a3771dc0ecc4da5aea0122bc
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1+1"
+    version: "0.7.2"
   v_chat_media_editor:
     dependency: transitive
     description:
       name: v_chat_media_editor
-      sha256: "8dcb9ed4051ea8187e76f904be28dfcf32a2f880ad603b5495a1a8e2701241f1"
+      sha256: "20325c0f660f7f363ca15329a3a4fef01f906c434ae2fca4635d6a04f709f019"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   v_chat_mention_controller:
     dependency: transitive
     description:
@@ -1941,66 +1949,66 @@ packages:
     dependency: "direct main"
     description:
       name: v_chat_message_page
-      sha256: e2e7055261f3539f8c453c4e3edf0c7f3b9a1a731b66db6c00cddec02cb9a350
+      sha256: f15d030d3724b93ae96439269819824065bdb57784d46ce4b504a34942f7d7b7
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1+1"
+    version: "0.7.2"
   v_chat_one_signal:
     dependency: "direct main"
     description:
       name: v_chat_one_signal
-      sha256: "8e1fe858d6b1d1ba247e8d8a5b6f09cf86a6740d2b535a53b606555a224c9a7f"
+      sha256: "269af930271e3da7edb5139b372758d81cfe8560bf2b03a6aa328dc104fc4855"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   v_chat_receive_share:
     dependency: "direct main"
     description:
       name: v_chat_receive_share
-      sha256: f72dc52f4b30add37759f49e55654c1acc1d987c942c3bc61438fd0d68d3aa39
+      sha256: "9aac15d761235caa59275f4ec15cf2ddbbd901f48eb8069c49172735fcc6229a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   v_chat_room_page:
     dependency: "direct main"
     description:
       name: v_chat_room_page
-      sha256: b8e4a60f8044cc525fcaec6c41b604f180c41e25309588a94a5fb7c09f70c42d
+      sha256: f578cfecf54e9fc08f6d3728c4fcd123c79cce5059ca9169584da1272e78c410
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   v_chat_sdk_core:
     dependency: "direct main"
     description:
       name: v_chat_sdk_core
-      sha256: "9fed7e5b7472c0960c26d577bbaa1dc39376fbea94beb70a8f6574e252d1f559"
+      sha256: cf6edecac7558014b904c532662f7fc2ff289c1e70418e8ddc4ac5e25d4c90e8
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   v_chat_utils:
     dependency: "direct main"
     description:
       name: v_chat_utils
-      sha256: c2da9cff09b11e43c9ee8e3f65631e88eec8c64c70d901ceebb16607d96c3243
+      sha256: "4530fede1a51a8c2d3ea41ccae183fd343b67d32fb61cd9818c3ca476ade7df5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   v_chat_voice_player:
     dependency: transitive
     description:
       name: v_chat_voice_player
-      sha256: "5e8d7136e3f8c83487c797ee0719b9e86ceea01020aa329286f9cd42458f1cd8"
+      sha256: d8120de5d215834f343414e060598a5b0bba003dbc2a9abd0d0b29eb4551b947
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   v_chat_web_rtc:
     dependency: "direct main"
     description:
       name: v_chat_web_rtc
-      sha256: "3063ead2964d71aa299fa9e98332998c4b9a9063f4f4e43ecdfa100a60c95607"
+      sha256: "36a85038e4ebb00868f5ebeea9ab77a5226e83ea52e4f691de4bb8f1cf9cdd99"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   vector_math:
     dependency: transitive
     description:

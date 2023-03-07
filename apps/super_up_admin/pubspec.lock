@@ -509,14 +509,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.2.0"
+  google_api_availability:
+    dependency: transitive
+    description:
+      name: google_api_availability
+      sha256: a1f58c5213abae549fb1e1451bc68eb499da7033039f77bc289fd6faca384295
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   html:
     dependency: transitive
     description:
       name: html
-      sha256: d9793e10dbe0e6c364f4c59bf3e01fb33a9b2a674bc7a1081693dba0614b6269
+      sha256: "79d498e6d6761925a34ee5ea8fa6dfef38607781d2fa91e37523474282af55cb"
       url: "https://pub.dev"
     source: hosted
-    version: "0.15.1"
+    version: "0.15.2"
   http:
     dependency: "direct main"
     description:
@@ -1325,18 +1333,18 @@ packages:
     dependency: transitive
     description:
       name: v_chat_sdk_core
-      sha256: "9fed7e5b7472c0960c26d577bbaa1dc39376fbea94beb70a8f6574e252d1f559"
+      sha256: cf6edecac7558014b904c532662f7fc2ff289c1e70418e8ddc4ac5e25d4c90e8
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   v_chat_utils:
     dependency: "direct main"
     description:
       name: v_chat_utils
-      sha256: c2da9cff09b11e43c9ee8e3f65631e88eec8c64c70d901ceebb16607d96c3243
+      sha256: "4530fede1a51a8c2d3ea41ccae183fd343b67d32fb61cd9818c3ca476ade7df5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   vector_math:
     dependency: transitive
     description:
