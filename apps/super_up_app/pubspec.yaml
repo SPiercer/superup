@@ -8,9 +8,9 @@ environment:
 dependencies:
   yaml: ^3.1.1
   v_chat_web_rtc: ^0.7.2
-  v_chat_message_page: ^0.7.2
+  v_chat_message_page: ^0.7.2+3
   v_chat_sdk_core: ^0.7.2
-  v_chat_room_page: ^0.7.2
+  v_chat_room_page: ^0.7.2+3
   v_chat_one_signal: ^0.7.2
   v_chat_firebase_fcm: ^0.7.2
   v_chat_receive_share: ^0.7.2

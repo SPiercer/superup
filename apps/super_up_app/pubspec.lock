@@ -542,14 +542,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
-  flutter_audio_waveforms:
-    dependency: transitive
-    description:
-      name: flutter_audio_waveforms
-      sha256: b0e5d18c0b4caf56cd3cb245385cdd40294f7a24605d0252394c2c42c8b854ed
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.1+7"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -1949,10 +1941,10 @@ packages:
     dependency: "direct main"
     description:
       name: v_chat_message_page
-      sha256: f15d030d3724b93ae96439269819824065bdb57784d46ce4b504a34942f7d7b7
+      sha256: "5b5e3f2d51220a5acfc054f6531c620d39317513a601fa0410f3f4747d4b9742"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.2"
+    version: "0.7.2+3"
   v_chat_one_signal:
     dependency: "direct main"
     description:
@@ -1973,10 +1965,10 @@ packages:
     dependency: "direct main"
     description:
       name: v_chat_room_page
-      sha256: f578cfecf54e9fc08f6d3728c4fcd123c79cce5059ca9169584da1272e78c410
+      sha256: "5905ae3dfda782e087866ddf156e0903c0e46af4e1acc6db5245d35fe53f6384"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.2"
+    version: "0.7.2+3"
   v_chat_sdk_core:
     dependency: "direct main"
     description:
@@ -1997,10 +1989,10 @@ packages:
     dependency: transitive
     description:
       name: v_chat_voice_player
-      sha256: d8120de5d215834f343414e060598a5b0bba003dbc2a9abd0d0b29eb4551b947
+      sha256: "6c081694b5e04dcf549f8870a2c55331bb0f286832fffda8f1b1525aefea5353"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.2"
+    version: "0.7.2+3"
   v_chat_web_rtc:
     dependency: "direct main"
     description:

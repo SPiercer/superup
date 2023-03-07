@@ -61,6 +61,7 @@ class LoginController implements SBaseController {
         VAppAlert.showLoading(context: context);
       },
       onError: (exception, trace) {
+        print(trace);
         context.pop();
         VAppAlert.showOkAlertDialog(
           context: context,

@@ -33,8 +33,10 @@ class SMyProfile {
 
   Map<String, dynamic> toMap() {
     return {
-      'me': baseUser.toMap(),
-      'registerStatus': registerStatus.name,
+      'me': {
+        ...baseUser.toMap(),
+        'registerStatus': registerStatus.name,
+      },
       'currentDevice': {"language": language.toString()},
     };
   }
@@ -46,7 +48,7 @@ class SMyProfile {
         (map['currentDevice'] as Map<String, dynamic>)['language'] as String,
       ),
       registerStatus:
-          RegisterStatus.values.byName(map['registerStatus'] as String),
+          RegisterStatus.values.byName(map['me']['registerStatus'] as String),
     );
   }
 
