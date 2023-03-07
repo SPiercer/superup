@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>super up</title>
+        <item>
+            <title>0.0.1</title>
+            <pubDate>Tue, 07 Mar 2023 19:10:36 +0200</pubDate>
+            <sparkle:version>21</sparkle:version>
+            <sparkle:shortVersionString>0.0.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
+            <enclosure url="https://superupdev.online/apps/super_up.dmg" length="38422577" type="application/octet-stream" sparkle:edSignature="oPzqvTvwpNH67dPzS/cvi/E1iQNjvc2C8xP9PcjmxTFENq8aHPA6n6KgKV7q1ha5agoHLT7OMvKwVDjjM14cCg=="/>
+        </item>
+    </channel>
+</rss>
