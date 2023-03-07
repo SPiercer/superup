@@ -5,7 +5,7 @@ releases:
       - name: release-macos
         package:
           platform: macos
-          target: zip
+          target: dmg
           build_args:
             dart-define:
               APP_ENV: dev
