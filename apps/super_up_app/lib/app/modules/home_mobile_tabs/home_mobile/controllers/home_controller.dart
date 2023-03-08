@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:super_up/app/core/states/s_list_loading_state.dart';
+import 'package:super_up/app/modules/app_members/views/app_members_view.dart';
 import 'package:super_up/app/modules/choose_members/views/choose_members_view.dart';
 import 'package:super_up/app/modules/create_broadcast/views/create_broadcast_view.dart';
 import 'package:super_up/app/modules/create_group/views/create_group_view.dart';
+import 'package:super_up/app/modules/create_text_status/views/create_text_status_view.dart';
 import 'package:super_up/app/modules/global_search/views/global_search_view.dart';
+import 'package:super_up/app/modules/home_mobile_tabs/home_mobile/widgets/expandable_fab.dart';
 import 'package:super_up/app/modules/link_web/views/link_web_view.dart';
 import 'package:super_up/app/modules/settings/views/settings_view.dart';
 import 'package:super_up/app/modules/star_messages/views/star_messages_view.dart';
@@ -28,7 +31,13 @@ class HomeMobileController extends SLoadingController<int> {
   late TabController tabController;
 
   int get tabIndex => data;
-  final tabsWidgets = <Widget>[];
+  final tabsWidgets = const <Widget>[
+    CameraTabView(),
+    RoomsTabView(),
+    StatusTabView(),
+    CallsTabView(),
+  ];
+  final fabKey = GlobalKey<ExpandableFabState>();
   final ProfileApiService profileApiService;
   final BuildContext context;
 
@@ -60,23 +69,37 @@ class HomeMobileController extends SLoadingController<int> {
   @override
   void onInit() {
     registerLazySingletons();
-
-    tabsWidgets.addAll([
-      WillPopScope(
-        onWillPop: () async {
-          tabController.animateTo(1);
-          return true;
-        },
-        child: const CameraTabView(),
-      ),
-      const RoomsTabView(),
-      const StatusTabView(),
-      const CallsTabView(),
-    ]);
     _connectToVChatSdk();
-
     GetIt.I.get<VersionCheckerController>().check();
+    tabController.addListener(() {
+      if (fabKey.currentState == null) return;
+      switch (tabController.index) {
+        case 0:
+          fabKey.currentState!.hide();
+          break;
+        case 1:
+          fabAction = () async {
+            context.toPage(const AppMembersView());
+          };
+          fabKey.currentState!.hide();
+          fabIcon = Icons.message;
+          break;
+        case 2:
+          fabAction = () async {};
+          fabKey.currentState!.show();
+          fabIcon = Icons.camera_alt;
+          break;
+        case 3:
+          fabKey.currentState!.hide();
+          break;
+      }
+      update();
+    });
   }
+
+  late Future<void> Function() fabAction = () async {
+    context.toPage(const AppMembersView());
+  };
 
   @override
   void onClose() {
@@ -85,7 +108,6 @@ class HomeMobileController extends SLoadingController<int> {
   }
 
   void changeTab(int id) {
-    tabController.index = id;
     tabController.animateTo(id);
     value.data = id;
     update();
@@ -150,4 +172,6 @@ class HomeMobileController extends SLoadingController<int> {
       ignoreTimeoutAndNoInternet: true,
     );
   }
+
+  IconData fabIcon = Icons.message;
 }

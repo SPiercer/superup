@@ -19,7 +19,7 @@ Future initVChat(GlobalKey<NavigatorState> navigatorKey) async {
     navigatorKey: navigatorKey,
     vChatConfig: VChatConfig(
       googleMapsApiKey: dotenv.env['googleMapsApiKey'],
-      encryptHashKey: kDebugMode
+      encryptHashKey: !kDebugMode
           ? "V_CHAT_SDK_V2_VERY_STRONG_KEY"
           : dotenv.env['encryptHashKey']!,
       baseUrl: SConstants.vChatBaseUrl,

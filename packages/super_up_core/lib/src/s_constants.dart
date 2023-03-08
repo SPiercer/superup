@@ -12,7 +12,7 @@ abstract class SConstants {
   static const maxMediaSize = 50 * 1000 * 1000; // 50 mb
 
   static Uri get vChatBaseUrl {
-    if (kDebugMode) {
+    if (!kDebugMode) {
       if (VPlatforms.isAndroid) {
         ///android emulator only for real device you need to get your ipv4 network address
         return Uri.parse("http://10.0.2.2:3001");
@@ -24,7 +24,7 @@ abstract class SConstants {
 
   static String get feedUrl => "https://$_productionBaseUrl/apps/appcast.xml";
   static Uri get sApiBaseUrl {
-    if (kDebugMode) {
+    if (!kDebugMode) {
       if (VPlatforms.isAndroid) {
         ///android emulator only for real device you need to get your ipv4 network address
         return Uri.parse("http://10.0.2.2:3000/api/v1");

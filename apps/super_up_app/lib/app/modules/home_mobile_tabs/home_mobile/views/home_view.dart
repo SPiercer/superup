@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:super_up/app/modules/create_text_status/views/create_text_status_view.dart';
+import 'package:super_up/app/modules/home_mobile_tabs/home_mobile/widgets/expandable_fab.dart';
 import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_utils/v_chat_utils.dart';
 
 import '../controllers/home_controller.dart';
 import '../widgets/home_app_bar.dart';
@@ -20,11 +23,10 @@ class _HomeMobileViewState extends State<HomeMobileView>
   void initState() {
     super.initState();
     final tabController = TabController(
-      length: 4,
-      initialIndex: 1,
-      vsync: this,
-      animationDuration: Duration.zero,
-    );
+        length: 4,
+        initialIndex: 1,
+        vsync: this,
+        animationDuration: const Duration(milliseconds: 100));
     controller = HomeMobileController(
       GetIt.I.get<ProfileApiService>(),
       context,
@@ -43,10 +45,6 @@ class _HomeMobileViewState extends State<HomeMobileView>
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // if (controller.selectedRooms.isNotEmpty) {
-        //   controller.clearAllSelection();
-        //   return false;
-        // }
         if (controller.tabIndex == 0) {
           controller.changeTab(1);
           return false;
@@ -54,15 +52,30 @@ class _HomeMobileViewState extends State<HomeMobileView>
         return true;
       },
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(100),
-          child: HomeAppbar(
-            controller: controller,
-          ),
+        floatingActionButton: ValueListenableBuilder(
+          valueListenable: controller,
+          builder: (_, __, ___) {
+            if (controller.tabController.index == 0 || controller.tabController.index == 3) {
+              return const SizedBox.shrink();
+            }
+            return ExpandableFab(
+              key: controller.fabKey,
+              backgroundColor: AppColors.buttonBackground,
+              onPressed: controller.fabAction,
+              smallButton: FloatingActionButton.small(
+                onPressed: () => context.toPage(const CreateTextStatusView()),
+                child: const Icon(Icons.edit),
+              ),
+              child: Icon(
+                controller.fabIcon,
+                color: Colors.white,
+              ),
+            );
+          },
         ),
+        appBar: HomeAppbar(controller: controller),
         body: SafeArea(
           child: TabBarView(
-            key: const PageStorageKey("df"),
             controller: controller.tabController,
             children: controller.tabsWidgets,
           ),

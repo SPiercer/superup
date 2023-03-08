@@ -26,15 +26,6 @@ class _RoomsTabViewState extends State<RoomsTabView> {
   Widget build(BuildContext context) {
     return VChatPage(
       context: context,
-      floatingActionButton: FloatingActionButton(
-        elevation: 1,
-        backgroundColor: AppColors.buttonBackground,
-        onPressed: () => controller.onFlatMessageIconPress(context),
-        child: const Icon(
-          Icons.message,
-          color: Colors.white,
-        ),
-      ),
       appBar: null,
       controller: controller.vRoomController,
     );

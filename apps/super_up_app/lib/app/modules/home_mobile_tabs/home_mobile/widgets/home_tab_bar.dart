@@ -17,9 +17,7 @@ TabBar homeTabBar(HomeMobileController controller, BuildContext context) {
       vertical: 4,
     ),
     isScrollable: true,
-    onTap: (value) {
-      controller.changeTab(value);
-    },
+    onTap: controller.changeTab,
     controller: controller.tabController,
     tabs: [
       Container(
@@ -40,15 +38,18 @@ TabBar homeTabBar(HomeMobileController controller, BuildContext context) {
               "CHATS",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Badge(
-              showBadge: false,
-              badgeStyle: BadgeStyle(
-                elevation: 0,
-                badgeColor: context.isDark ? Colors.green : Colors.grey,
+            if (true) // TODO: add unread messages
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Badge(
+                badgeStyle: BadgeStyle(
+                  elevation: 0,
+                  badgeColor: context.isDark ? Colors.green : Colors.grey,
+                ),
+                badgeContent: '3'.cap.color(
+                      context.isDark ? Colors.black : Colors.white,
+                    ),
               ),
-              badgeContent: '3'.cap.color(
-                    context.isDark ? Colors.black : Colors.white,
-                  ),
             ),
           ],
         ),

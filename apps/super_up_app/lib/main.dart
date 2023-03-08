@@ -7,11 +7,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:super_up/app/modules/splash/views/splash_view.dart';
+import 'package:super_up/color_schemes.g.dart';
 import 'package:super_up/v_chat_config.dart';
 import 'package:super_up_core/super_up_core.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:v_chat_firebase_fcm/v_chat_firebase_fcm.dart';
 import 'package:v_chat_message_page/v_chat_message_page.dart';
+import 'package:v_chat_room_page/v_chat_room_page.dart';
 import 'package:v_chat_utils/v_chat_utils.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -56,7 +58,6 @@ void main() async {
           return MaterialApp(
             navigatorKey: _navigatorKey,
             title: SConstants.appName,
-            themeMode: theme,
             localizationsDelegates: [
               // S.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -111,29 +112,32 @@ void main() async {
             locale: local,
             home: const SplashView(),
             debugShowCheckedModeBanner: false,
-            theme: FlexThemeData.light(
-              scheme: FlexScheme.gold,
+            themeMode: theme,
+            theme: ThemeData(
               useMaterial3: true,
-              useMaterial3ErrorColors: true,
-              transparentStatusBar: true,
-              appBarBackground: Colors.yellow.shade400,
-              scaffoldBackground: const Color(0xffdaf5e0),
+              colorScheme: lightColorScheme,
               extensions: [
-                VMessageTheme.dark().copyWith(
+                VMessageTheme.light().copyWith(
                   scaffoldDecoration: sMessageBackground(isDark: false),
-                )
+                ),
+                VRoomTheme.light().copyWith(
+                  scaffoldDecoration: VRoomTheme.light()
+                      .scaffoldDecoration
+                      .copyWith(color: lightColorScheme.background),
+                ),
               ],
             ),
-            darkTheme: FlexThemeData.dark(
-              scheme: FlexScheme.green,
+            darkTheme: ThemeData(
               useMaterial3: true,
-              scaffoldBackground: const Color(0xff252323),
-              useMaterial3ErrorColors: true,
-              appBarBackground: const Color(0xff3b3737),
-              transparentStatusBar: true,
+              colorScheme: darkColorScheme,
               extensions: [
                 VMessageTheme.dark().copyWith(
                   scaffoldDecoration: sMessageBackground(isDark: true),
+                ),
+                VRoomTheme.dark().copyWith(
+                  scaffoldDecoration: VRoomTheme.dark()
+                      .scaffoldDecoration
+                      .copyWith(color: darkColorScheme.background),
                 )
               ],
             ),
